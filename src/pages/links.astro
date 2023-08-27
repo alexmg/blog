@@ -1,0 +1,59 @@
+---
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Datetime from "@components/Datetime";
+import Main from "@layouts/Main.astro";
+
+type Raindrop = {
+  link: string;
+  title: string;
+  excerpt: string;
+  cover: string;
+  created: Date;
+}
+
+const headers = { Authorization: `Bearer ${import.meta.env.RAINDROP_TOKEN}` };
+const url = "https://api.raindrop.io/rest/v1/raindrops/0?search=%23blog&sort=-created&page=0&perpage=20";
+const response = await fetch(url, { headers });
+const data = await response.json();
+const items = data.items as Raindrop[];
+
+const truncateString = (value: string, maxLength: number) =>
+  value.length > maxLength 
+    ? `${value.substring(0, maxLength)}…`
+    : value
+---
+
+<Layout title={`Links | ${SITE.title}`}>
+  <Header activeNav="links" />
+  <Main
+    pageTitle="Links"
+    pageDesc="Recent content from across the web that has caught my attention"
+  >
+  <div class="container mx-auto divide-y divide-skin-line">
+    {
+      items.map(i => (
+      <div class="space-y-2 py-6 first:pt-0 last:pb-0">
+        <a
+            href={i.link}
+            target="_blank"
+            class="inline-block text-lg font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+          >
+            <h3 class="text-lg font-medium hover:underline">{i.title}</h3>
+          </a>
+          <Datetime datetime={i.created} />
+          {
+            i.excerpt && <p>{truncateString(i.excerpt, 300)}</p>
+          }
+          <a href={i.link} target="_blank" class="inline-block">
+            <img src={i.cover} alt={i.title}>
+          </a>
+      </div>
+      ))
+    }
+  </div>
+  </Main>
+  <Footer />
+</Layout>

@@ -1,0 +1,20 @@
+# Ignore everything
+/*
+
+# Ignore files
+**/*.svg
+**/*.png
+**/*.jpg
+**/*.md
+**/*.woff2
+
+# Except these files & folders
+!/src
+!/public
+!/.github
+!tsconfig.json
+!astro.config.mjs
+!package.json
+!.prettierrc
+!.eslintrc.js
+!README.md

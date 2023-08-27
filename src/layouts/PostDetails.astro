@@ -1,0 +1,63 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Tag from "@components/Tag.astro";
+import PostMetadata from "@components/PostMetadata";
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-iconify";
+import { slugifyStr, default as slugify } from "@utils/slugify";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, author, description, ogImage, pubDatetime, tags } = post.data;
+const { Content, remarkPluginFrontmatter } = await post.render();
+const frontmatter = remarkPluginFrontmatter as CollectionEntry<"blog">["data"];
+
+const slug = slugify(post);
+
+//const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin).href;
+---
+
+<Layout
+  title={title}
+  author={author}
+  description={description}
+  ogImage={ogImage}
+  postSlug={slug}
+>
+  <Header />
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex items-center hover:opacity-75"
+      onclick="history.back()"
+    >
+      <Icon pack="tabler" name="arrow-narrow-left" class="h-5 w-5" />
+      <span class="ml-2">Go back</span>
+    </button>
+  </div>
+  <main id="main-content">
+    <h1 class="post-title">{title}</h1>
+    <PostMetadata datetime={pubDatetime} readingTime={frontmatter.readingTime!} size="lg" />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+      <Content />
+    </article>
+    <div class="mt-8 flex flex-row flex-wrap">
+      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+    </div>
+    <div class="giscus mt-8"></div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full max-w-3xl px-4 pb-12;
+  }
+  .post-title {
+    @apply text-2xl font-semibold text-skin-accent sm:text-3xl;
+  }
+</style>

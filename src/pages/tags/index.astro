@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Tag from "@components/Tag.astro";
+import getTagsWithCount from "@utils/getTagsWithCount";
+import { SITE } from "@config";
+
+const posts = await getCollection("blog");
+
+let tagsWithCount = getTagsWithCount(posts);
+---
+
+<Layout title={`Tags | ${SITE.title}`}>
+  <Header activeNav="tags" />
+  <Main
+    pageTitle="Tags"
+    pageDesc="Select a tag to view a list of blog posts about that topic"
+  >
+    <div class="flex flex-row flex-wrap gap-x-2 gap-y-4">
+      {
+        tagsWithCount.map(({ tag, count }) => (
+          <Tag name={tag} size="lg" count={count} />
+        ))
+      }
+    </div>
+  </Main>
+  <Footer />
+</Layout>
