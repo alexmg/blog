@@ -1,8 +1,7 @@
-import type { APIContext } from "astro";
 import { SITE } from "@config";
 import { generateImage, colors, buildFooterHtml } from "@utils/generateImage";
 
-export async function get({ params }: APIContext) {
+export async function GET() {
   const markup = `
   <div tw="bg-[${colors.black}] flex flex-col w-full h-full">
     <div tw="flex flex-col w-full h-4/5 p-10 justify-center items-center">
@@ -21,5 +20,8 @@ export async function get({ params }: APIContext) {
     ${buildFooterHtml()}
   </div>`;
 
-  return generateImage(markup);
+  const image = await generateImage(markup);
+  return new Response(image.body, {
+    headers: { "Content-Type": image.contentType },
+  });
 }

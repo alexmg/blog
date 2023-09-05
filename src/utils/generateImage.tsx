@@ -46,6 +46,7 @@ export async function generateImage(template: string) {
   return {
     body: image.asPng(),
     encoding: "binary",
+    contentType: "image/png",
   };
 }
 

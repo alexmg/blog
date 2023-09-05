@@ -6,7 +6,7 @@ import { encode } from "html-entities";
 
 const pages = await getCollection("blog", ({ data }) => !data.draft);
 
-export async function get({ params }: APIContext) {
+export async function GET({ params }: APIContext) {
   var page = pages.find(p => slugify(p) === params.id);
 
   let title = page!.data.title;
@@ -30,7 +30,10 @@ export async function get({ params }: APIContext) {
     ${buildFooterHtml()}
   </div>`;
 
-  return generateImage(markup);
+  const image = await generateImage(markup);
+  return new Response(image.body, {
+    headers: { "Content-Type": image.contentType },
+  });
 }
 
 export async function getStaticPaths() {

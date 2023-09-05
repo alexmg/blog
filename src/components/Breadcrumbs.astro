@@ -54,6 +54,9 @@ breadcrumbList[0] === "posts" &&
   .breadcrumb ul li span {
     @apply opacity-70;
   }
+  .breadcrumb ul li:not(:last-child) span {
+    @apply p-1;
+  }
   .breadcrumb ul li:not(:last-child) a {
     @apply hover:opacity-100;
   }

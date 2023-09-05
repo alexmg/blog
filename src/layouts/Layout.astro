@@ -2,6 +2,7 @@
 import { SITE, GISCUS } from "@config";
 import "../styles/base.css";
 import GoogleFont from "./GoogleFont.astro";
+import { ViewTransitions } from 'astro:transitions';
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -30,8 +31,9 @@ const socialImageURL = new URL(
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
+    <ViewTransitions />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -92,8 +94,6 @@ const socialImageURL = new URL(
         />
       )
     }
-
-    <script is:inline src="/toggle-theme.js"></script>
   </head>
   <body>
     <slot />

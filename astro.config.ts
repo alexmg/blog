@@ -11,6 +11,7 @@ import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
+  scopedStyleStrategy: "where",
   site: SITE.website,
   integrations: [
     tailwind({
