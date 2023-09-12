@@ -4,7 +4,7 @@ export const SITE: Site = {
   website: "https://alexmg.dev/",
   domain: "alexmg.dev",
   author: "Alex Meyer-Gleaves",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "The personal blog of Alex Meyer-Gleaves",
   title: "Alex Meyer-Gleaves",
   socials: {
     mastodon: "@alexmg@hachyderm.io",
@@ -14,6 +14,12 @@ export const SITE: Site = {
   },
   lightAndDarkMode: false,
   postPerPage: 10,
+};
+
+export const LINKS = {
+  title: `${SITE.title} | Links`,
+  desc: "Recent content from across the web that has caught my attention",
+  limit: 20,
 };
 
 export const LOCALE = ["en-AU"]; // set to [] to use the environment default

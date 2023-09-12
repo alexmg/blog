@@ -1,24 +1,13 @@
 ---
-import { SITE } from "@config";
+import { SITE, LINKS } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Datetime from "@components/Datetime";
 import Main from "@layouts/Main.astro";
+import getLinks from "@utils/getLinks";
 
-type Raindrop = {
-  link: string;
-  title: string;
-  excerpt: string;
-  cover: string;
-  created: Date;
-}
-
-const headers = { Authorization: `Bearer ${import.meta.env.RAINDROP_TOKEN}` };
-const url = "https://api.raindrop.io/rest/v1/raindrops/0?search=%23blog&sort=-created&page=0&perpage=20";
-const response = await fetch(url, { headers });
-const data = await response.json();
-const items = data.items as Raindrop[];
+const items = await getLinks();
 
 const truncateString = (value: string, maxLength: number) =>
   value.length > maxLength 
@@ -30,7 +19,7 @@ const truncateString = (value: string, maxLength: number) =>
   <Header activeNav="links" />
   <Main
     pageTitle="Links"
-    pageDesc="Recent content from across the web that has caught my attention"
+    pageDesc={LINKS.desc}
   >
   <div class="container mx-auto divide-y divide-skin-line">
     {

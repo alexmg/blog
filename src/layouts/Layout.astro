@@ -1,5 +1,5 @@
 ---
-import { SITE, GISCUS } from "@config";
+import { SITE, GISCUS, LINKS } from "@config";
 import "../styles/base.css";
 import GoogleFont from "./GoogleFont.astro";
 import { ViewTransitions } from 'astro:transitions';
@@ -39,6 +39,16 @@ const socialImageURL = new URL(
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
+    <link 
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE.title}
+      href="/rss.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={LINKS.title}
+      href="/links/rss.xml" />
 
     <!-- General Meta Tags -->
     <title>{title}</title>
