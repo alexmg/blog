@@ -24,13 +24,6 @@ export const LINKS = {
 
 export const LOCALE = ["en-AU"]; // set to [] to use the environment default
 
-export const LOGO_IMAGE = {
-  enable: false,
-  svg: true,
-  width: 216,
-  height: 46,
-};
-
 export const GISCUS = {
   repo: "alexmg/blog-comments",
   repoId: "R_kgDOKK8C0A",
