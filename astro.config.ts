@@ -8,6 +8,7 @@ import { SITE } from "./src/config";
 import fs from "node:fs";
 import type { Plugin } from "vite";
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +22,15 @@ export default defineConfig({
     }),
     react(),
     sitemap(),
+    icon({
+      include: {
+        tabler: ["*"],
+        "simple-icons": ["*"],
+        mdi: ["*"],
+        logos: ["*"],
+        devicon: ["*"]
+      }
+    })
   ],
   markdown: {
     remarkPlugins: [

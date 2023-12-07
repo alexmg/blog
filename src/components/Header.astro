@@ -2,7 +2,7 @@
 import { SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
-import { Icon } from "astro-iconify";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   activeNav?: "posts" | "tags" | "about" | "links" | "search";
@@ -75,8 +75,7 @@ const { activeNav } = Astro.props;
               title="RSS Feed"
             >
               <Icon
-                pack="tabler"
-                name="rss"
+                name="tabler:rss"
                 class="h-5 w-5 scale-125 sm:scale-100"
               />
             </LinkButton>
@@ -91,8 +90,7 @@ const { activeNav } = Astro.props;
               title="Search"
             >
               <Icon
-                pack="tabler"
-                name="search"
+                name="tabler:search"
                 class="h-5 w-5 scale-125 sm:scale-100"
               />
             </LinkButton>

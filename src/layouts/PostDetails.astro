@@ -5,7 +5,7 @@ import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import PostMetadata from "@components/PostMetadata";
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-iconify";
+import { Icon } from "astro-icon/components";
 import { slugifyStr, default as slugify } from "@utils/slugify";
 
 export interface Props {
@@ -35,7 +35,7 @@ const slug = slugify(post);
       class="focus-outline mb-2 mt-8 flex items-center hover:opacity-75"
       onclick="history.back()"
     >
-      <Icon pack="tabler" name="arrow-narrow-left" class="h-5 w-5" />
+      <Icon name="tabler:arrow-narrow-left" class="h-5 w-5" />
       <span class="ml-2">Go back</span>
     </button>
   </div>
