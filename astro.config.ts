@@ -24,11 +24,10 @@ export default defineConfig({
     sitemap(),
     icon({
       include: {
-        tabler: ["*"],
-        "simple-icons": ["*"],
-        mdi: ["*"],
-        logos: ["*"],
-        devicon: ["*"]
+        tabler: ["rss", "search", "arrow-narrow-left", "arrow-narrow-right"],
+        mdi: ["github", "paper-text-outline"],
+        logos: ["astro-icon", "typescript-icon-round", "react", "eslint", "prettier"],
+        devicon: ["tailwindcss", "vercel-wordmark"],
       }
     })
   ],
