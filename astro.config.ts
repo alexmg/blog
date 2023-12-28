@@ -6,7 +6,6 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import fs from "node:fs";
-import type { Plugin } from "vite";
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
 import icon from "astro-icon";
 
@@ -26,14 +25,20 @@ export default defineConfig({
       include: {
         tabler: ["rss", "search", "arrow-narrow-left", "arrow-narrow-right"],
         mdi: ["github", "paper-text-outline"],
-        logos: ["astro-icon", "typescript-icon-round", "react", "eslint", "prettier"],
+        logos: [
+          "astro-icon",
+          "typescript-icon-round",
+          "react",
+          "eslint",
+          "prettier",
+        ],
         devicon: ["tailwindcss", "vercel-wordmark"],
-      }
-    })
+      },
+    }),
   ],
   markdown: {
     remarkPlugins: [
-      remarkToc,
+      remarkToc as any,
       remarkReadingTime,
       [
         remarkCollapse,
@@ -55,11 +60,11 @@ export default defineConfig({
   },
 });
 
-function rawFonts(ext: string[]): Plugin {
+function rawFonts(ext: string[]) {
   return {
     name: "vite-plugin-raw-fonts",
-    transform(_, id) {
-      if (ext.some((e) => id.endsWith(e))) {
+    transform(_: string, id: string) {
+      if (ext.some(e => id.endsWith(e))) {
         const buffer = fs.readFileSync(id);
         return {
           code: `export default ${JSON.stringify(buffer)}`,
