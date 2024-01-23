@@ -46,7 +46,7 @@ const slug = slugify(post);
       <Content />
     </article>
     <div class="mt-8 flex flex-row flex-wrap">
-      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
     </div>
     <div class="giscus mt-8"></div>
   </main>

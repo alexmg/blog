@@ -22,7 +22,7 @@ let tagsWithCount = getTagsWithCount(posts);
     <div class="flex flex-row flex-wrap gap-x-2 gap-y-4">
       {
         tagsWithCount.map(({ tag, count }) => (
-          <Tag name={tag} size="lg" count={count} />
+          <Tag tag={tag} size="lg" count={count} />
         ))
       }
     </div>

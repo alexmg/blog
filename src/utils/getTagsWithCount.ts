@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 export type TagsWithCount = {
   tag: string;
+  tagName: string;
   count: number;
 };
 
@@ -13,6 +14,7 @@ const getTagsWithCount = (posts: CollectionEntry<"blog">[]) => {
   uniqueTags.forEach(tag => {
     const result: TagsWithCount = {
       tag: slugifyStr(tag),
+      tagName: tag,
       count: posts.filter(p => p.data.tags.includes(tag)).length,
     };
     list.push(result);
