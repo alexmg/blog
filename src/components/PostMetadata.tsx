@@ -2,8 +2,8 @@ import ReadingTime from "./ReadingTime";
 import Datetime from "./Datetime";
 
 export interface Props {
-  pubDatetime: string | Date;
-  modDatetime: string | Date | undefined;
+  pubDatetime: Date;
+  modDatetime: Date | null | undefined;
   readingTime?: string;
   size?: "sm" | "lg";
   className?: string;
