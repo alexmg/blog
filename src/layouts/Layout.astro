@@ -14,6 +14,7 @@ export interface Props {
   ogImage?: string;
   pubDatetime?: Date;
   modDatetime?: Date;
+  scrollSmooth?: boolean;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   description = SITE.desc,
   pubDatetime,
   modDatetime,
+  scrollSmooth = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -35,7 +37,10 @@ const socialImageURL = new URL(
 ---
 
 <!DOCTYPE html>
-<html lang=`${LOCALE.lang ?? "en"}` data-theme="dark">
+<html
+  lang=`${LOCALE.lang ?? "en"}`
+  class={`${scrollSmooth && "scroll-smooth"}`}
+  data-theme="dark">
   <head>
     <ViewTransitions />
     <meta charset="UTF-8" />

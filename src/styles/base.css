@@ -37,9 +37,6 @@
     --color-border: 103 101 199; /* #6765C7 */
     --color-stop: 255 147 15; /* #FF930F */
   }
-  html {
-    scroll-behavior: smooth;
-  }
   #sun-svg,
   html[data-theme="dark"] #moon-svg {
     display: none;
