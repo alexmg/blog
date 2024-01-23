@@ -1,12 +1,21 @@
 import { LOCALE } from "@config";
 
-export interface Props {
-  datetime: string | Date;
+interface DatetimesProps {
+  pubDatetime: string | Date;
+  modDatetime: string | Date | undefined;
+}
+
+interface Props extends DatetimesProps {
   size?: "sm" | "lg";
   className?: string;
 }
 
-export default function Datetime({ datetime, size = "sm", className }: Props) {
+export default function Datetime({
+  pubDatetime,
+  modDatetime,
+  size = "sm",
+  className,
+}: Props) {
   return (
     <div
       className={`${
@@ -16,7 +25,7 @@ export default function Datetime({ datetime, size = "sm", className }: Props) {
       <svg
         className={`${
           size === "sm" ? "scale-75" : "scale-100"
-        } inline-block h-6 w-6 fill-skin-base`}
+        } inline-block h-6 w-6 min-w-[1.375rem] fill-skin-base`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
       >
@@ -52,22 +61,31 @@ export default function Datetime({ datetime, size = "sm", className }: Props) {
           d="M464 160H48"
         />
       </svg>
-      <span className="sr-only">Posted on:</span>
+      {modDatetime ? (
+        <span className={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
+          Updated:
+        </span>
+      ) : (
+        <span className="sr-only">Published:</span>
+      )}
       <span className={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
-        {FormattedDate(datetime)}
+        <FormattedDatetime
+          pubDatetime={pubDatetime}
+          modDatetime={modDatetime}
+        />
       </span>
     </div>
   );
 }
 
-const FormattedDate = (datetime: string | Date) => {
-  const myDatetime = new Date(datetime);
+const FormattedDatetime = ({ pubDatetime, modDatetime }: DatetimesProps) => {
+  const myDatetime = new Date(modDatetime ? modDatetime : pubDatetime);
 
-  const date = myDatetime.toLocaleDateString(LOCALE, {
+  const date = myDatetime.toLocaleDateString(LOCALE.langTag, {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   });
 
-  return date;
+  return <time dateTime={myDatetime.toISOString()}>{date}</time>;
 };

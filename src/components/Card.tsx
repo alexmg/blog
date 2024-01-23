@@ -1,5 +1,4 @@
 import PostMetadata from "./PostMetadata";
-import { slugifyStr } from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -9,7 +8,8 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter, secHeading = true }: Props) {
-  const { title, pubDatetime, description, readingTime } = frontmatter;
+  const { title, pubDatetime, modDatetime, description, readingTime } =
+    frontmatter;
   const headerClassName = "text-lg font-medium hover:underline";
   return (
     <li className="my-6 space-y-2">
@@ -23,7 +23,11 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
           <h3 className={headerClassName}>{title}</h3>
         )}
       </a>
-      <PostMetadata datetime={pubDatetime} readingTime={readingTime} />
+      <PostMetadata
+        pubDatetime={pubDatetime}
+        modDatetime={modDatetime}
+        readingTime={readingTime}
+      />
       <p>{description}</p>
     </li>
   );

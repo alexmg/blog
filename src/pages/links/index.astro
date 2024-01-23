@@ -32,7 +32,7 @@ const truncateString = (value: string, maxLength: number) =>
           >
             <h3 class="text-lg font-medium hover:underline">{i.title}</h3>
           </a>
-          <Datetime datetime={i.created} />
+          <Datetime pubDatetime={i.created} modDatetime={undefined} />
           {
             i.excerpt && <p>{truncateString(i.excerpt, 300)}</p>
           }

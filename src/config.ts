@@ -22,7 +22,10 @@ export const LINKS = {
   limit: 20,
 };
 
-export const LOCALE = ["en-AU"]; // set to [] to use the environment default
+export const LOCALE = {
+  lang: "en", // html lang code. Set this empty and default will be "en"
+  langTag: ["en-AU"], // BCP 47 Language Tags. Set this empty [] to use the environment default
+} as const;
 
 export const GISCUS = {
   repo: "alexmg/blog-comments",

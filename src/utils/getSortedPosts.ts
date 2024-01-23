@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import getPostsWithRT from "./getSortedPostsWithRT";
+import getPostsWithRT from "./getPostsWithRT";
 
 const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
   const postsWithRT = await getPostsWithRT(posts);
@@ -7,8 +7,12 @@ const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
     .filter(({ data }) => !data.draft)
     .sort(
       (a, b) =>
-        Math.floor(new Date(b.data.pubDatetime).getTime() / 1000) -
-        Math.floor(new Date(a.data.pubDatetime).getTime() / 1000)
+        Math.floor(
+          new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() / 1000
+        ) -
+        Math.floor(
+          new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime() / 1000
+        )
     );
 };
 
