@@ -1,5 +1,5 @@
 ---
-import { SITE, GISCUS, LINKS } from "@config";
+import { SITE, GISCUS, LINKS, LOCALE } from "@config";
 import "../styles/base.css";
 import GoogleFont from "./GoogleFont.astro";
 import { ViewTransitions } from 'astro:transitions';
@@ -35,7 +35,7 @@ const socialImageURL = new URL(
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang=`${LOCALE.lang ?? "en"}` data-theme="dark">
   <head>
     <ViewTransitions />
     <meta charset="UTF-8" />
