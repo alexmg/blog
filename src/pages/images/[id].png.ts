@@ -1,18 +1,18 @@
+import { LOCALE } from "@config";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
-import slugify from "@utils/slugify";
 import { buildFooterHtml, colors, generateImage } from "@utils/generateImage";
 import { encode } from "html-entities";
 
 const pages = await getCollection("blog", ({ data }) => !data.draft);
 
 export async function GET({ params }: APIContext) {
-  var page = pages.find(p => slugify(p) === params.id);
+  var page = pages.find(p => p.slug === params.id);
 
   let title = page!.data.title;
   let pubDatetime = page!.data.pubDatetime;
 
-  let pubDate = pubDatetime!.toLocaleDateString("en-AU", {
+  let pubDate = pubDatetime!.toLocaleDateString(LOCALE.langTag, {
     dateStyle: "full",
   });
 
@@ -38,7 +38,7 @@ export async function GET({ params }: APIContext) {
 
 export async function getStaticPaths() {
   return pages.map(p => {
-    const id = slugify(p);
+    const id = p.slug;
     return { params: { id } };
   });
 }

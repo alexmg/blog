@@ -6,7 +6,7 @@ import Tag from "@components/Tag.astro";
 import PostMetadata from "@components/PostMetadata";
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
-import { slugifyStr, default as slugify } from "@utils/slugify";
+import { slugifyStr } from "@utils/slugify";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -16,8 +16,7 @@ const { post } = Astro.props;
 const { title, author, description, ogImage, pubDatetime, modDatetime, tags } = post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
 const frontmatter = remarkPluginFrontmatter as CollectionEntry<"blog">["data"];
-
-const slug = slugify(post);
+const slug = post.slug;
 
 //const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin).href;
 ---
