@@ -15,6 +15,7 @@ const posts = await getCollection("blog");
 
 const sortedPosts = await getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -54,36 +55,39 @@ const socialCount = SOCIALS.filter(social => social.active).length;
               ))}
             </ul>
           </section>
-          <Hr />
+          {recentPosts.length > 0 && <Hr />}
         </>
       )
     }
 
-    <section id="recent-posts">
-      <h2>Recent posts</h2>
-      <ul>
-        {
-          sortedPosts
-            .filter(({ data }) => !data.featured)
-            .map(
-              (post, index) =>
-                index < 5 && (
-                  <Card
-                    href={`/posts/${post.slug}`}
-                    frontmatter={post.data}
-                    secHeading={false}
-                  />
-                )
-            )
-        }
-      </ul>
-      <div class="all-posts-btn-wrapper">
-        <LinkButton href="/posts">
-          All posts
-          <Icon name="tabler:arrow-narrow-right" class="h-5 w-5" />
-        </LinkButton>
-      </div>
-    </section>
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts">
+          <h2>Recent posts</h2>
+          <ul>
+            {
+              recentPosts.map(
+                (post, index) =>
+                  index < 5 && (
+                    <Card
+                      href={`/posts/${post.slug}`}
+                      frontmatter={post.data}
+                      secHeading={false}
+                    />
+                  )
+              )
+            }
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="all-posts-btn-wrapper">
+      <LinkButton href="/posts">
+        All posts
+        <Icon name="tabler:arrow-narrow-right" class="h-5 w-5" />
+      </LinkButton>
+    </div>
   </main>
 
   <Footer />
