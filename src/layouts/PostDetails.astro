@@ -14,7 +14,8 @@ export interface Props {
 }
 
 const { post } = Astro.props;
-const { title, author, description, ogImage, pubDatetime, modDatetime, tags } = post.data;
+const { title, author, description, ogImage, pubDatetime, modDatetime, tags } =
+  post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
 const frontmatter = remarkPluginFrontmatter as CollectionEntry<"blog">["data"];
 const slug = post.slug;
@@ -42,7 +43,12 @@ const slug = post.slug;
   </div>
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <PostMetadata pubDatetime={pubDatetime} modDatetime={modDatetime} readingTime={frontmatter.readingTime!} size="lg" />
+    <PostMetadata
+      pubDatetime={pubDatetime}
+      modDatetime={modDatetime}
+      readingTime={frontmatter.readingTime!}
+      size="lg"
+    />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>
@@ -96,7 +102,6 @@ const slug = post.slug;
     }
   }
   addHeadingLinks();
-
 
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */

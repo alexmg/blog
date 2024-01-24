@@ -2,7 +2,7 @@
 import { SITE, GISCUS, LINKS, LOCALE } from "@config";
 import "../styles/base.css";
 import GoogleFont from "./GoogleFont.astro";
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -36,11 +36,12 @@ const socialImageURL = new URL(
 ).href;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html
   lang=`${LOCALE.lang ?? "en"}`
   class={`${scrollSmooth && "scroll-smooth"}`}
-  data-theme="dark">
+  data-theme="dark"
+>
   <head>
     <ViewTransitions />
     <meta charset="UTF-8" />
@@ -48,16 +49,18 @@ const socialImageURL = new URL(
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
-    <link 
+    <link
       rel="alternate"
       type="application/rss+xml"
       title={SITE.title}
-      href="/rss.xml" />
+      href="/rss.xml"
+    />
     <link
       rel="alternate"
       type="application/rss+xml"
       title={LINKS.title}
-      href="/links/rss.xml" />
+      href="/links/rss.xml"
+    />
 
     <!-- General Meta Tags -->
     <title>{title}</title>

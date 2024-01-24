@@ -26,7 +26,8 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <section id="hero">
       <h1>
         Hey, I'm <span class="text-skin-accent">Alex</span>&nbsp;<span
-          class="wave text-3xl sm:text-5xl">👋</span>
+          class="wave text-3xl sm:text-5xl">👋</span
+        >
       </h1>
       {
         // only display if at least one social link is enabled
@@ -65,18 +66,16 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         <section id="recent-posts">
           <h2>Recent posts</h2>
           <ul>
-            {
-              recentPosts.map(
-                (post, index) =>
-                  index < 5 && (
-                    <Card
-                      href={`/posts/${post.slug}`}
-                      frontmatter={post.data}
-                      secHeading={false}
-                    />
-                  )
-              )
-            }
+            {recentPosts.map(
+              (post, index) =>
+                index < 5 && (
+                  <Card
+                    href={`/posts/${post.slug}`}
+                    frontmatter={post.data}
+                    secHeading={false}
+                  />
+                )
+            )}
           </ul>
         </section>
       )
