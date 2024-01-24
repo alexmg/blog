@@ -34,7 +34,7 @@ const slug = post.slug;
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex items-center hover:opacity-75"
-      onclick="history.back()"
+      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
     >
       <Icon name="tabler:arrow-narrow-left" class="h-5 w-5" />
       <span class="ml-2">Go back</span>
