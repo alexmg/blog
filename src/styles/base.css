@@ -87,8 +87,8 @@
     prose-code:bg-opacity-75
     prose-code:p-1
     prose-code:!text-skin-base
-    prose-code:before:!content-['']
-    prose-code:after:!content-['']
+    prose-code:before:!content-none
+    prose-code:after:!content-none
     prose-pre:!text-skin-base
     prose-ol:!text-skin-base 
     prose-ul:overflow-x-clip
