@@ -8,7 +8,7 @@ const { tag, size = "sm", count } = Astro.props;
 ---
 
 <a
-  href={`/tags/${tag}`}
+  href={`/tags/${tag}/`}
   class={`${
     size === "sm" ? "text-sm" : "text-md"
   } pr-2 relative hover:text-skin-accent focus-visible:p-1`}
