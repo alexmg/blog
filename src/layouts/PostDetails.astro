@@ -8,6 +8,7 @@ import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
+import { SITE } from "@config";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -24,7 +25,8 @@ const slug = post.slug;
 ---
 
 <Layout
-  title={title}
+  title=`${title} | ${SITE.title}`
+  ,
   author={author}
   description={description}
   ogImage={ogImage}
