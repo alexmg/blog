@@ -61,7 +61,7 @@ export default function Datetime({
           d="M464 160H48"
         />
       </svg>
-      {modDatetime ? (
+      {modDatetime && modDatetime > pubDatetime ? (
         <span className={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
           Updated:
         </span>
@@ -79,7 +79,9 @@ export default function Datetime({
 }
 
 const FormattedDatetime = ({ pubDatetime, modDatetime }: DatetimesProps) => {
-  const myDatetime = new Date(modDatetime ? modDatetime : pubDatetime);
+  const myDatetime = new Date(
+    modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime
+  );
 
   const date = myDatetime.toLocaleDateString(LOCALE.langTag, {
     year: "numeric",
