@@ -94,7 +94,7 @@ const slug = post.slug;
       link.innerText = "#";
       link.className = "heading-link hidden group-hover:inline-block ml-2";
       link.href = "#" + heading.id;
-      link.ariaHidden = true;
+      link.ariaHidden = "true";
       heading.appendChild(link);
     }
   }
@@ -118,7 +118,7 @@ const slug = post.slug;
       codeBlock.appendChild(copyButton);
 
       // wrap codebock with relative parent element
-      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
       wrapper.appendChild(codeBlock);
 
       copyButton.addEventListener("click", async () => {
@@ -128,9 +128,9 @@ const slug = post.slug;
 
     async function copyCode(block, button) {
       let code = block.querySelector("code");
-      let text = code.innerText;
+      let text = code?.innerText;
 
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(text ?? "");
 
       // visual feedback that task is completed
       button.innerText = "Copied";
@@ -141,7 +141,6 @@ const slug = post.slug;
     }
   }
   attachCopyButtons();
-  document.addEventListener("astro:after-swap", attachCopyButtons);
 
   /** Scrolls the document to the top when
    * the "Back to Top" button is clicked. */
@@ -152,5 +151,4 @@ const slug = post.slug;
     });
   }
   backToTop();
-  document.addEventListener("astro:after-swap", backToTop);
 </script>
