@@ -7,6 +7,7 @@ export type Site = {
   desc: string;
   title: string;
   lightAndDarkMode: boolean;
+  postPerIndex: number;
   postPerPage: number;
   socials: Socials;
 };

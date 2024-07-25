@@ -13,6 +13,7 @@ export const SITE: Site = {
     gitHub: "alexmg",
   },
   lightAndDarkMode: false,
+  postPerIndex: 5,
   postPerPage: 10,
 };
 
