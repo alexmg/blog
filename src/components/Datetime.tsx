@@ -14,13 +14,13 @@ export default function Datetime({
   pubDatetime,
   modDatetime,
   size = "sm",
-  className,
+  className = "",
 }: Props) {
   return (
     <div
       className={`${
         size === "sm" ? "space-x-1" : "space-x-2"
-      } flex items-center opacity-80 ${className}`}
+      } flex items-center opacity-80 ${className}`.trim()}
     >
       <svg
         className={`${
