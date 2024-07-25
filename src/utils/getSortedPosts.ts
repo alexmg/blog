@@ -1,10 +1,11 @@
 import type { CollectionEntry } from "astro:content";
 import getPostsWithRT from "./getPostsWithRT";
+import postFilter from "./postFilter";
 
 const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
   const postsWithRT = await getPostsWithRT(posts);
   return postsWithRT
-    .filter(({ data }) => !data.draft)
+    .filter(postFilter)
     .sort(
       (a, b) =>
         Math.floor(
