@@ -14,7 +14,7 @@ export const colors = {
   accent: "#2dd4bf",
   white: "#fdfffc",
   border: "#6765C7",
-  black: "#020100 ",
+  black: "#020100",
 };
 
 export async function generateImage(template: string) {
