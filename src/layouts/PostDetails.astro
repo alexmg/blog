@@ -24,6 +24,7 @@ const frontmatter = remarkPluginFrontmatter as CollectionEntry<"blog">["data"];
 
 const layoutProps = {
   title: `${title} | ${SITE.title}`,
+  postSlug: post.slug,
   author,
   description,
   pubDatetime,
@@ -31,8 +32,6 @@ const layoutProps = {
   ogImage: ogImage,
   scrollSmooth: true,
 };
-
-//const ogUrl = new URL(ogImage ? ogImage : `${title}.svg`, Astro.url.origin).href;
 ---
 
 <Layout {...layoutProps}>
