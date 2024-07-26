@@ -10,6 +10,7 @@ export interface Props {
   title?: string;
   postSlug?: string;
   author?: string;
+  website?: string;
   description?: string;
   ogImage?: string;
   pubDatetime?: Date;
@@ -20,6 +21,7 @@ export interface Props {
 const {
   title = SITE.title,
   author = SITE.author,
+  website = SITE.website,
   description = SITE.desc,
   pubDatetime,
   modDatetime,
@@ -34,6 +36,22 @@ const socialImageURL = new URL(
   `/images/${socialImageName}.png`,
   Astro.url.origin
 ).href;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: `${title}`,
+  image: `${socialImageURL}`,
+  datePublished: `${pubDatetime?.toISOString()}`,
+  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
+  author: [
+    {
+      "@type": "Person",
+      name: `${author}`,
+      url: `${website}`,
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -99,6 +117,17 @@ const socialImageURL = new URL(
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- Google JSON-LD Structured data -->
+    {
+      postSlug && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
 
     <GoogleFont />
 
