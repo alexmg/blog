@@ -26,7 +26,7 @@
     "@iconify-json/simple-icons": "^1.1.109",
     "@iconify-json/tabler": "^1.1.118",
     "astro": "^4.12.2",
-    "fuse.js": "^6.6.2",
+    "fuse.js": "^7.0.0",
     "github-slugger": "^2.0.0",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
