@@ -23,7 +23,7 @@
     "@iconify-json/devicon": "^1.1.49",
     "@iconify-json/logos": "^1.1.43",
     "@iconify-json/mdi": "^1.1.67",
-    "@iconify-json/simple-icons": "^1.1.109",
+    "@iconify-json/simple-icons": "^1.1.112",
     "@iconify-json/tabler": "^1.1.118",
     "astro": "^4.12.2",
     "fuse.js": "^7.0.0",
