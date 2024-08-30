@@ -18,7 +18,7 @@ export const colors = {
 };
 
 export async function generateImage(template: string) {
-  const markup = html(template);
+  const markup = html(template) as React.ReactNode;
   const svg = await satori(markup, {
     fonts: [
       {

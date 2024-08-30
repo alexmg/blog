@@ -57,7 +57,7 @@ const layoutProps = {
       <Content />
     </article>
     <div class="mt-8 flex flex-row flex-wrap">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
+      {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
     </div>
     <div class="mt-8">
       <ShareLinks />
