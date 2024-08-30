@@ -18,7 +18,7 @@ export const getReadingTime = async () => {
     globPostsValues.map(async globPost => {
       const { frontmatter, file } = await globPost();
       const filename = file.split("/").pop();
-      var post = posts.find(x => x.id === filename);
+      const post = posts.find(x => x.id === filename);
       mapFrontmatter.set(post?.slug, frontmatter.readingTime);
     })
   );

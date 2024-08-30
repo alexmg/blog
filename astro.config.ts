@@ -8,6 +8,7 @@ import { SITE } from "./src/config";
 import fs from "node:fs";
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
 import icon from "astro-icon";
+import type { RemarkPlugin } from "node_modules/@astrojs/markdown-remark/dist/types";
 
 // https://astro.build/config
 export default defineConfig({
@@ -41,7 +42,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [
-      remarkToc as any,
+      remarkToc as RemarkPlugin,
       remarkReadingTime,
       [
         remarkCollapse,

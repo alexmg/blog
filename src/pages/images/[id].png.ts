@@ -7,12 +7,12 @@ import { encode } from "html-entities";
 const pages = await getCollection("blog", ({ data }) => !data.draft);
 
 export async function GET({ params }: APIContext) {
-  var page = pages.find(p => p.slug === params.id);
+  const page = pages.find(p => p.slug === params.id);
 
-  let title = page!.data.title;
-  let pubDatetime = page!.data.pubDatetime;
+  const title = page!.data.title;
+  const pubDatetime = page!.data.pubDatetime;
 
-  let pubDate = pubDatetime!.toLocaleDateString(LOCALE.langTag, {
+  const pubDate = pubDatetime!.toLocaleDateString(LOCALE.langTag, {
     dateStyle: "full",
   });
 

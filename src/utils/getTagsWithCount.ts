@@ -9,7 +9,7 @@ export type TagsWithCount = {
 
 const getTagsWithCount = (posts: CollectionEntry<"blog">[]) => {
   const filteredPosts = posts.filter(({ data }) => !data.draft);
-  var uniqueTags = new Set(filteredPosts.flatMap(p => p.data.tags));
+  const uniqueTags = new Set(filteredPosts.flatMap(p => p.data.tags));
   const list: TagsWithCount[] = [];
   uniqueTags.forEach(tag => {
     const result: TagsWithCount = {
