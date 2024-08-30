@@ -12,6 +12,9 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   scopedStyleStrategy: "where",
+  experimental: {
+    contentLayer: true,
+  },
   site: SITE.website,
   integrations: [
     tailwind({
