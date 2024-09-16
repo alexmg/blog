@@ -41,7 +41,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@divriots/jampack": "^0.15.0",
     "@fontsource/inconsolata": "^5.0.20",
-    "@fontsource/nunito": "^5.0.20",
+    "@fontsource/nunito": "^5.1.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/github-slugger": "^2.0.0",
