@@ -49,7 +49,7 @@
     "@types/react": "^18.3.12",
     "@typescript-eslint/parser": "^8.15.0",
     "astro-eslint-parser": "^1.1.0",
-    "astro-icon": "^1.1.2",
+    "astro-icon": "^1.1.4",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.15.0",
