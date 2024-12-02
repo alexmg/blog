@@ -39,7 +39,7 @@
     "@astrojs/react": "^3.6.3",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
-    "@divriots/jampack": "^0.15.0",
+    "@divriots/jampack": "^0.30.1",
     "@fontsource/inconsolata": "^5.1.0",
     "@fontsource/nunito": "^5.1.0",
     "@resvg/resvg-js": "^2.6.2",
