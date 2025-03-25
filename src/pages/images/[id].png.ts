@@ -7,7 +7,7 @@ import { encode } from "html-entities";
 const pages = await getCollection("blog", ({ data }) => !data.draft);
 
 export async function GET({ params }: APIContext) {
-  const page = pages.find(p => p.slug === params.id);
+  const page = pages.find(p => p.id === params.id);
 
   const title = page!.data.title;
   const pubDatetime = page!.data.pubDatetime;
@@ -38,7 +38,7 @@ export async function GET({ params }: APIContext) {
 
 export async function getStaticPaths() {
   return pages.map(p => {
-    const id = p.slug;
+    const id = p.id;
     return { params: { id } };
   });
 }

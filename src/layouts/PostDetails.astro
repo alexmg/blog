@@ -4,7 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import PostMetadata from "@components/PostMetadata";
-import type { CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
@@ -18,13 +18,13 @@ const { post } = Astro.props;
 const { title, author, description, ogImage, pubDatetime, modDatetime, tags } =
   post.data;
 
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 const frontmatter = remarkPluginFrontmatter as CollectionEntry<"blog">["data"];
 
 const layoutProps = {
   title: `${title} | ${SITE.title}`,
-  postSlug: post.slug,
+  postSlug: post.id,
   author,
   description,
   pubDatetime,

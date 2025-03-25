@@ -13,9 +13,6 @@ import type { RemarkPlugin } from "node_modules/@astrojs/markdown-remark/dist/ty
 // https://astro.build/config
 export default defineConfig({
   scopedStyleStrategy: "where",
-  experimental: {
-    contentLayer: true,
-  },
   site: SITE.website,
   integrations: [
     tailwind({

@@ -19,7 +19,7 @@ export const getReadingTime = async () => {
       const { frontmatter, file } = await globPost();
       const filename = file.split("/").pop();
       const post = posts.find(x => x.id === filename);
-      mapFrontmatter.set(post?.slug, frontmatter.readingTime);
+      mapFrontmatter.set(post?.id, frontmatter.readingTime);
     })
   );
 
@@ -29,7 +29,7 @@ export const getReadingTime = async () => {
 const getPostsWithRT = async (posts: CollectionEntry<"blog">[]) => {
   const mapFrontmatter = await getReadingTime();
   return posts.map(post => {
-    post.data.readingTime = mapFrontmatter.get(post.slug);
+    post.data.readingTime = mapFrontmatter.get(post.id);
     return post;
   });
 };
