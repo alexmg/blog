@@ -7,6 +7,7 @@ import Main from "@layouts/Main.astro";
 import Tag from "@components/Tag.astro";
 import getTagsWithCount from "@utils/getTagsWithCount";
 import { SITE } from "@config";
+import { slugifyStr } from "@utils/slugify";
 
 const posts = await getCollection("blog");
 
@@ -22,7 +23,7 @@ let tagsWithCount = getTagsWithCount(posts);
     <div class="flex flex-row flex-wrap gap-x-2 gap-y-4">
       {
         tagsWithCount.map(({ tag, count }) => (
-          <Tag tag={tag} size="lg" count={count} />
+          <Tag tag={slugifyStr(tag)} tagName={tag} size="lg" count={count} />
         ))
       }
     </div>

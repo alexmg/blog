@@ -1,10 +1,11 @@
 ---
 export interface Props {
   tag: string;
+  tagName: string;
   size?: "sm" | "lg";
   count?: number;
 }
-const { tag, size = "sm", count } = Astro.props;
+const { tag, tagName, size = "sm", count } = Astro.props;
 ---
 
 <a
@@ -17,7 +18,7 @@ const { tag, size = "sm", count } = Astro.props;
     <span
       class="align-center ease flex w-max cursor-pointer rounded-lg border px-3 py-1 transition duration-300"
     >
-      {size === "sm" && <span class="mr-1">#</span>}{tag}{
+      {size === "sm" && <span class="mr-1">#</span>}{tagName}{
         count && <span class="ml-2 opacity-50">({count})</span>
       }
     </span>
