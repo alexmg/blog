@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.x"
+  },
   "name": "blog",
   "version": "0.0.1",
   "private": true,
