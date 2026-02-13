@@ -1,0 +1,56 @@
+---
+import { getAllPosts } from "@/utils/data-utils";
+import Layout from "@/layouts/Layout.astro";
+import { render } from "astro:content";
+import { SITE } from "@/consts";
+import Prose from "@/components/Prose.astro";
+import PostDetail from "@/components/PostDetail.astro";
+import Gradient from "@/components/Gradient.astro";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+  title={post.data.title}
+  id={post.id}
+  description={post.data.description}
+>
+  <article class="py-6">
+    <header class="mb-6">
+      <h1
+        class="font-heading mb-3 text-3xl font-bold text-gray-900 dark:text-white"
+      >
+        <Gradient>{post.data.title}</Gradient>
+      </h1>
+      <PostDetail post={post} />
+    </header>
+
+    <Prose>
+      <Content />
+    </Prose>
+
+    {
+      post.data.updated && (
+        <footer class="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
+          <p>
+            Last updated:{" "}
+            {post.data.updated.toLocaleDateString(SITE.locale, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </footer>
+      )
+    }
+  </article>
+</Layout>

@@ -1,32 +1,39 @@
 ---
-import { getCollection } from "astro:content";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import Layout from "@layouts/Layout.astro";
-import Main from "@layouts/Main.astro";
-import Tag from "@components/Tag.astro";
-import getTagsWithCount from "@utils/getTagsWithCount";
-import { SITE } from "@config";
-import { slugifyStr } from "@utils/slugify";
+import Gradient from "@/components/Gradient.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getAllTagsWithCount, type TagWithCount } from "@/utils/data-utils";
 
-const posts = await getCollection("blog");
-
-let tagsWithCount = getTagsWithCount(posts);
+const allTags: TagWithCount[] = await getAllTagsWithCount();
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
-  <Header activeNav="tags" />
-  <Main
-    pageTitle="Tags"
-    pageDesc="Select a tag to view a list of blog posts about that topic"
-  >
-    <div class="flex flex-row flex-wrap gap-x-2 gap-y-4">
+<Layout title="Post Tags">
+  <div class="py-6">
+    <h1
+      class="font-heading mb-6 text-2xl font-bold text-gray-900 dark:text-white"
+    >
+      <Gradient>Post Tags</Gradient>
+    </h1>
+
+    <div class="flex flex-wrap gap-3">
       {
-        tagsWithCount.map(({ tag, count }) => (
-          <Tag tag={slugifyStr(tag)} tagName={tag} size="lg" count={count} />
+        allTags.map((tag) => (
+          <a
+            href={`/tags/${tag.name}`}
+            class="inline-flex items-center rounded-full bg-gray-200 px-4 py-2 text-gray-800 transition-colors duration-200 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+          >
+            <span class="font-medium">{tag.name}</span>
+            <span class="ml-2 rounded-full bg-gray-300 px-2 py-0.5 text-xs font-semibold text-gray-700 dark:bg-gray-600 dark:text-gray-300">
+              {tag.count}
+            </span>
+          </a>
         ))
       }
     </div>
-  </Main>
-  <Footer />
+
+    {
+      allTags.length === 0 && (
+        <p class="text-gray-600 dark:text-gray-400">No tags found.</p>
+      )
+    }
+  </div>
 </Layout>

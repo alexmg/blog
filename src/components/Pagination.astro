@@ -1,65 +1,199 @@
 ---
-import LinkButton from "./LinkButton.astro";
-
-export interface Props {
+interface Props {
   currentPage: number;
   totalPages: number;
-  prevUrl: string;
-  nextUrl: string;
+  prevUrl: string | undefined;
+  nextUrl: string | undefined;
 }
 
 const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
 
-const prev = currentPage > 1 ? "" : "disabled";
-const next = currentPage < totalPages ? "" : "disabled";
-const isPrevDisabled = prev === "disabled";
-const isNextDisabled = next === "disabled";
----
+// Generate page numbers to show in pagination
+function generatePagination(current: number, max: number) {
+  const pages = [];
 
-{
-  totalPages > 1 && (
-    <nav class="pagination-wrapper" aria-label="Pagination">
-      <LinkButton
-        disabled={isPrevDisabled}
-        href={prevUrl}
-        className={`mr-4 select-none ${prev}`}
-        ariaLabel="Previous"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class:list={[{ "disabled-svg": isPrevDisabled }]}
-        >
-          <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z" />
-        </svg>
-        Prev
-      </LinkButton>
-      {currentPage} / {totalPages}
-      <LinkButton
-        disabled={isNextDisabled}
-        href={nextUrl}
-        className={`ml-4 select-none ${next}`}
-        ariaLabel="Next"
-      >
-        Next
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class:list={[{ "disabled-svg": isNextDisabled }]}
-        >
-          <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
-        </svg>
-      </LinkButton>
-    </nav>
-  )
+  // Always include first page
+  pages.push(1);
+
+  // Add ellipsis if needed
+  if (current > 3) {
+    pages.push("ellipsis");
+  }
+
+  // Add pages around current page
+  for (
+    let i = Math.max(2, current - 1);
+    i <= Math.min(max - 1, current + 1);
+    i++
+  ) {
+    pages.push(i);
+  }
+
+  // Add ellipsis if needed
+  if (current < max - 2) {
+    pages.push("ellipsis");
+  }
+
+  // Always include last page if not first page
+  if (max > 1) {
+    pages.push(max);
+  }
+
+  return pages;
 }
 
-<style>
-  .pagination-wrapper {
-    @apply mb-8 mt-auto flex justify-center;
+const pages = generatePagination(currentPage, totalPages);
+
+// Create the URL for each page
+function getPageUrl(pageNum: number) {
+  if (pageNum === 1) {
+    return "/posts";
   }
-  .disabled {
-    @apply pointer-events-none select-none opacity-50 hover:text-skin-base group-hover:fill-skin-base;
-  }
-  .disabled-svg {
-    @apply group-hover:!fill-skin-base;
-  }
-</style>
+  return `/posts/${pageNum}`;
+}
+---
+
+<nav aria-label="Pagination" class="mt-10 mb-5 flex justify-center">
+  <ul class="flex items-center -space-x-px">
+    <!-- Previous page link -->
+    <li>
+      {
+        prevUrl ? (
+          <a
+            href={prevUrl}
+            class="ms-0 flex h-10 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            aria-label="Previous page"
+          >
+            <span class="sr-only">Previous</span>
+            <svg
+              class="h-3 w-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+          </a>
+        ) : (
+          <span
+            class="ms-0 flex h-10 cursor-not-allowed items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
+            aria-disabled="true"
+          >
+            <span class="sr-only">Previous</span>
+            <svg
+              class="h-3 w-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+          </span>
+        )
+      }
+    </li>
+
+    <!-- Page numbers -->
+    {
+      pages.map((page) => {
+        if (page === "ellipsis") {
+          return (
+            <li>
+              <span class="flex h-10 items-center justify-center border border-gray-300 bg-white px-4 leading-tight dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+                &hellip;
+              </span>
+            </li>
+          );
+        }
+
+        const isCurrentPage = page === currentPage;
+
+        return (
+          <li>
+            {isCurrentPage ? (
+              <span
+                aria-current="page"
+                class="flex h-10 items-center justify-center border border-gray-300 bg-teal-50 px-4 text-teal-600 hover:bg-teal-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+              >
+                {page}
+              </span>
+            ) : (
+              <a
+                href={getPageUrl(page as number)}
+                class="flex h-10 items-center justify-center border border-gray-300 bg-white px-4 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                {page}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+
+    <!-- Next page link -->
+    <li>
+      {
+        nextUrl ? (
+          <a
+            href={nextUrl}
+            class="flex h-10 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            aria-label="Next page"
+          >
+            <span class="sr-only">Next</span>
+            <svg
+              class="h-3 w-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </a>
+        ) : (
+          <span
+            class="flex h-10 cursor-not-allowed items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
+            aria-disabled="true"
+          >
+            <span class="sr-only">Next</span>
+            <svg
+              class="h-3 w-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </span>
+        )
+      }
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,106 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Pagination from "@/components/Pagination.astro";
+import { getAllTags, getPostsByTag } from "@/utils/data-utils";
+import type { PaginateFunction } from "astro";
+import { SITE } from "@/consts";
+import PostDetail from "@/components/PostDetail.astro";
+import Gradient from "@/components/Gradient.astro";
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) {
+  // Get all tags
+  const allTags = await getAllTags();
+
+  // For each tag, get posts and paginate them
+  return (
+    await Promise.all(
+      allTags.map(async (tag) => {
+        const posts = await getPostsByTag(tag);
+        return paginate(posts, {
+          params: { tag },
+          pageSize: SITE.postsPerPage,
+          props: { tag },
+        });
+      }),
+    )
+  ).flat();
+}
+
+const { page, tag } = Astro.props;
+const totalPosts = page.total;
+---
+
+<Layout title={`Posts tagged with "${tag}"`}>
+  <div class="py-6">
+    <div class="mb-6 flex flex-wrap items-center justify-between">
+      <h1 class="font-heading text-2xl font-bold text-gray-900 dark:text-white">
+        <span class="mr-2 inline-block"
+          ><Gradient>Posts tagged with:</Gradient></span
+        >
+        <span
+          class="inline-flex items-center rounded-full bg-teal-100 px-3 py-1 text-teal-800 dark:bg-teal-900 dark:text-teal-200"
+        >
+          {tag}
+        </span>
+      </h1>
+      <a
+        href="/tags"
+        class="flex items-center text-teal-600 hover:underline dark:text-teal-400"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mr-1 h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+        </svg>
+        All Tags
+      </a>
+    </div>
+
+    <p class="mb-6 text-gray-600 dark:text-gray-300">
+      Found {totalPosts} post{totalPosts !== 1 ? "s" : ""} tagged with "{tag}"
+    </p>
+
+    <ul>
+      {
+        page.data.map((post) => (
+          <li class="mb-6 border-b border-gray-200 pb-6 last:mb-0 last:border-0 last:pb-0 dark:border-gray-700">
+            <h2 class="font-heading mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+              <a
+                href={`/posts/${post.id}`}
+                class="transition-colors duration-200 hover:text-teal-600 dark:hover:text-teal-400"
+              >
+                {post.data.title}
+              </a>
+            </h2>
+            <PostDetail post={post} />
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      (page.url.prev || page.url.next) && (
+        <div class="mt-8">
+          <Pagination
+            currentPage={page.currentPage}
+            totalPages={page.lastPage}
+            prevUrl={page.url.prev}
+            nextUrl={page.url.next}
+          />
+        </div>
+      )
+    }
+  </div>
+</Layout>

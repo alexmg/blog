@@ -1,0 +1,67 @@
+---
+// Import font CSS files to get their paths
+import cabinFontPath from "@fontsource/cabin/files/cabin-latin-400-normal.woff2";
+import cabinBoldPath from "@fontsource/cabin/files/cabin-latin-700-normal.woff2";
+import inconsolataFontPath from "@fontsource/inconsolata/files/inconsolata-latin-400-normal.woff2";
+import nunitoFontPath from "@fontsource/nunito/files/nunito-latin-400-normal.woff2";
+import nunitoBoldPath from "@fontsource/nunito/files/nunito-latin-700-normal.woff2";
+
+// Still import the full font packages for comprehensive character support
+import "@fontsource/cabin";
+import "@fontsource/inconsolata";
+import "@fontsource/nunito";
+---
+<!-- Preload critical fonts to prevent flash of unstyled text (FOUT) -->
+<link
+    rel="preload"
+    href={cabinFontPath}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+/>
+<link
+    rel="preload"
+    href={cabinBoldPath}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+/>
+<link
+    rel="preload"
+    href={nunitoFontPath}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+/>
+<link
+    rel="preload"
+    href={nunitoBoldPath}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+/>
+<link
+    rel="preload"
+    href={inconsolataFontPath}
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+/>
+
+<!-- Font display strategy styles -->
+<style>
+    @font-face {
+    font-family: "Cabin";
+    font-display: swap;
+    }
+
+    @font-face {
+    font-family: "Nunito";
+    font-display: swap;
+    }
+
+    @font-face {
+    font-family: "Inconsolata";
+    font-display: swap;
+    }
+</style>

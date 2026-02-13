@@ -1,0 +1,34 @@
+---
+import { SITE } from "@/consts";
+
+interface Props {
+  title?: string;
+  description?: string;
+  id?: string;
+}
+const { title = SITE.title, description = SITE.description, id } = Astro.props;
+const ogImageName = id ? id : "og";
+const ogImageUrl = new URL(`/images/${ogImageName}.png`, Astro.url.origin).href;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- General Meta Tags -->
+<meta name="generator" content={Astro.generator} />
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={SITE.author} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:description" content={description} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImageUrl} />

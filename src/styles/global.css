@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Ensure smooth transitions when changing themes */
+  html {
+    @apply transition-colors duration-200;
+  }
+
+  /* Style inline code elements */
+  :not(pre) > code {
+    @apply rounded bg-gray-200 px-1.5 py-0.5 font-mono text-sm dark:bg-gray-800;
+  }
+}
+
+/* Override typography plugin styles for inline code */
+.prose :not(pre) > code:not([class*="language-"]) {
+  &::before,
+  &::after {
+    content: none !important;
+    display: none !important;
+  }
+}
+
+@theme {
+  --font-sans: "Cabin", "sans-serif";
+  --font-heading: "Nunito", "sans-serif";
+  --font-code: "Inconsolata", "monospace";
+  --color-highlight-dark: #41d1aa;
+  --color-highlight-light: #218676;
+}

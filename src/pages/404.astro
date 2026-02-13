@@ -1,42 +1,23 @@
 ---
-import { SITE } from "@config";
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
-  <Header />
-
-  <main id="main-content">
-    <div class="not-found-wrapper">
-      <h1>404</h1>
-      <span aria-hidden="true" class="py-4 text-3xl">¯\_(ツ)_/¯</span>
-      <p>Page not found</p>
-      <LinkButton
-        href="/"
-        className="mt-8 underline decoration-accent decoration-2 underline-offset-8 text-lg"
-      >
-        Go back home
-      </LinkButton>
-    </div>
-  </main>
-
-  <Footer />
+<Layout title="404: Page Not Found" description="Page not found">
+  <div class="py-6">
+    <h1
+      class="font-heading mb-6 text-2xl font-bold text-gray-900 dark:text-white"
+    >
+      404: Page Not Found 😦
+    </h1>
+    <p class="mb-6 text-gray-700 dark:text-gray-300">
+      Looks like you've ventured into the cosmic void. The page you're looking
+      for doesn't exist.
+    </p>
+    <a
+      href="/"
+      class="text-gray-600 transition-colors duration-200 hover:text-teal-600 dark:text-gray-300 dark:hover:text-teal-400"
+    >
+      Return to Home
+    </a>
+  </div>
 </Layout>
-
-<style>
-  #main-content {
-    @apply mx-auto mt-14 flex max-w-3xl flex-1 items-center justify-center;
-  }
-  .not-found-wrapper {
-    @apply mb-14 flex flex-col items-center justify-center;
-  }
-  .not-found-wrapper h1 {
-    @apply text-9xl font-bold text-skin-accent;
-  }
-  .not-found-wrapper p {
-    @apply mt-4 text-2xl sm:text-3xl;
-  }
-</style>

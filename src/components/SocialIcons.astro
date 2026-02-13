@@ -1,0 +1,19 @@
+---
+import { SOCIALS } from "@/consts";
+import { Icon } from "astro-icon/components";
+---
+
+{
+  SOCIALS.map((value) => (
+    <a
+      href={value.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-highlight-dark transition-colors duration-200 hover:scale-130"
+      aria-label={value.title}
+      title={value.title}
+    >
+      <Icon name={value.icon} />
+    </a>
+  ))
+}

@@ -1,44 +1,17 @@
 ---
-import { SITE } from "@config";
-import Hr from "./Hr.astro";
-import Socials from "./Socials.astro";
+import { SITE } from "@/consts";
 
+// Get current year for the copyright
 const currentYear = new Date().getFullYear();
-
-export interface Props {
-  noMarginTop?: boolean;
-}
-
-const { noMarginTop = false } = Astro.props;
 ---
 
-<footer class={`${noMarginTop ? "" : "mt-auto"}`}>
-  <Hr noPadding />
-  <div class="footer-wrapper">
-    <Socials centered />
-    <div class="copyright-wrapper">
-      <span>Copyright 2008-{currentYear}<wbr /> {SITE.author}</span>
-    </div>
+<footer
+  class="mt-auto border-t border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900"
+>
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <p class="text-center text-sm text-gray-500 dark:text-gray-400">
+      © 2008-{currentYear}
+      {SITE.title}. All rights reserved.
+    </p>
   </div>
 </footer>
-
-<style>
-  footer {
-    @apply w-full;
-  }
-  .footer-wrapper {
-    @apply flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4;
-  }
-  .link-button {
-    @apply my-1 p-2 hover:rotate-6;
-  }
-  .link-button svg {
-    @apply scale-125;
-  }
-  .copyright-wrapper {
-    @apply my-2 flex flex-col items-center whitespace-nowrap text-center sm:flex-row;
-  }
-  .separator {
-    @apply hidden sm:inline;
-  }
-</style>

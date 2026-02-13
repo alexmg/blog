@@ -1,20 +1,19 @@
+import type { APIRoute } from "astro";
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
-import getSortedPosts from "@utils/getSortedPosts";
-import { SITE } from "@config";
+import { SITE } from "@/consts";
+import { getAllPosts } from "@/utils/data-utils";
 
-export async function GET() {
-  const posts = await getCollection("blog");
-  const sortedPosts = await getSortedPosts(posts);
+export const GET: APIRoute = async ({ site }) => {
+  const posts = await getAllPosts();
   return rss({
     title: SITE.title,
-    description: SITE.desc,
-    site: SITE.website,
-    items: sortedPosts.map(({ data, id }) => ({
+    description: SITE.description,
+    site: site!.href,
+    items: posts.map(({ data, id }) => ({
       link: `posts/${id}/`,
       title: data.title,
       description: data.description,
-      pubDate: new Date(data.modDatetime ?? data.pubDatetime),
+      pubDate: new Date(data.updated ?? data.date),
     })),
   });
-}
+};

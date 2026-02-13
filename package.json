@@ -1,85 +1,32 @@
 {
-  "engines": {
-    "node": "22.x"
-  },
-  "name": "blog",
+  "name": "wretched-wavelength",
+  "type": "module",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
-    "dev": "run-p start check:wait",
-    "check": "astro check",
-    "check:wait": "wait-on tcp:3000 && astro check --wait",
-    "start": "astro dev",
+    "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "sync": "astro sync",
     "astro": "astro",
-    "format:check": "prettier --check . --plugin=prettier-plugin-astro",
-    "format": "prettier --write . --plugin=prettier-plugin-astro",
-    "cz": "cz",
-    "prepare": "husky install",
-    "lint": "eslint ."
+    "lint": "pnpm exec prettier . --write"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@astrojs/rss": "^4.0.14",
-    "@iconify-json/devicon": "^1.2.52",
-    "@iconify-json/logos": "^1.2.10",
-    "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.62",
-    "@iconify-json/tabler": "^1.2.23",
-    "astro": "^5.16.4",
-    "fuse.js": "^7.1.0",
-    "lodash.kebabcase": "^4.1.1",
-    "mdast-util-to-string": "^4.0.0",
-    "reading-time": "^1.5.0",
-    "remark-collapse": "^0.1.2",
-    "remark-toc": "^9.0.0",
-    "tailwindcss": "^3.4.18",
-    "typescript": "^5.9.3"
-  },
-  "devDependencies": {
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/rss": "4.0.15",
+    "@astrojs/sitemap": "3.7.0",
+    "@fontsource/cabin": "^5.2.8",
     "@fontsource/inconsolata": "^5.2.8",
     "@fontsource/nunito": "^5.2.7",
     "@resvg/resvg-js": "^2.6.2",
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/github-slugger": "^2.0.0",
-    "@types/lodash.kebabcase": "^4.1.9",
-    "@types/react": "^19.2.7",
-    "@typescript-eslint/parser": "^8.48.1",
-    "astro-eslint-parser": "^1.2.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "5.17.2",
+    "astro-expressive-code": "^0.41.6",
     "astro-icon": "^1.1.5",
-    "commitizen": "^4.3.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.39.1",
-    "eslint-plugin-astro": "^1.5.0",
-    "globals": "^16.5.0",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "html-entities": "^2.6.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^3.7.4",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.5.14",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
-    "satori": "^0.10.14",
-    "satori-html": "^0.3.2",
-    "typescript-eslint": "^8.48.1",
-    "wait-on": "^9.0.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,mdx,json,astro}": [
-      "prettier --write --plugin=prettier-plugin-astro"
-    ],
-    "*.astro": "astro check"
+    "prettier": "3.7.4",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2"
   }
 }

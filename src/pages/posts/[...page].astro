@@ -1,0 +1,42 @@
+---
+import { SITE } from "@/consts";
+import Layout from "@/layouts/Layout.astro";
+import { getAllPosts } from "@/utils/data-utils";
+import type { PaginateFunction } from "astro";
+import Pagination from "@/components/Pagination.astro";
+import PostList from "@/components/PostList.astro";
+import Gradient from "@/components/Gradient.astro";
+
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) {
+  const allPosts = await getAllPosts();
+  return paginate(allPosts, { pageSize: SITE.postsPerPage });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Blog Posts" description={SITE.description}>
+  <div class="py-6">
+    <h1
+      class="font-heading mb-6 text-2xl font-bold text-gray-900 dark:text-white"
+    >
+      <Gradient>Blog Posts</Gradient>
+    </h1>
+    <PostList posts={page.data} />
+
+    {
+      (page.url.prev || page.url.next) && (
+        <Pagination
+          currentPage={page.currentPage}
+          totalPages={page.lastPage}
+          prevUrl={page.url.prev}
+          nextUrl={page.url.next}
+        />
+      )
+    }
+  </div>
+</Layout>

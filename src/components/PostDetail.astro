@@ -1,0 +1,27 @@
+---
+import { SITE } from "@/consts";
+import type { CollectionEntry } from "astro:content";
+import Tags from "./Tags.astro";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+  <time datetime={post.data.date.toISOString()}>
+    {
+      post.data.date.toLocaleDateString(SITE.locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    }
+  </time>
+  <Tags tags={post.data.tags} />
+</div>
+<p class="mt-3 text-gray-600 dark:text-gray-300">
+  {post.data.description}
+</p>
