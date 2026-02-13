@@ -2,7 +2,7 @@
 
 The source code for my personal blog [alexmg.dev](https://alexmg.dev).
 
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=blog-alexmg)</br>
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/blog-rouge-ten)</br>
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)</br>
 ![GitHub](https://img.shields.io/github/license/alexmg/blog?color=%232F3741)</br>
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)</br>
