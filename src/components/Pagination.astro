@@ -61,7 +61,7 @@ function getPageUrl(pageNum: number) {
         prevUrl ? (
           <a
             href={prevUrl}
-            class="ms-0 flex h-10 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            class="pagination-btn-base pagination-btn-hover ms-0 rounded-s-lg border-e-0 !px-3"
             aria-label="Previous page"
           >
             <span class="sr-only">Previous</span>
@@ -83,7 +83,7 @@ function getPageUrl(pageNum: number) {
           </a>
         ) : (
           <span
-            class="ms-0 flex h-10 cursor-not-allowed items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
+            class="pagination-btn-base pagination-btn-disabled ms-0 rounded-s-lg border-e-0 !px-3"
             aria-disabled="true"
           >
             <span class="sr-only">Previous</span>
@@ -113,7 +113,7 @@ function getPageUrl(pageNum: number) {
         if (page === "ellipsis") {
           return (
             <li>
-              <span class="flex h-10 items-center justify-center border border-gray-300 bg-white px-4 leading-tight dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
+              <span class="pagination-btn-base dark:!text-gray-400">
                 &hellip;
               </span>
             </li>
@@ -127,14 +127,14 @@ function getPageUrl(pageNum: number) {
             {isCurrentPage ? (
               <span
                 aria-current="page"
-                class="flex h-10 items-center justify-center border border-gray-300 bg-teal-50 px-4 text-teal-600 hover:bg-teal-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                class="pagination-btn-base pagination-btn-active"
               >
                 {page}
               </span>
             ) : (
               <a
                 href={getPageUrl(page as number)}
-                class="flex h-10 items-center justify-center border border-gray-300 bg-white px-4 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="pagination-btn-base pagination-btn-hover"
               >
                 {page}
               </a>
@@ -150,7 +150,7 @@ function getPageUrl(pageNum: number) {
         nextUrl ? (
           <a
             href={nextUrl}
-            class="flex h-10 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight transition-colors duration-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            class="pagination-btn-base pagination-btn-hover rounded-e-lg !px-3"
             aria-label="Next page"
           >
             <span class="sr-only">Next</span>
@@ -172,7 +172,7 @@ function getPageUrl(pageNum: number) {
           </a>
         ) : (
           <span
-            class="flex h-10 cursor-not-allowed items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
+            class="pagination-btn-base pagination-btn-disabled rounded-e-lg !px-3"
             aria-disabled="true"
           >
             <span class="sr-only">Next</span>

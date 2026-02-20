@@ -32,3 +32,32 @@
   --color-highlight-dark: #41d1aa;
   --color-highlight-light: #218676;
 }
+
+@utility container-base {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility link-highlight {
+  @apply transition-colors duration-200 hover:text-highlight-light dark:hover:text-highlight-dark;
+}
+
+@utility bg-interactive {
+  @apply rounded-md bg-gray-200 transition-colors duration-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600;
+}
+
+@utility pagination-btn-base {
+  @apply flex h-10 items-center justify-center border border-gray-300 px-4 leading-tight dark:border-gray-700;
+}
+
+@utility pagination-btn-active {
+  @apply bg-highlight-light/10 text-highlight-light hover:bg-highlight-light/20 dark:bg-gray-700 dark:text-white;
+}
+
+@utility pagination-btn-hover {
+  @apply bg-white dark:bg-gray-800 dark:text-gray-300 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white;
+}
+
+@utility pagination-btn-disabled {
+  @apply cursor-not-allowed bg-white dark:bg-gray-800 opacity-50 dark:text-gray-500;
+}
+

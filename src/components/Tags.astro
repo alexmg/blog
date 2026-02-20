@@ -14,7 +14,7 @@ const { tags } = Astro.props;
         {tags.map((t) => (
           <a
             href={`/tags/${t}`}
-            class="rounded bg-gray-200 px-2 py-1 text-xs text-gray-700 transition-colors duration-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+            class="bg-interactive px-2 py-1 text-xs text-gray-700 dark:text-gray-300"
           >
             {t}
           </a>
