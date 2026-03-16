@@ -11,7 +11,7 @@
     "lint": "pnpm exec prettier . --write"
   },
   "dependencies": {
-    "@astrojs/rss": "4.0.15",
+    "@astrojs/rss": "4.0.17",
     "@astrojs/sitemap": "3.7.0",
     "@fontsource/cabin": "^5.2.8",
     "@fontsource/inconsolata": "^5.2.8",
