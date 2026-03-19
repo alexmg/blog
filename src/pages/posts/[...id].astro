@@ -6,6 +6,7 @@ import { SITE } from "@/consts";
 import Prose from "@/components/Prose.astro";
 import PostDetail from "@/components/PostDetail.astro";
 import Gradient from "@/components/Gradient.astro";
+import BackToTop from "@/components/BackToTop.astro";
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -53,4 +54,6 @@ const { Content } = await render(post);
       )
     }
   </article>
+
+  <BackToTop />
 </Layout>
