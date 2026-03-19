@@ -4,9 +4,18 @@ interface Props {
   totalPages: number;
   prevUrl: string | undefined;
   nextUrl: string | undefined;
+  basePath?: string;
 }
 
-const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+const {
+  currentPage,
+  totalPages,
+  prevUrl,
+  nextUrl,
+  basePath = "/posts",
+} = Astro.props;
+const normalizedBasePath =
+  basePath === "/" ? "" : basePath.replace(/\/$/, "");
 
 // Generate page numbers to show in pagination
 function generatePagination(current: number, max: number) {
@@ -47,9 +56,9 @@ const pages = generatePagination(currentPage, totalPages);
 // Create the URL for each page
 function getPageUrl(pageNum: number) {
   if (pageNum === 1) {
-    return "/posts";
+    return normalizedBasePath || "/";
   }
-  return `/posts/${pageNum}`;
+  return `${normalizedBasePath}/${pageNum}`;
 }
 ---
 
