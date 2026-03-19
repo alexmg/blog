@@ -36,24 +36,17 @@ const totalPosts = page.total;
 
 <Layout title={`Posts tagged with "${tag}"`}>
   <div class="py-6">
-    <div class="mb-6 flex flex-wrap items-center justify-between">
-      <h1 class="font-heading text-2xl font-bold text-gray-900 dark:text-white">
-        <span class="mr-2 inline-block"
-          ><Gradient>Posts tagged with:</Gradient></span
-        >
-        <span
-          class="bg-highlight-light/20 text-highlight-light dark:text-highlight-dark inline-flex items-center rounded-full px-3 py-1"
-        >
-          {tag}
-        </span>
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <h1 class="font-heading text-2xl font-bold">
+        <Gradient>Posts tagged with » {tag}</Gradient>
       </h1>
       <a
         href="/tags"
-        class="text-highlight-light dark:text-highlight-dark flex items-center hover:underline"
+        class="inline-flex items-center gap-1.5 rounded-lg border border-[#de8b3a]/55 px-3 py-1.5 text-sm font-semibold text-[#8c4f0f] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#de8b3a]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#de8b3a]/60 dark:border-[#3fd3c6]/55 dark:text-[#7dd8cf] dark:hover:bg-[#3fd3c6]/10 dark:focus-visible:ring-[#3fd3c6]/60"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="mr-1 h-4 w-4"
+          class="h-3.5 w-3.5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -68,15 +61,15 @@ const totalPosts = page.total;
       </a>
     </div>
 
-    <p class="mb-6 text-gray-600 dark:text-gray-300">
-      Found {totalPosts} post{totalPosts !== 1 ? "s" : ""} tagged with "{tag}"
+    <p class="mb-6 text-sm tracking-wide text-[#537884] dark:text-[#7caab2]">
+      {totalPosts} post{totalPosts !== 1 ? "s" : ""} found
     </p>
 
     <ul>
       {
         page.data.map((post) => (
-          <li class="mb-6 border-b border-gray-200 pb-6 last:mb-0 last:border-0 last:pb-0 dark:border-gray-700">
-            <h2 class="font-heading mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+          <li class="cyber-card mb-5">
+            <h2 class="font-heading mb-2 text-xl font-semibold text-[#123845] dark:text-[#def6f3]">
               <a href={`/posts/${post.id}`} class="link-highlight">
                 {post.data.title}
               </a>

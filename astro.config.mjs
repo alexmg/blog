@@ -15,6 +15,9 @@ export default defineConfig({
       themes: ["night-owl", "catppuccin-latte"],
       useDarkModeMediaQuery: false,
       themeCssRoot: ":root",
+      frames: {
+        showCopyToClipboardButton: true,
+      },
       themeCssSelector: (theme) =>
         theme.name == "night-owl" ? ":root.dark" : ":root:not(.dark)",
       styleOverrides: {

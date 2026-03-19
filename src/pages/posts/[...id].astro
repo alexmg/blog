@@ -27,7 +27,7 @@ const { Content } = await render(post);
   <article class="py-6">
     <header class="mb-6">
       <h1
-        class="font-heading mb-3 text-3xl font-bold text-gray-900 dark:text-white"
+        class="font-heading mb-3 text-3xl font-bold"
       >
         <Gradient>{post.data.title}</Gradient>
       </h1>
@@ -40,7 +40,7 @@ const { Content } = await render(post);
 
     {
       post.data.updated && (
-        <footer class="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
+        <footer class="mt-8 border-t border-[#dce7ea] pt-4 text-sm text-[#8db2bb] dark:border-[#1a3d4a] dark:text-[#5a7d87]">
           <p>
             Last updated:{" "}
             {post.data.updated.toLocaleDateString(SITE.locale, {

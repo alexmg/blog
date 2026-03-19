@@ -6,26 +6,26 @@ import ThemeToggle from "./ThemeToggle.astro";
 import MenuToggle from "./MenuToggle.astro";
 ---
 
-<header class="relative z-10 w-full border-b border-slate-200 dark:border-none">
+<header class="relative z-10 w-full border-b border-[#7ba2ac]/35 dark:border-[#1f4856]">
   <!-- Banner -->
   <div
-    class="h-48 w-full bg-cover bg-center"
+    class="h-52 w-full bg-cover bg-center"
     style="background-image: url('/banner.webp');"
   >
     <div
-      class="relative flex h-full w-full flex-col items-center justify-center bg-black/30"
+      class="relative flex h-full w-full flex-col items-center justify-center bg-[linear-gradient(to_bottom,rgba(5,14,20,0.2),rgba(5,14,20,0.56))]"
     >
       <!-- Site title -->
       <a href="/">
         <p
-          class="font-heading hover:text-highlight-dark text-3xl font-bold text-white drop-shadow-lg transition-colors duration-200 sm:text-4xl"
+          class="font-heading text-3xl font-extrabold tracking-[0.05em] text-[#f8f2df] drop-shadow-[0_3px_14px_rgba(0,0,0,0.45)] transition-colors duration-200 hover:text-[#f8ca76] sm:text-4xl"
         >
           {SITE.title}
         </p>
       </a>
       <!-- Social icons -->
       <div
-        class="mt-3 flex items-center space-x-3 text-xl text-gray-300 sm:text-2xl"
+        class="mt-3 flex items-center space-x-3 text-xl text-[#b2ccd1] sm:text-2xl"
       >
         <SocialIcons />
       </div>
@@ -33,19 +33,19 @@ import MenuToggle from "./MenuToggle.astro";
   </div>
   <!-- Logo -->
   <div class="relative mx-auto max-w-7xl">
-    <div class="absolute left-4 -translate-y-1/2 transform sm:left-6 lg:left-8">
+    <div class="absolute left-4 z-30 -translate-y-[62%] transform sm:left-6 lg:left-8">
       <a href="/" class="cursor-pointer">
         <img
           src="/logo.webp"
           alt="Logo"
-          class="h-32 w-32 rounded-full border-3 border-gray-50 object-cover dark:border-gray-900"
+          class="h-32 w-32 rounded-full border-4 border-[#f4cb87] object-cover shadow-[0_0_0_4px_rgba(13,38,48,0.3),0_20px_35px_rgba(7,24,34,0.35)] dark:border-[#3fd3c6]"
         />
       </a>
     </div>
   </div>
   <!-- Navigation bar -->
   <div>
-    <div class="container-base flex items-center justify-between py-4">
+    <div class="container-base relative z-10 flex items-center justify-between py-4 backdrop-blur-sm">
       <div class="flex-1"></div>
 
       <!-- Mobile menu buttons -->
@@ -68,7 +68,7 @@ import MenuToggle from "./MenuToggle.astro";
     <!-- Mobile navigation menu (hidden by default) -->
     <div
       id="mobile-menu"
-      class="hidden bg-white px-4 py-4 sm:hidden dark:bg-gray-800"
+      class="hidden border-t border-[#7ba2ac]/25 bg-[#f7fbfc]/95 px-4 py-4 sm:hidden dark:border-[#1f4856] dark:bg-[#0a1e27]/95"
     >
       <nav class="flex flex-col space-y-6">
         <MenuItem href="/posts" icon="post" text="Posts" />

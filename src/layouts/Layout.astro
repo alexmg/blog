@@ -16,7 +16,6 @@ const { title = SITE.title, description = SITE.description, id } = Astro.props;
 const path = Astro.url.pathname;
 const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
 ---
-
 <!doctype html>
 <html lang="en" class="font-display-swap h-full">
   <head>
@@ -45,12 +44,29 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
     </script>
   </head>
   <body
-    class="flex min-h-full flex-col bg-slate-50 transition-colors duration-200 dark:bg-gray-900"
+    class="flex min-h-full flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
   >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
+      <div
+        class="absolute -top-28 right-[-10%] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(222,139,58,0.22)_0%,rgba(222,139,58,0)_72%)] dark:bg-[radial-gradient(circle,rgba(222,139,58,0.2)_0%,rgba(222,139,58,0)_70%)]"
+      ></div>
+      <div
+        class="absolute top-[20%] left-[-12%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(63,211,198,0.18)_0%,rgba(63,211,198,0)_72%)] dark:bg-[radial-gradient(circle,rgba(63,211,198,0.2)_0%,rgba(63,211,198,0)_70%)]"
+      ></div>
+      <div class="absolute inset-0 opacity-[0.12] dark:opacity-[0.16]">
+        <div
+          class="h-full w-full bg-[linear-gradient(rgba(63,211,198,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.15)_1px,transparent_1px)] bg-[size:48px_48px]"
+        ></div>
+      </div>
+    </div>
+
     <Header />
 
     <main class="flex-grow">
-      <div class="container-base">
+      <div class="container-base relative">
         <!-- Content goes here -->
         <slot />
       </div>

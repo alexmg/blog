@@ -12,8 +12,8 @@ const { posts } = Astro.props;
 <ul>
   {
     posts.map((post) => (
-      <li class="mb-6 border-b border-gray-200 pb-6 last:mb-0 last:border-0 last:pb-0 dark:border-gray-700">
-        <h2 class="font-heading mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+      <li class="cyber-card mb-5 last:mb-0">
+        <h2 class="font-heading mb-3 text-xl font-semibold text-[#123845] dark:text-[#def6f3]">
           <a href={`/posts/${post.id}`} class="link-highlight">
             {post.data.title}
           </a>

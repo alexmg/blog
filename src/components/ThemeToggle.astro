@@ -8,12 +8,12 @@ const { id } = Astro.props;
 <button
   id={id}
   aria-label="Toggle theme"
-  class="bg-interactive cursor-pointer p-2"
+  class="bg-interactive cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#de8b3a]/70 dark:focus-visible:ring-[#3fd3c6]/70"
 >
   <span class="sr-only">Toggle theme</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    class="block h-6 w-6 text-gray-700 dark:hidden dark:text-gray-300"
+    class="block h-6 w-6 text-[#9d5f1d] transition-transform duration-200 hover:rotate-12 dark:hidden"
     viewBox="0 0 20 20"
     fill="currentColor"
   >
@@ -22,7 +22,7 @@ const { id } = Astro.props;
   </svg>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    class="hidden h-6 w-6 text-gray-700 dark:block dark:text-gray-300"
+    class="hidden h-6 w-6 text-[#62d3c7] transition-transform duration-200 hover:-rotate-12 dark:block"
     viewBox="0 0 20 20"
     fill="currentColor"
   >

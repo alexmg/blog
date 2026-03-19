@@ -1,20 +1,62 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Gradient from "../components/Gradient.astro";
 ---
 
 <Layout title="404: Page Not Found" description="Page not found">
-  <div class="py-6">
-    <h1
-      class="font-heading mb-6 text-2xl font-bold text-gray-900 dark:text-white"
-    >
-      404: Page Not Found 😦
-    </h1>
-    <p class="mb-6 text-gray-700 dark:text-gray-300">
-      Looks like you've ventured into the cosmic void. The page you're looking
-      for doesn't exist.
-    </p>
-    <a href="/" class="link-highlight text-gray-600 dark:text-gray-300">
-      Return to Home
-    </a>
+  <div class="py-12 sm:py-16">
+    <div class="space-y-8">
+      <!-- Animated signal bars -->
+      <div class="flex items-center justify-center gap-2">
+        <div class="h-12 w-1 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] opacity-60 animate-pulse"></div>
+        <div class="h-16 w-1 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] opacity-70 animate-pulse" style="animation-delay: 0.1s;"></div>
+        <div class="h-20 w-1 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] opacity-80 animate-pulse" style="animation-delay: 0.2s;"></div>
+        <div class="h-16 w-1 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] opacity-70 animate-pulse" style="animation-delay: 0.3s;"></div>
+        <div class="h-12 w-1 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] opacity-60 animate-pulse" style="animation-delay: 0.4s;"></div>
+      </div>
+
+      <!-- Main heading -->
+      <div class="text-center space-y-2">
+        <h1 class="font-heading text-5xl font-bold">
+          <Gradient>Signal Lost</Gradient>
+        </h1>
+        <p class="text-sm font-mono tracking-widest text-[#8db2bb] dark:text-[#5a7d87] uppercase">
+          Error: 404 | Route Not Found
+        </p>
+      </div>
+
+      <!-- Description -->
+      <p class="mx-auto max-w-md text-center text-[#2f4f5c] dark:text-[#9dc1c8] leading-relaxed">
+        The page you're searching for has been lost in the digital void. Check your route and try again.
+      </p>
+
+      <!-- Status info -->
+      <div class="mx-auto max-w-sm space-y-3 rounded-lg border border-[#de8b3a]/30 bg-[#f7ecdf]/40 p-4 dark:border-[#3fd3c6]/30 dark:bg-[#0e2e38]/40">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-[#537884] dark:text-[#7caab2]">Status</span>
+          <span class="font-mono font-bold text-[#de8b3a] dark:text-[#3fd3c6]">404 Not Found</span>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-[#537884] dark:text-[#7caab2]">Signal</span>
+          <span class="flex items-center gap-1.5">
+            <span class="h-2 w-2 rounded-full bg-[#de8b3a] dark:bg-[#3fd3c6] animate-pulse"></span>
+            <span class="font-mono text-[#8db2bb] dark:text-[#5a7d87]">No Connection</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex flex-col items-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 rounded-lg border border-[#de8b3a]/70 px-6 py-3 font-heading font-semibold tracking-wide text-[#8d5317] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#de8b3a]/12 hover:text-[#6f400f] hover:shadow-[0_4px_14px_rgba(222,139,58,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#de8b3a]/60 dark:border-[#3fd3c6]/80 dark:text-[#8ce0d8] dark:hover:bg-[#3fd3c6]/12 dark:hover:text-[#bcf5ee] dark:hover:shadow-[0_4px_14px_rgba(63,211,198,0.2)] dark:focus-visible:ring-[#3fd3c6]/60"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+          </svg>
+          Return to Home
+        </a>
+      </div>
+    </div>
   </div>
 </Layout>
