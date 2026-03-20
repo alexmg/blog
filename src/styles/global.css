@@ -269,45 +269,36 @@
 }
 
 .prose :where(a:not([class])) {
-  position: relative;
   text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(90deg, rgba(222, 139, 58, 0.96), rgba(63, 211, 198, 0.8));
+  background-position: 0 calc(100% - 0.08em);
+  background-repeat: no-repeat;
+  background-size: 0 2px;
+  filter: none;
   transition:
+    background-size 220ms ease-out,
     color 180ms ease-out,
-    text-shadow 220ms ease-out;
-}
-
-.prose :where(a:not([class]))::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.18rem;
-  height: 2px;
-  transform: scaleX(0.14);
-  transform-origin: left center;
-  opacity: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(222, 139, 58, 0.94), rgba(63, 211, 198, 0.78));
-  box-shadow: 0 0 12px rgba(222, 139, 58, 0.18);
-  transition:
-    transform 220ms ease-out,
-    opacity 180ms ease-out,
-    box-shadow 220ms ease-out;
+    text-shadow 220ms ease-out,
+    filter 220ms ease-out;
 }
 
 .prose :where(a:not([class]):is(:hover, :focus-visible)) {
+  background-size: 100% 2px;
   text-shadow: 0 0 16px rgba(63, 211, 198, 0.16);
+  filter: drop-shadow(0 0 10px rgba(222, 139, 58, 0.18)) drop-shadow(0 0 16px rgba(63, 211, 198, 0.14));
 }
 
-.prose :where(a:not([class]):is(:hover, :focus-visible))::after {
-  transform: scaleX(1);
-  opacity: 1;
+.dark .prose :where(a:not([class])) {
+  background-image: linear-gradient(90deg, rgba(63, 211, 198, 0.95), rgba(222, 139, 58, 0.74));
 }
 
-.dark .prose :where(a:not([class]))::after {
-  background: linear-gradient(90deg, rgba(63, 211, 198, 0.95), rgba(222, 139, 58, 0.72));
-  box-shadow: 0 0 14px rgba(63, 211, 198, 0.18);
+.dark .prose :where(a:not([class]):is(:hover, :focus-visible)) {
+  text-shadow: 0 0 16px rgba(63, 211, 198, 0.16);
+  filter: drop-shadow(0 0 12px rgba(63, 211, 198, 0.18)) drop-shadow(0 0 18px rgba(222, 139, 58, 0.12));
 }
+
 
 .prose :where(table) {
   width: 100%;
