@@ -4,7 +4,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { SITE } from "@/consts";
 import Seo from "@/components/Seo.astro";
-import Fonts from "@/components/Fonts.astro";
+import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -26,7 +26,9 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
 
     <Seo {...{ title, description, id }} />
 
-    <Fonts />
+    <Font cssVariable="--font-cabin" preload />
+    <Font cssVariable="--font-nunito" preload />
+    <Font cssVariable="--font-inconsolata" preload />
 
     <!-- Prevent flash by applying theme immediately -->
     <script is:inline>

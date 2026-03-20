@@ -118,10 +118,10 @@
   }
 }
 
-@theme {
-  --font-sans: "Cabin", "sans-serif";
-  --font-heading: "Nunito", "sans-serif";
-  --font-code: "Inconsolata", "monospace";
+@theme inline {
+  --font-sans: var(--font-cabin);
+  --font-heading: var(--font-nunito);
+  --font-code: var(--font-inconsolata);
   --color-highlight-dark: #3fd3c6;
   --color-highlight-light: #de8b3a;
 }

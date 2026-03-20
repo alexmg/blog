@@ -3,6 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -11,14 +14,11 @@
     "lint": "pnpm exec prettier . --write"
   },
   "dependencies": {
-    "@astrojs/rss": "4.0.15",
-    "@astrojs/sitemap": "3.7.0",
-    "@fontsource/cabin": "^5.2.8",
-    "@fontsource/inconsolata": "^5.2.8",
-    "@fontsource/nunito": "^5.2.7",
+    "@astrojs/rss": "4.0.17",
+    "@astrojs/sitemap": "3.7.1",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "5.18.0",
+    "astro": "6.0.7",
     "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.2.1"
