@@ -53,21 +53,21 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
       class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
       <div
-        class="absolute -top-28 right-[-10%] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(222,139,58,0.22)_0%,rgba(222,139,58,0)_72%)] dark:bg-[radial-gradient(circle,rgba(222,139,58,0.2)_0%,rgba(222,139,58,0)_70%)]"
+        class="absolute -top-28 right-[-10%] h-128 w-lg rounded-full bg-[radial-gradient(circle,rgba(222,139,58,0.22)_0%,rgba(222,139,58,0)_72%)] dark:bg-[radial-gradient(circle,rgba(222,139,58,0.2)_0%,rgba(222,139,58,0)_70%)]"
       ></div>
       <div
-        class="absolute top-[20%] left-[-12%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(63,211,198,0.18)_0%,rgba(63,211,198,0)_72%)] dark:bg-[radial-gradient(circle,rgba(63,211,198,0.2)_0%,rgba(63,211,198,0)_70%)]"
+        class="absolute top-[20%] left-[-12%] h-120 w-120 rounded-full bg-[radial-gradient(circle,rgba(63,211,198,0.18)_0%,rgba(63,211,198,0)_72%)] dark:bg-[radial-gradient(circle,rgba(63,211,198,0.2)_0%,rgba(63,211,198,0)_70%)]"
       ></div>
       <div class="absolute inset-0 opacity-[0.12] dark:opacity-[0.16]">
         <div
-          class="h-full w-full bg-[linear-gradient(rgba(63,211,198,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.15)_1px,transparent_1px)] bg-[size:48px_48px]"
+          class="h-full w-full bg-[linear-gradient(rgba(63,211,198,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.15)_1px,transparent_1px)] bg-size-[48px_48px]"
         ></div>
       </div>
     </div>
 
     <Header />
 
-    <main class="flex-grow">
+    <main class="grow">
       <div class="container-base relative">
         <!-- Content goes here -->
         <slot />
