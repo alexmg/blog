@@ -1,7 +1,7 @@
 ---
 import { SITE } from "@/consts";
 import Layout from "../layouts/Layout.astro";
-import TerminalCursor from "@/components/TerminalCursor.astro";
+import TerminalPrompt from "@/components/TerminalPrompt.astro";
 import { getAllPosts } from "@/utils/data-utils";
 import PostList from "@/components/PostList.astro";
 import Gradient from "@/components/Gradient.astro";
@@ -13,8 +13,8 @@ const posts = (await getAllPosts()).slice(0, 3);
   <div class="pt-14 pb-8 sm:pt-16">
     <section class="surface-panel">
       <h1 class="font-heading text-3xl font-extrabold tracking-wide text-[#123744] dark:text-[#dbf2ef] sm:text-4xl">
-        <Gradient>Hey there, I'm Alex</Gradient>
-        <TerminalCursor />
+        <TerminalPrompt />
+        <Gradient>Hey there, I'm Alex!</Gradient>
       </h1>
       <p class="mt-4 max-w-3xl text-base leading-relaxed text-[#35535f] dark:text-[#9cc2c9]">
         I'm a VP and Software Architect based in Brisbane, Australia, with a focus

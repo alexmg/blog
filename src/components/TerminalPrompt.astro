@@ -1,0 +1,36 @@
+---
+---
+<span class="terminal-prompt select-none" aria-hidden="true">
+  <span class="text-[#de8b3a] dark:text-[#f4cb87]">~</span>
+  <span class="text-[#537884] dark:text-[#9cc2c9]">/</span>
+  <span class="text-[#3fd3c6] dark:text-[#71e2d4]">alex</span>
+  <span class="mx-1 text-[#c08b3f] dark:text-[#dcb047]">❯</span>
+</span>
+
+<style>
+  @reference "../styles/global.css";
+
+  .terminal-prompt {
+    @apply inline-block mr-2;
+    animation: prompt-entry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes prompt-entry {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-prompt {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
