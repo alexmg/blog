@@ -58,16 +58,23 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
       <div
         class="absolute top-[20%] left-[-12%] h-120 w-120 rounded-full bg-[radial-gradient(circle,rgba(63,211,198,0.18)_0%,rgba(63,211,198,0)_72%)] dark:bg-[radial-gradient(circle,rgba(63,211,198,0.2)_0%,rgba(63,211,198,0)_70%)]"
       ></div>
-      <div class="absolute inset-0 opacity-[0.12] dark:opacity-[0.16]">
-        <div
-          class="h-full w-full bg-[linear-gradient(rgba(63,211,198,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.15)_1px,transparent_1px)] bg-size-[48px_48px]"
-        ></div>
-      </div>
+
     </div>
 
     <Header />
 
-    <main class="grow">
+<main class="relative grow isolate">                                                                                                                                          
+   <div                                                                                                                                                                        
+     aria-hidden="true"                                                                                                                                                        
+     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"                                                                                                       
+   >                                                                                                                                                                           
+     <div class="absolute inset-0 opacity-[0.4] dark:opacity-[0.16]">                                                                                                          
+       <div                                                                                                                                                                    
+         class="h-full w-full bg-[linear-gradient(rgba(148,170,176,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(148,170,176,0.25)_1px,transparent_1px)]               
+│    dark:bg-[linear-gradient(rgba(63,211,198,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.15)_1px,transparent_1px)] bg-size-[48px_48px]"                      
+       ></div>                                                                                                                                                                 
+     </div>                                                                                                                                                                    
+   </div> 
       <div class="container-base relative">
         <!-- Content goes here -->
         <slot />
