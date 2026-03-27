@@ -1,0 +1,30 @@
+---
+import BackgroundDarkStarfield from "@/components/BackgroundDarkStarfield.astro";
+import BackgroundLightSky from "@/components/BackgroundLightSky.astro";
+---
+
+<div class="theme-background theme-background-light">
+  <BackgroundLightSky />
+</div>
+
+<div class="theme-background theme-background-dark">
+  <BackgroundDarkStarfield />
+</div>
+
+<style>
+  .theme-background-light {
+    display: block;
+  }
+
+  .theme-background-dark {
+    display: none;
+  }
+
+  :global(html.dark) .theme-background-light {
+    display: none;
+  }
+
+  :global(html.dark) .theme-background-dark {
+    display: block;
+  }
+</style>

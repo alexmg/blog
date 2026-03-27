@@ -22,41 +22,37 @@
 
     const root = document.documentElement;
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const palette = {
+      background: "#071822",
+      haze: "rgba(8, 30, 38, 0.34)",
+      starHues: [176, 186, 34],
+      shooterHead: "63, 211, 198",
+      shooterTail: "222, 139, 58",
+      nebula: "rgba(14, 52, 64, 0.12)",
+      twinkleBoost: 1,
+      shooterChance: 0.0032,
+      density: { min: 140, max: 320, divisor: 6800 },
+      radius: { min: 0.25, max: 1.8 },
+      alpha: { min: 0.2, max: 0.95 },
+      deltaAlpha: { min: 0.004, max: 0.02 },
+      driftX: { min: -0.14, max: 0.14 },
+      driftY: { min: -0.07, max: 0.07 },
+      sweepX: 0.028,
+      sweepY: 0.016,
+      minAlphaFloor: 0.08,
+      glowScale: 2.6,
+      glowAlpha: 0.11,
+      glowRadiusThreshold: 1.15,
+    };
 
     let width = 0;
     let height = 0;
     let dpr = 1;
     let animationFrame = 0;
     let lastTimestamp = 0;
+    let isActive = false;
     let stars = [];
     let shooters = [];
-    let palette = getPalette();
-
-    function getPalette() {
-      const isDark = root.classList.contains("dark");
-
-      return isDark
-        ? {
-            background: "#071822",
-            haze: "rgba(8, 30, 38, 0.34)",
-            starHues: [176, 186, 34],
-            shooterHead: "63, 211, 198",
-            shooterTail: "222, 139, 58",
-            nebula: "rgba(14, 52, 64, 0.12)",
-            twinkleBoost: 1,
-            shooterChance: 0.0032,
-          }
-        : {
-            background: "#f3f8f9",
-            haze: "rgba(243, 248, 249, 0.42)",
-            starHues: [192, 30, 176],
-            shooterHead: "63, 211, 198",
-            shooterTail: "222, 139, 58",
-            nebula: "rgba(255, 255, 255, 0.08)",
-            twinkleBoost: 0.55,
-            shooterChance: 0.0012,
-          };
-    }
 
     function randomBetween(min, max) {
       return Math.random() * (max - min) + min;
@@ -79,10 +75,16 @@
     }
 
     function createStars() {
-      const density = Math.min(320, Math.max(140, Math.round((width * height) / 6800)));
+      const density = Math.min(
+        palette.density.max,
+        Math.max(
+          palette.density.min,
+          Math.round((width * height) / palette.density.divisor),
+        ),
+      );
 
       stars = Array.from({ length: density }, () => {
-        const radius = randomBetween(0.25, 1.8);
+        const radius = randomBetween(palette.radius.min, palette.radius.max);
         const depth = radius > 1.15 ? 1 : radius > 0.8 ? 0.78 : 0.58;
 
         return {
@@ -90,10 +92,12 @@
           y: Math.random() * height,
           radius,
           depth,
-          alpha: randomBetween(0.2, 0.95),
-          deltaAlpha: randomBetween(0.004, 0.02) * (Math.random() < 0.5 ? -1 : 1),
-          dx: randomBetween(-0.14, 0.14) * depth,
-          dy: randomBetween(-0.07, 0.07) * depth,
+          alpha: randomBetween(palette.alpha.min, palette.alpha.max),
+          deltaAlpha:
+            randomBetween(palette.deltaAlpha.min, palette.deltaAlpha.max) *
+            (Math.random() < 0.5 ? -1 : 1),
+          dx: randomBetween(palette.driftX.min, palette.driftX.max) * depth,
+          dy: randomBetween(palette.driftY.min, palette.driftY.max) * depth,
           hue: palette.starHues[Math.floor(Math.random() * palette.starHues.length)],
         };
       });
@@ -112,6 +116,10 @@
       });
     }
 
+    function clearCanvas() {
+      context.clearRect(0, 0, width, height);
+    }
+
     function drawBackdrop() {
       context.clearRect(0, 0, width, height);
 
@@ -124,18 +132,35 @@
       context.fillRect(0, 0, width, height);
     }
 
+    function drawDarkParticle(star) {
+      context.beginPath();
+      context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      context.fillStyle = `hsla(${star.hue}, 90%, 78%, ${star.alpha})`;
+      context.fill();
+
+      if (
+        star.radius > palette.glowRadiusThreshold &&
+        star.alpha > palette.minAlphaFloor * 3
+      ) {
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius * palette.glowScale, 0, Math.PI * 2);
+        context.fillStyle = `hsla(${star.hue}, 95%, 72%, ${star.alpha * palette.glowAlpha})`;
+        context.fill();
+      }
+    }
+
     function drawStars(deltaRatio, timestamp) {
-      const sweepX = Math.sin(timestamp * 0.00008) * 0.028;
-      const sweepY = Math.cos(timestamp * 0.00006) * 0.016;
+      const sweepX = Math.sin(timestamp * 0.00008) * palette.sweepX;
+      const sweepY = Math.cos(timestamp * 0.00006) * palette.sweepY;
 
       for (const star of stars) {
         star.alpha += star.deltaAlpha * deltaRatio * palette.twinkleBoost;
         if (star.alpha >= 1) {
           star.alpha = 1;
-          star.deltaAlpha = -randomBetween(0.004, 0.02);
-        } else if (star.alpha <= 0.08) {
-          star.alpha = 0.08;
-          star.deltaAlpha = randomBetween(0.004, 0.02);
+          star.deltaAlpha = -randomBetween(palette.deltaAlpha.min, palette.deltaAlpha.max);
+        } else if (star.alpha <= palette.minAlphaFloor) {
+          star.alpha = palette.minAlphaFloor;
+          star.deltaAlpha = randomBetween(palette.deltaAlpha.min, palette.deltaAlpha.max);
         }
 
         star.x += (star.dx + sweepX * star.depth) * deltaRatio;
@@ -146,17 +171,7 @@
         if (star.y < -8) star.y = height + 8;
         if (star.y > height + 8) star.y = -8;
 
-        context.beginPath();
-        context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        context.fillStyle = `hsla(${star.hue}, 90%, 78%, ${star.alpha})`;
-        context.fill();
-
-        if (star.radius > 1.15 && star.alpha > 0.5) {
-          context.beginPath();
-          context.arc(star.x, star.y, star.radius * 2.6, 0, Math.PI * 2);
-          context.fillStyle = `hsla(${star.hue}, 95%, 72%, ${star.alpha * 0.11})`;
-          context.fill();
-        }
+        drawDarkParticle(star);
       }
     }
 
@@ -196,6 +211,10 @@
     }
 
     function frame(timestamp) {
+      if (!isActive) {
+        return;
+      }
+
       if (document.visibilityState === "hidden") {
         animationFrame = window.requestAnimationFrame(frame);
         return;
@@ -215,26 +234,48 @@
       animationFrame = window.requestAnimationFrame(frame);
     }
 
-    function refreshTheme() {
-      palette = getPalette();
-      createStars();
+    function startAnimation() {
+      if (isActive) {
+        return;
+      }
+
+      isActive = true;
+      lastTimestamp = 0;
+      resize();
+      animationFrame = window.requestAnimationFrame(frame);
+    }
+
+    function stopAnimation() {
+      if (!isActive) {
+        return;
+      }
+
+      isActive = false;
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      shooters = [];
+      clearCanvas();
+    }
+
+    function syncTheme() {
+      if (root.classList.contains("dark")) {
+        startAnimation();
+      } else {
+        stopAnimation();
+      }
     }
 
     const themeObserver = new MutationObserver(() => {
-      refreshTheme();
+      syncTheme();
     });
 
-    resize();
-    animationFrame = window.requestAnimationFrame(frame);
-
     window.addEventListener("resize", resize, { passive: true });
-    mediaQuery.addEventListener("change", refreshTheme);
     themeObserver.observe(root, { attributes: true, attributeFilter: ["class"] });
+    syncTheme();
 
     window.addEventListener("beforeunload", () => {
-      window.cancelAnimationFrame(animationFrame);
+      stopAnimation();
       window.removeEventListener("resize", resize);
-      mediaQuery.removeEventListener("change", refreshTheme);
       themeObserver.disconnect();
     });
   })();
@@ -253,13 +294,6 @@
       linear-gradient(180deg, rgba(3, 15, 21, 0.08), rgba(3, 15, 21, 0));
   }
 
-  :global(html:not(.dark)) .starfield-shell {
-    background:
-      radial-gradient(circle at top, rgba(63, 211, 198, 0.08), transparent 42%),
-      radial-gradient(circle at 82% 18%, rgba(222, 139, 58, 0.07), transparent 34%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
-  }
-
   .starfield-canvas {
     position: absolute;
     inset: 0;
@@ -275,13 +309,6 @@
       radial-gradient(circle at center, transparent 34%, rgba(7, 24, 34, 0.14) 100%),
       linear-gradient(180deg, rgba(7, 24, 34, 0.06), rgba(7, 24, 34, 0.24));
     mix-blend-mode: screen;
-  }
-
-  :global(html:not(.dark)) .starfield-vignette {
-    background:
-      radial-gradient(circle at center, transparent 34%, rgba(197, 217, 223, 0.12) 100%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(219, 232, 236, 0.2));
-    mix-blend-mode: multiply;
   }
 
   .starfield-aurora {
@@ -309,10 +336,6 @@
     background: radial-gradient(circle, rgba(222, 139, 58, 0.12), rgba(222, 139, 58, 0));
     animation-duration: 22s;
     animation-direction: alternate-reverse;
-  }
-
-  :global(html:not(.dark)) .starfield-aurora {
-    opacity: 0.26;
   }
 
   @keyframes starfield-float {

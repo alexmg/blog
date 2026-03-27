@@ -1,0 +1,257 @@
+---
+---
+
+<div aria-hidden="true" class="light-sky-shell">
+  <div class="light-sky-wash"></div>
+  <div class="light-sky-orb light-sky-orb-primary"></div>
+  <div class="light-sky-orb light-sky-orb-secondary"></div>
+  <div class="light-sky-ribbon light-sky-ribbon-primary"></div>
+  <div class="light-sky-ribbon light-sky-ribbon-secondary"></div>
+  <div class="light-sky-grid"></div>
+  <div class="light-sky-contours"></div>
+  <div class="light-sky-speckles"></div>
+  <div class="light-sky-vignette"></div>
+</div>
+
+<style>
+  .light-sky-shell {
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    overflow: clip;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0) 42%),
+      linear-gradient(180deg, rgba(250, 253, 253, 0.9), rgba(232, 242, 245, 0.8) 40%, rgba(225, 236, 239, 0.7) 100%);
+  }
+
+  .light-sky-wash,
+  .light-sky-grid,
+  .light-sky-contours,
+  .light-sky-speckles,
+  .light-sky-vignette,
+  .light-sky-orb,
+  .light-sky-ribbon {
+    position: absolute;
+    inset: 0;
+    will-change: transform, opacity, background-position;
+  }
+
+  .light-sky-wash {
+    background:
+      radial-gradient(circle at 12% 18%, rgba(63, 211, 198, 0.22), rgba(63, 211, 198, 0) 28%),
+      radial-gradient(circle at 85% 14%, rgba(222, 139, 58, 0.2), rgba(222, 139, 58, 0) 24%),
+      radial-gradient(circle at 48% 72%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 40%),
+      linear-gradient(145deg, rgba(236, 247, 248, 0.82), rgba(228, 239, 243, 0.16));
+    animation: light-sky-wash-shift 24s ease-in-out infinite;
+  }
+
+  .light-sky-orb {
+    border-radius: 999px;
+    filter: blur(90px);
+    transform: translate3d(0, 0, 0);
+    animation: light-sky-float 16s ease-in-out infinite;
+  }
+
+  .light-sky-orb-primary {
+    top: -8%;
+    left: -10%;
+    width: 34rem;
+    height: 34rem;
+    background: radial-gradient(circle, rgba(87, 214, 205, 0.18), rgba(87, 214, 205, 0));
+  }
+
+  .light-sky-orb-secondary {
+    inset: auto;
+    right: -8%;
+    top: 12%;
+    width: 28rem;
+    height: 28rem;
+    background: radial-gradient(circle, rgba(235, 173, 96, 0.16), rgba(235, 173, 96, 0));
+    animation-duration: 20s;
+    animation-direction: alternate-reverse;
+  }
+
+  .light-sky-ribbon {
+    inset: auto;
+    border-radius: 999px;
+    filter: blur(28px);
+    opacity: 0.82;
+    mix-blend-mode: screen;
+    animation: light-sky-drift 14s ease-in-out infinite;
+  }
+
+  .light-sky-ribbon-primary {
+    top: 10%;
+    left: -10%;
+    width: 44rem;
+    height: 5.5rem;
+    transform: rotate(-8deg);
+    background: linear-gradient(90deg, rgba(87, 214, 205, 0), rgba(87, 214, 205, 0.16), rgba(255, 255, 255, 0));
+  }
+
+  .light-sky-ribbon-secondary {
+    right: -12%;
+    top: 54%;
+    width: 34rem;
+    height: 4rem;
+    transform: rotate(7deg);
+    background: linear-gradient(90deg, rgba(235, 173, 96, 0), rgba(235, 173, 96, 0.14), rgba(255, 255, 255, 0));
+    animation-duration: 18s;
+    animation-direction: alternate-reverse;
+  }
+
+  .light-sky-grid {
+    opacity: 0.48;
+    background-image:
+      linear-gradient(rgba(124, 160, 171, 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124, 160, 171, 0.16) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.3) 60%, transparent);
+    animation: light-sky-grid-pan 18s linear infinite;
+  }
+
+  .light-sky-contours {
+    opacity: 0.34;
+    background:
+      radial-gradient(circle at 18% 28%, transparent 0 8%, rgba(127, 170, 179, 0.12) 8.4% 8.8%, transparent 9.2%),
+      radial-gradient(circle at 80% 22%, transparent 0 10%, rgba(233, 170, 102, 0.12) 10.4% 10.8%, transparent 11.2%),
+      radial-gradient(circle at 52% 70%, transparent 0 13%, rgba(127, 170, 179, 0.1) 13.5% 13.9%, transparent 14.4%);
+    transform: scale(1.12);
+    animation: light-sky-contour-pulse 12s ease-in-out infinite;
+  }
+
+  .light-sky-speckles {
+    opacity: 0.48;
+    background-image:
+      radial-gradient(circle at 14% 24%, rgba(255, 255, 255, 0.92) 0 1px, transparent 1.8px),
+      radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.9) 0 1.1px, transparent 1.9px),
+      radial-gradient(circle at 22% 72%, rgba(142, 180, 188, 0.48) 0 1px, transparent 2px),
+      radial-gradient(circle at 64% 62%, rgba(142, 180, 188, 0.44) 0 1px, transparent 2px),
+      radial-gradient(circle at 86% 54%, rgba(233, 170, 102, 0.36) 0 1px, transparent 2px);
+    background-size: 19rem 19rem, 24rem 24rem, 28rem 28rem, 22rem 22rem, 26rem 26rem;
+    animation: light-sky-speckle-drift 10s ease-in-out infinite alternate;
+  }
+
+  .light-sky-vignette {
+    background:
+      radial-gradient(circle at center, transparent 44%, rgba(174, 201, 209, 0.12) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(214, 228, 233, 0.18));
+    mix-blend-mode: multiply;
+  }
+
+  @keyframes light-sky-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate3d(4%, 4.5%, 0) scale(1.1);
+    }
+  }
+
+  @keyframes light-sky-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(-8deg) scaleX(1);
+    }
+
+    50% {
+      transform: translate3d(8%, 1.5%, 0) rotate(-3deg) scaleX(1.14);
+    }
+  }
+
+  @keyframes light-sky-wash-shift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.92;
+    }
+
+    50% {
+      transform: translate3d(2%, 1.5%, 0) scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  @keyframes light-sky-grid-pan {
+    0% {
+      background-position: 0 0, 0 0;
+    }
+
+    100% {
+      background-position: 0 72px, 72px 0;
+    }
+  }
+
+  @keyframes light-sky-contour-pulse {
+    0%,
+    100% {
+      transform: scale(1.12);
+      opacity: 0.24;
+    }
+
+    50% {
+      transform: scale(1.18);
+      opacity: 0.44;
+    }
+  }
+
+  @keyframes light-sky-speckle-drift {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.34;
+    }
+
+    50% {
+      transform: translate3d(2.5%, 1.5%, 0);
+      opacity: 0.56;
+    }
+
+    100% {
+      transform: translate3d(-1.5%, 1%, 0);
+      opacity: 0.42;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .light-sky-orb-primary {
+      width: 24rem;
+      height: 24rem;
+      left: -18%;
+    }
+
+    .light-sky-orb-secondary {
+      width: 18rem;
+      height: 18rem;
+      right: -14%;
+      top: 18%;
+    }
+
+    .light-sky-ribbon-primary {
+      width: 28rem;
+      top: 14%;
+    }
+
+    .light-sky-ribbon-secondary {
+      width: 24rem;
+      top: 60%;
+    }
+
+    .light-sky-grid {
+      background-size: 48px 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .light-sky-wash,
+    .light-sky-orb,
+    .light-sky-ribbon,
+    .light-sky-grid,
+    .light-sky-contours,
+    .light-sky-speckles {
+      animation: none;
+    }
+  }
+</style>
