@@ -7,20 +7,113 @@ const { id } = Astro.props;
 
 <button
   id={id}
-  class="bg-interactive cyber-scanner cyber-pulse cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-highlight-light/70 dark:focus-visible:ring-highlight-dark/70"
+  type="button"
+  class="menu-toggle bg-interactive cyber-scanner cyber-pulse cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-highlight-light/70 dark:focus-visible:ring-highlight-dark/70"
   aria-label="Toggle menu"
+  aria-expanded="false"
+  aria-controls="mobile-menu"
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="h-6 w-6 text-[#43636d] dark:text-[#8ce0d8]"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M4 6h16M4 12h16M4 18h16"></path>
-  </svg>
+  <span class="sr-only">Toggle menu</span>
+  <span class="menu-toggle__spark" aria-hidden="true"></span>
+  <span class="menu-toggle__bars" aria-hidden="true">
+    <span class="menu-toggle__bar menu-toggle__bar--top"></span>
+    <span class="menu-toggle__bar menu-toggle__bar--middle"></span>
+    <span class="menu-toggle__bar menu-toggle__bar--bottom"></span>
+  </span>
 </button>
+
+<style>
+  @reference "../styles/global.css";
+
+  .menu-toggle {
+    @apply relative flex h-10 w-10 items-center justify-center rounded-md text-[#123744] transition-colors duration-200 hover:text-[#0f4554] dark:text-[#b8d9de] dark:hover:text-[#dcf7f2];
+  }
+
+  .menu-toggle__bars {
+    @apply relative z-10 flex h-4 w-5 flex-col justify-between;
+  }
+
+  .menu-toggle__bar {
+    display: block;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(14, 53, 66, 0.92), rgba(191, 114, 38, 0.88));
+    box-shadow: 0 0 10px rgba(191, 114, 38, 0.12);
+    transform-origin: center;
+    transition:
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease-out,
+      width 220ms ease-out,
+      background 220ms ease-out,
+      box-shadow 220ms ease-out;
+  }
+
+  .menu-toggle__bar--top,
+  .menu-toggle__bar--bottom {
+    width: 20px;
+  }
+
+  .menu-toggle__bar--middle {
+    width: 14px;
+    margin-left: auto;
+  }
+
+  :global(.dark) .menu-toggle__bar {
+    background: linear-gradient(90deg, rgba(128, 241, 228, 0.94), rgba(244, 203, 135, 0.82));
+    box-shadow: 0 0 12px rgba(63, 211, 198, 0.18);
+  }
+
+  .menu-toggle__spark {
+    position: absolute;
+    top: 0.05rem;
+    right: -0.1rem;
+    height: 0.3rem;
+    width: 0.3rem;
+    border-radius: 999px;
+    background: rgba(222, 139, 58, 0.9);
+    box-shadow: 0 0 12px rgba(222, 139, 58, 0.42);
+    transition:
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 180ms ease-out,
+      background 220ms ease-out,
+      box-shadow 220ms ease-out;
+  }
+
+  :global(.dark) .menu-toggle__spark {
+    background: rgba(115, 235, 222, 0.94);
+    box-shadow: 0 0 14px rgba(63, 211, 198, 0.46);
+  }
+
+  .menu-toggle:is(:hover, :focus-visible) .menu-toggle__bar--middle {
+    width: 18px;
+  }
+
+  .menu-toggle:is(:hover, :focus-visible) .menu-toggle__spark {
+    transform: scale(1.12);
+  }
+
+  .menu-toggle[data-open="true"] .menu-toggle__bar--top {
+    transform: translateY(7px) rotate(43deg);
+  }
+
+  .menu-toggle[data-open="true"] .menu-toggle__bar--middle {
+    opacity: 0;
+    transform: translateX(5px);
+  }
+
+  .menu-toggle[data-open="true"] .menu-toggle__bar--bottom {
+    transform: translateY(-7px) rotate(-43deg);
+  }
+
+  .menu-toggle[data-open="true"] .menu-toggle__spark {
+    transform: translate(-6px, 6px) scale(0.7);
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle__bar,
+    .menu-toggle__spark {
+      transition: none;
+    }
+  }
+</style>
