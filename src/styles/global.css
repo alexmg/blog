@@ -233,11 +233,11 @@
 }
 
 @utility bg-interactive {
-  @apply rounded-md border border-[#9dc2cb]/40 bg-[#eff6f8] text-[#10303b] transition-all duration-200 hover:border-highlight-light/70 hover:bg-[#e3eef2] dark:border-[#2f5863] dark:bg-[#0d2530] dark:text-[#b6d7dc] dark:hover:border-highlight-dark/70 dark:hover:bg-[#11303d];
+  @apply rounded-md border border-[#9dc2cb]/40 bg-[#eff6f8] text-[#10303b] transition-all duration-200 hover:border-highlight-light/70 hover:bg-[#e3eef2] dark:border-[#2f5863]/72 dark:bg-[#0d2530]/58 dark:text-[#b6d7dc] dark:hover:border-highlight-dark/70 dark:hover:bg-[#11303d]/72;
 }
 
 @utility cyber-card {
-  @apply rounded-2xl border border-[#8db2bb]/35 bg-white/70 p-5 shadow-[0_16px_36px_rgba(10,30,42,0.08)] transition-all duration-200 hover:border-highlight-light/60 hover:brightness-[1.02] hover:shadow-[0_22px_42px_rgba(18,48,66,0.15)] dark:border-[#2a4f5b]/70 dark:bg-[#0b202a]/75 dark:shadow-[0_18px_38px_rgba(1,8,14,0.45)] dark:hover:border-highlight-dark/65 dark:hover:brightness-[1.04] dark:hover:shadow-[0_24px_46px_rgba(8,31,42,0.5)];
+  @apply rounded-2xl border border-[#8db2bb]/35 bg-white/70 p-5 shadow-[0_16px_36px_rgba(10,30,42,0.08)] transition-all duration-200 hover:border-highlight-light/60 hover:brightness-[1.02] hover:shadow-[0_22px_42px_rgba(18,48,66,0.15)] dark:border-[#2a4f5b]/52 dark:bg-[#0b202a]/46 dark:shadow-[0_18px_38px_rgba(1,8,14,0.34)] dark:hover:border-highlight-dark/62 dark:hover:bg-[#0f2732]/54 dark:hover:brightness-[1.04] dark:hover:shadow-[0_24px_46px_rgba(8,31,42,0.42)];
 }
 
 @utility signal-chip {
