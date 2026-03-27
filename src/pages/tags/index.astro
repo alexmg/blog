@@ -20,7 +20,7 @@ const allTags: TagWithCount[] = await getAllTagsWithCount();
         allTags.map((tag) => (
           <a
             href={`/tags/${tag.name}`}
-            class="group inline-flex items-center gap-2 rounded-full border border-[#de8b3a]/40 bg-[#f7ecdf]/60 px-4 py-2 text-sm font-semibold text-[#8c4f0f] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#de8b3a]/80 hover:bg-[#f0e0c5] hover:shadow-[0_4px_14px_rgba(222,139,58,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#de8b3a]/60 dark:border-[#3fd3c6]/40 dark:bg-[#0e2e38]/70 dark:text-[#7dd8cf] dark:hover:border-[#3fd3c6]/80 dark:hover:bg-[#12404d] dark:hover:text-[#b8f0ea] dark:hover:shadow-[0_4px_14px_rgba(63,211,198,0.2)] dark:focus-visible:ring-[#3fd3c6]/60"
+            class="group inline-flex items-center gap-2 rounded-full border border-[#de8b3a]/40 bg-[#f7ecdf]/60 px-4 py-2 text-sm font-semibold text-[#8c4f0f] shadow-sm transition-all duration-200 hover:border-[#de8b3a]/80 hover:bg-[#f0e0c5] hover:brightness-[1.03] hover:shadow-[0_4px_14px_rgba(222,139,58,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#de8b3a]/60 dark:border-[#3fd3c6]/40 dark:bg-[#0e2e38]/70 dark:text-[#7dd8cf] dark:hover:border-[#3fd3c6]/80 dark:hover:bg-[#12404d] dark:hover:brightness-[1.04] dark:hover:text-[#b8f0ea] dark:hover:shadow-[0_4px_14px_rgba(63,211,198,0.2)] dark:focus-visible:ring-[#3fd3c6]/60"
           >
             <span>{tag.name}</span>
             <span class="rounded-full bg-[#de8b3a]/20 px-2 py-0.5 text-xs font-bold text-[#7a4210] transition-colors duration-200 group-hover:bg-[#de8b3a]/35 dark:bg-[#3fd3c6]/15 dark:text-[#5bbdb5] dark:group-hover:bg-[#3fd3c6]/28 dark:group-hover:text-[#7ee8e0]">

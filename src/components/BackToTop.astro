@@ -2,7 +2,7 @@
   id="back-to-top"
   type="button"
   aria-label="Back to top"
-  class="bg-interactive cyber-scanner fixed right-4 bottom-5 z-40 inline-flex translate-y-4 items-center gap-2 rounded-full border border-highlight-light/60 px-3 py-2 text-sm font-heading font-bold tracking-[0.18em] text-[#8d5317] opacity-0 shadow-[0_18px_35px_rgba(10,30,42,0.16)] transition-all duration-300 pointer-events-none sm:right-6 sm:bottom-6 dark:border-highlight-dark/70 dark:bg-[#0b2430]/92 dark:text-[#8ce0d8] dark:shadow-[0_20px_40px_rgba(2,10,18,0.42)]"
+  class="bg-interactive cyber-scanner fixed right-4 bottom-5 z-40 inline-flex scale-95 items-center gap-2 rounded-full border border-highlight-light/60 px-3 py-2 text-sm font-heading font-bold tracking-[0.18em] text-[#8d5317] opacity-0 shadow-[0_18px_35px_rgba(10,30,42,0.16)] transition-all duration-300 pointer-events-none sm:right-6 sm:bottom-6 dark:border-highlight-dark/70 dark:bg-[#0b2430]/92 dark:text-[#8ce0d8] dark:shadow-[0_20px_40px_rgba(2,10,18,0.42)]"
 >
   <span
     aria-hidden="true"
@@ -32,9 +32,9 @@
 
     button.classList.toggle("pointer-events-none", !shouldShow);
     button.classList.toggle("opacity-0", !shouldShow);
-    button.classList.toggle("translate-y-4", !shouldShow);
+    button.classList.toggle("scale-95", !shouldShow);
     button.classList.toggle("opacity-100", shouldShow);
-    button.classList.toggle("translate-y-0", shouldShow);
+    button.classList.toggle("scale-100", shouldShow);
   };
 
   const handleBackToTopClick = () => {
