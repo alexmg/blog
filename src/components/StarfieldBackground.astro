@@ -1,0 +1,349 @@
+---
+---
+
+<div aria-hidden="true" class="starfield-shell">
+  <canvas class="starfield-canvas" data-starfield-canvas></canvas>
+  <div class="starfield-vignette"></div>
+  <div class="starfield-aurora starfield-aurora-primary"></div>
+  <div class="starfield-aurora starfield-aurora-secondary"></div>
+</div>
+
+<script is:inline>
+  (() => {
+    const canvas = document.querySelector("[data-starfield-canvas]");
+    if (!(canvas instanceof HTMLCanvasElement)) {
+      return;
+    }
+
+    const context = canvas.getContext("2d");
+    if (!context) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let animationFrame = 0;
+    let lastTimestamp = 0;
+    let stars = [];
+    let shooters = [];
+    let palette = getPalette();
+
+    function getPalette() {
+      const isDark = root.classList.contains("dark");
+
+      return isDark
+        ? {
+            background: "#071822",
+            haze: "rgba(8, 30, 38, 0.34)",
+            starHues: [176, 186, 34],
+            shooterHead: "63, 211, 198",
+            shooterTail: "222, 139, 58",
+            nebula: "rgba(14, 52, 64, 0.12)",
+            twinkleBoost: 1,
+            shooterChance: 0.0032,
+          }
+        : {
+            background: "#f3f8f9",
+            haze: "rgba(243, 248, 249, 0.42)",
+            starHues: [192, 30, 176],
+            shooterHead: "63, 211, 198",
+            shooterTail: "222, 139, 58",
+            nebula: "rgba(255, 255, 255, 0.08)",
+            twinkleBoost: 0.55,
+            shooterChance: 0.0012,
+          };
+    }
+
+    function randomBetween(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.scale(dpr, dpr);
+
+      createStars();
+    }
+
+    function createStars() {
+      const density = Math.min(320, Math.max(140, Math.round((width * height) / 6800)));
+
+      stars = Array.from({ length: density }, () => {
+        const radius = randomBetween(0.25, 1.8);
+        const depth = radius > 1.15 ? 1 : radius > 0.8 ? 0.78 : 0.58;
+
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius,
+          depth,
+          alpha: randomBetween(0.2, 0.95),
+          deltaAlpha: randomBetween(0.004, 0.02) * (Math.random() < 0.5 ? -1 : 1),
+          dx: randomBetween(-0.14, 0.14) * depth,
+          dy: randomBetween(-0.07, 0.07) * depth,
+          hue: palette.starHues[Math.floor(Math.random() * palette.starHues.length)],
+        };
+      });
+
+      shooters = [];
+    }
+
+    function spawnShooter() {
+      shooters.push({
+        x: Math.random() * width * 0.78,
+        y: Math.random() * height * 0.35,
+        vx: randomBetween(4.2, 7.4),
+        vy: randomBetween(1.2, 2.8),
+        life: 1,
+        length: randomBetween(60, 120),
+      });
+    }
+
+    function drawBackdrop() {
+      context.clearRect(0, 0, width, height);
+
+      const backdrop = context.createLinearGradient(0, 0, width, height);
+      backdrop.addColorStop(0, palette.background);
+      backdrop.addColorStop(0.18, palette.nebula);
+      backdrop.addColorStop(0.45, "rgba(0, 0, 0, 0)");
+      backdrop.addColorStop(1, palette.haze);
+      context.fillStyle = backdrop;
+      context.fillRect(0, 0, width, height);
+    }
+
+    function drawStars(deltaRatio, timestamp) {
+      const sweepX = Math.sin(timestamp * 0.00008) * 0.028;
+      const sweepY = Math.cos(timestamp * 0.00006) * 0.016;
+
+      for (const star of stars) {
+        star.alpha += star.deltaAlpha * deltaRatio * palette.twinkleBoost;
+        if (star.alpha >= 1) {
+          star.alpha = 1;
+          star.deltaAlpha = -randomBetween(0.004, 0.02);
+        } else if (star.alpha <= 0.08) {
+          star.alpha = 0.08;
+          star.deltaAlpha = randomBetween(0.004, 0.02);
+        }
+
+        star.x += (star.dx + sweepX * star.depth) * deltaRatio;
+        star.y += (star.dy + sweepY * star.depth) * deltaRatio;
+
+        if (star.x < -8) star.x = width + 8;
+        if (star.x > width + 8) star.x = -8;
+        if (star.y < -8) star.y = height + 8;
+        if (star.y > height + 8) star.y = -8;
+
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        context.fillStyle = `hsla(${star.hue}, 90%, 78%, ${star.alpha})`;
+        context.fill();
+
+        if (star.radius > 1.15 && star.alpha > 0.5) {
+          context.beginPath();
+          context.arc(star.x, star.y, star.radius * 2.6, 0, Math.PI * 2);
+          context.fillStyle = `hsla(${star.hue}, 95%, 72%, ${star.alpha * 0.11})`;
+          context.fill();
+        }
+      }
+    }
+
+    function drawShooters(deltaRatio) {
+      for (let index = shooters.length - 1; index >= 0; index -= 1) {
+        const shooter = shooters[index];
+
+        shooter.x += shooter.vx * deltaRatio;
+        shooter.y += shooter.vy * deltaRatio;
+        shooter.life -= 0.016 * deltaRatio;
+
+        if (shooter.life <= 0) {
+          shooters.splice(index, 1);
+          continue;
+        }
+
+        const tailX = shooter.x - shooter.length;
+        const tailY = shooter.y - shooter.length * (shooter.vy / shooter.vx);
+        const gradient = context.createLinearGradient(shooter.x, shooter.y, tailX, tailY);
+
+        gradient.addColorStop(0, `rgba(${palette.shooterHead}, ${0.92 * shooter.life})`);
+        gradient.addColorStop(0.45, `rgba(${palette.shooterTail}, ${0.48 * shooter.life})`);
+        gradient.addColorStop(1, `rgba(${palette.shooterTail}, 0)`);
+
+        context.beginPath();
+        context.moveTo(shooter.x, shooter.y);
+        context.lineTo(tailX, tailY);
+        context.strokeStyle = gradient;
+        context.lineWidth = 1.5;
+        context.stroke();
+
+        context.beginPath();
+        context.arc(shooter.x, shooter.y, 1.8, 0, Math.PI * 2);
+        context.fillStyle = `rgba(255, 255, 255, ${shooter.life})`;
+        context.fill();
+      }
+    }
+
+    function frame(timestamp) {
+      if (document.visibilityState === "hidden") {
+        animationFrame = window.requestAnimationFrame(frame);
+        return;
+      }
+
+      const deltaRatio = Math.min(2.2, (timestamp - lastTimestamp || 16.67) / 16.67);
+      lastTimestamp = timestamp;
+
+      drawBackdrop();
+      drawStars(deltaRatio, timestamp);
+
+      if (!mediaQuery.matches && Math.random() < palette.shooterChance) {
+        spawnShooter();
+      }
+
+      drawShooters(deltaRatio);
+      animationFrame = window.requestAnimationFrame(frame);
+    }
+
+    function refreshTheme() {
+      palette = getPalette();
+      createStars();
+    }
+
+    const themeObserver = new MutationObserver(() => {
+      refreshTheme();
+    });
+
+    resize();
+    animationFrame = window.requestAnimationFrame(frame);
+
+    window.addEventListener("resize", resize, { passive: true });
+    mediaQuery.addEventListener("change", refreshTheme);
+    themeObserver.observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    window.addEventListener("beforeunload", () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+      mediaQuery.removeEventListener("change", refreshTheme);
+      themeObserver.disconnect();
+    });
+  })();
+</script>
+
+<style>
+  .starfield-shell {
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    overflow: clip;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at top, rgba(63, 211, 198, 0.12), transparent 38%),
+      radial-gradient(circle at 82% 18%, rgba(222, 139, 58, 0.11), transparent 30%),
+      linear-gradient(180deg, rgba(3, 15, 21, 0.08), rgba(3, 15, 21, 0));
+  }
+
+  :global(html:not(.dark)) .starfield-shell {
+    background:
+      radial-gradient(circle at top, rgba(63, 211, 198, 0.08), transparent 42%),
+      radial-gradient(circle at 82% 18%, rgba(222, 139, 58, 0.07), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  }
+
+  .starfield-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.96;
+  }
+
+  .starfield-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center, transparent 34%, rgba(7, 24, 34, 0.14) 100%),
+      linear-gradient(180deg, rgba(7, 24, 34, 0.06), rgba(7, 24, 34, 0.24));
+    mix-blend-mode: screen;
+  }
+
+  :global(html:not(.dark)) .starfield-vignette {
+    background:
+      radial-gradient(circle at center, transparent 34%, rgba(197, 217, 223, 0.12) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(219, 232, 236, 0.2));
+    mix-blend-mode: multiply;
+  }
+
+  .starfield-aurora {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(72px);
+    opacity: 0.4;
+    transform: translate3d(0, 0, 0);
+    animation: starfield-float 18s ease-in-out infinite;
+  }
+
+  .starfield-aurora-primary {
+    top: -8%;
+    left: -10%;
+    width: 30rem;
+    height: 30rem;
+    background: radial-gradient(circle, rgba(63, 211, 198, 0.15), rgba(63, 211, 198, 0));
+  }
+
+  .starfield-aurora-secondary {
+    right: -8%;
+    top: 14%;
+    width: 26rem;
+    height: 26rem;
+    background: radial-gradient(circle, rgba(222, 139, 58, 0.12), rgba(222, 139, 58, 0));
+    animation-duration: 22s;
+    animation-direction: alternate-reverse;
+  }
+
+  :global(html:not(.dark)) .starfield-aurora {
+    opacity: 0.26;
+  }
+
+  @keyframes starfield-float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate3d(2%, 3%, 0) scale(1.08);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .starfield-aurora-primary {
+      width: 22rem;
+      height: 22rem;
+      left: -18%;
+    }
+
+    .starfield-aurora-secondary {
+      width: 18rem;
+      height: 18rem;
+      right: -14%;
+      top: 22%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .starfield-aurora {
+      animation: none;
+    }
+  }
+</style>

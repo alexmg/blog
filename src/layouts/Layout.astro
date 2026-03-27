@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import StarfieldBackground from "@/components/StarfieldBackground.astro";
 import { SITE } from "@/consts";
 import Seo from "@/components/Seo.astro";
 import { Font } from "astro:assets";
@@ -48,6 +49,8 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
   <body
     class="flex min-h-full flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
   >
+    <StarfieldBackground />
+
     <div
       aria-hidden="true"
       class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
