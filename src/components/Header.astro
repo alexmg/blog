@@ -38,14 +38,19 @@ import MenuToggle from "./MenuToggle.astro";
         <img
           src="/logo.webp"
           alt="Logo"
-          class="h-32 w-32 rounded-full border-4 border-[#f4cb87] object-cover shadow-[0_0_0_4px_rgba(13,38,48,0.3),0_20px_35px_rgba(7,24,34,0.35)] dark:border-[#3fd3c6]"
+          class="h-32 w-32 rounded-full border-4 border-[#f4cb87] object-cover shadow-[0_0_0_4px_rgba(13,38,48,0.3),0_20px_35px_rgba(7,24,34,0.35)] dark:border-highlight-dark"
         />
       </a>
     </div>
   </div>
   <!-- Navigation bar -->
-  <div>
-    <div class="container-base relative z-10 flex items-center justify-between py-4 backdrop-blur-sm">
+  <div class="relative overflow-hidden border-t border-[#7ba2ac]/12 bg-[#f3f8f9]/52 shadow-[0_12px_24px_rgba(10,30,42,0.06)] backdrop-blur-md dark:border-[#183947]/90 dark:bg-[linear-gradient(90deg,rgba(6,20,27,0.94),rgba(8,26,35,0.9),rgba(6,20,27,0.94))] dark:shadow-[0_16px_34px_rgba(1,8,14,0.42)]">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden dark:block">
+      <div class="absolute top-[-16%] right-[2%] h-20 w-64 bg-[radial-gradient(circle,rgba(222,139,58,0.12)_0%,rgba(222,139,58,0.05)_34%,rgba(222,139,58,0)_74%)] opacity-70 blur-2xl"></div>
+      <div class="absolute inset-y-0 right-[6%] w-36 bg-[linear-gradient(90deg,rgba(222,139,58,0),rgba(222,139,58,0.04),rgba(222,139,58,0))] opacity-55 blur-xl"></div>
+      <div class="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(63,211,198,0),rgba(63,211,198,0.2),rgba(222,139,58,0.18),rgba(63,211,198,0))]"></div>
+    </div>
+    <div class="container-base relative z-10 flex items-center justify-between py-4">
       <div class="flex-1"></div>
 
       <!-- Mobile menu buttons -->
