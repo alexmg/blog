@@ -25,7 +25,7 @@
   const scheduleTerminalPromptAnimation = () => {
     window.setTimeout(() => {
       requestAnimationFrame(startTerminalPromptAnimation);
-    }, 140);
+    }, 240);
   };
 
   if (document.readyState === "complete") {
@@ -54,7 +54,7 @@
   }
 
   .terminal-prompt.prompt-live {
-    animation: prompt-shell 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: prompt-shell 0.92s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .terminal-prompt.prompt-live::before {
@@ -71,7 +71,7 @@
     opacity: 0;
     pointer-events: none;
     transform: translateX(-145%) skewX(-18deg);
-    animation: prompt-scan 0.56s ease-out 0.08s forwards;
+    animation: prompt-scan 0.74s ease-out 0.12s forwards;
   }
 
   .terminal-prompt.prompt-live > span {
@@ -81,7 +81,7 @@
       0.06em 0 0
         color-mix(in srgb, var(--color-highlight-dark) 40%, transparent);
     will-change: transform, filter, opacity;
-    animation: prompt-glyph 0.48s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    animation: prompt-glyph 0.62s cubic-bezier(0.2, 0.9, 0.2, 1) both;
   }
 
   .terminal-prompt.prompt-live > span:nth-child(1) {
@@ -89,15 +89,15 @@
   }
 
   .terminal-prompt.prompt-live > span:nth-child(2) {
-    animation-delay: 0.1s;
+    animation-delay: 0.12s;
   }
 
   .terminal-prompt.prompt-live > span:nth-child(3) {
-    animation-delay: 0.18s;
+    animation-delay: 0.22s;
   }
 
   .terminal-prompt.prompt-live > span:nth-child(4) {
-    animation-delay: 0.26s;
+    animation-delay: 0.32s;
   }
 
   @keyframes prompt-shell {
