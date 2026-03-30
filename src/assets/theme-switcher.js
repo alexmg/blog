@@ -2,24 +2,27 @@ document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggles();
 });
 
+function applyTheme(isDark) {
+  document.documentElement.classList.add("disable-transitions");
+
+  // Force reflow so transition suppression is active before the theme class flips.
+  void document.documentElement.offsetWidth;
+
+  document.documentElement.classList.toggle("dark", isDark);
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove("disable-transitions");
+    });
+  });
+}
+
 // Setup all theme toggle buttons
 function setupThemeToggles() {
   // Function to toggle the theme
   function toggleTheme() {
-    // Disable Astro transitions during theme switch
-    document.documentElement.classList.add("disable-transitions");
-
-    // Force reflow to ensure the class is applied before toggling theme
-    void document.documentElement.offsetWidth;
-
-    document.documentElement.classList.toggle("dark");
-    const isDark = document.documentElement.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-
-    // Remove the class after the next frame
-    requestAnimationFrame(() => {
-      document.documentElement.classList.remove("disable-transitions");
-    });
+    applyTheme(!document.documentElement.classList.contains("dark"));
   }
 
   // Desktop toggle button
@@ -44,10 +47,6 @@ window
     const newColorScheme = e.matches ? "dark" : "light";
     if (!localStorage.getItem("theme")) {
       // Only change if user hasn't explicitly set a preference
-      if (newColorScheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      applyTheme(newColorScheme === "dark");
     }
   });
