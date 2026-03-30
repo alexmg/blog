@@ -91,6 +91,8 @@ import MenuToggle from "./MenuToggle.astro";
     if (menuToggle && mobileMenu) {
       menuToggle.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
+        const isExpanded = !mobileMenu.classList.contains("hidden");
+        menuToggle.setAttribute("aria-expanded", String(isExpanded));
       });
     }
   </script>

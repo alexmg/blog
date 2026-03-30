@@ -7,12 +7,16 @@ const { id } = Astro.props;
 
 <button
   id={id}
-  class="cursor-pointer rounded-md bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+  type="button"
+  aria-controls="mobile-menu"
+  aria-expanded="false"
   aria-label="Toggle menu"
+  class="bg-interactive cyber-scanner cyber-pulse group cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-highlight-light/70 dark:focus-visible:ring-highlight-dark/70"
 >
+  <span class="sr-only">Toggle menu</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    class="h-6 w-6 text-gray-700 dark:text-gray-300"
+    class="h-6 w-6 text-[#9d5f1d] transition-transform duration-200 group-hover:rotate-6 dark:text-[#62d3c7] dark:group-hover:-rotate-6"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
