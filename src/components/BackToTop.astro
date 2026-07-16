@@ -2,7 +2,7 @@
   id="back-to-top"
   type="button"
   aria-label="Back to top"
-  class="bg-interactive cyber-scanner fixed right-4 bottom-5 z-40 inline-flex translate-y-4 items-center gap-2 rounded-full border border-highlight-light/60 px-3 py-2 text-sm font-heading font-bold tracking-[0.18em] text-[#8d5317] opacity-0 shadow-[0_18px_35px_rgba(10,30,42,0.16)] transition-all duration-300 pointer-events-none sm:right-6 sm:bottom-6 dark:border-highlight-dark/70 dark:bg-[#0b2430]/92 dark:text-[#8ce0d8] dark:shadow-[0_20px_40px_rgba(2,10,18,0.42)]"
+  class="bg-interactive cyber-scanner fixed right-4 bottom-5 z-50 inline-flex translate-y-4 items-center gap-2 rounded-full border border-highlight-light/60 px-3 py-2 text-sm font-heading font-bold tracking-[0.18em] text-[#8d5317] opacity-0 shadow-[0_18px_35px_rgba(10,30,42,0.16)] transition-all duration-300 pointer-events-none sm:right-6 sm:bottom-6 dark:border-highlight-dark/70 dark:bg-[#0b2430]/92 dark:text-[#8ce0d8] dark:shadow-[0_20px_40px_rgba(2,10,18,0.42)]"
 >
   <span
     aria-hidden="true"
@@ -24,6 +24,10 @@
 
 <script>
   const button = document.getElementById("back-to-top");
+  const footer = document.querySelector("footer");
+  const defaultBottom = button instanceof HTMLElement
+    ? parseFloat(getComputedStyle(button).bottom)
+    : 0;
 
   const syncBackToTopVisibility = () => {
     if (!(button instanceof HTMLButtonElement)) return;
@@ -37,6 +41,21 @@
     button.classList.toggle("translate-y-0", shouldShow);
   };
 
+  const syncBackToTopOffset = () => {
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    if (!(footer instanceof HTMLElement)) {
+      button.style.removeProperty("bottom");
+      return;
+    }
+
+    const footerRect = footer.getBoundingClientRect();
+    const overlap = window.innerHeight - footerRect.top;
+    const offset = Math.max(0, overlap + 12);
+
+    button.style.bottom = `${defaultBottom + offset}px`;
+  };
+
   const handleBackToTopClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -46,6 +65,10 @@
   }
 
   syncBackToTopVisibility();
+  syncBackToTopOffset();
   window.addEventListener("scroll", syncBackToTopVisibility, { passive: true });
+  window.addEventListener("scroll", syncBackToTopOffset, { passive: true });
+  window.addEventListener("resize", syncBackToTopOffset);
   document.addEventListener("astro:after-swap", syncBackToTopVisibility);
+  document.addEventListener("astro:after-swap", syncBackToTopOffset);
 </script>
