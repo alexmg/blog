@@ -63,6 +63,15 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
       document.documentElement.classList.toggle("dark", shouldUseDarkTheme);
     </script>
     <style is:inline>
+      .layout-frame {
+        min-width: 0;
+      }
+
+      .layout-frame :where(.prose) {
+        max-width: 75ch;
+        margin-inline: auto;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -115,9 +124,11 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
           ></div>
         </div>
       </div>
-      <div class="container-base relative">
+      <div class="container-base relative py-6 sm:py-8 lg:py-10">
         <!-- Content goes here -->
-        <slot />
+        <div class="layout-frame">
+          <slot />
+        </div>
       </div>
     </main>
 
