@@ -2,6 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggles();
 });
 
+function updateThemeToggleLabels(isDark) {
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  ["theme-toggle", "theme-toggle-mobile"].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.setAttribute("aria-label", label);
+  });
+}
+
 function applyTheme(isDark) {
   document.documentElement.classList.add("disable-transitions");
 
@@ -10,6 +18,7 @@ function applyTheme(isDark) {
 
   document.documentElement.classList.toggle("dark", isDark);
   localStorage.setItem("theme", isDark ? "dark" : "light");
+  updateThemeToggleLabels(isDark);
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -20,6 +29,9 @@ function applyTheme(isDark) {
 
 // Setup all theme toggle buttons
 function setupThemeToggles() {
+  // Sync labels to current state on load
+  updateThemeToggleLabels(document.documentElement.classList.contains("dark"));
+
   // Function to toggle the theme
   function toggleTheme() {
     applyTheme(!document.documentElement.classList.contains("dark"));

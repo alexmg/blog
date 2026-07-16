@@ -7,10 +7,10 @@ const { id } = Astro.props;
 
 <button
   id={id}
-  aria-label="Toggle theme"
+  type="button"
+  aria-label="Switch to dark mode"
   class="bg-interactive cyber-scanner cyber-pulse cursor-pointer p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-highlight-light/70 dark:focus-visible:ring-highlight-dark/70"
 >
-  <span class="sr-only">Toggle theme</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="block h-6 w-6 text-[#9d5f1d] transition-transform duration-200 hover:rotate-12 dark:hidden"
