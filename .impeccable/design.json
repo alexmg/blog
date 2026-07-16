@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T00:04:20.146Z",
+  "title": "Design System: Alex Meyer-Gleaves Blog",
+  "extensions": {
+    "colorMeta": {
+      "neon-accent-light": {
+        "role": "primary",
+        "displayName": "Signal Teal",
+        "canonical": "#218676",
+        "tonalRamp": [
+          "#113c34",
+          "#145148",
+          "#18665b",
+          "#1b7a6f",
+          "#218676",
+          "#2aa08e",
+          "#41d1aa",
+          "#95f0d9"
+        ]
+      },
+      "neon-accent-dark": {
+        "role": "primary",
+        "displayName": "Night Neon",
+        "canonical": "#41d1aa",
+        "tonalRamp": [
+          "#113c34",
+          "#145148",
+          "#18665b",
+          "#1f7e71",
+          "#2aa08e",
+          "#41d1aa",
+          "#6fe0c2",
+          "#b7f3e5"
+        ]
+      },
+      "page-bg-light": {
+        "role": "neutral",
+        "displayName": "Frosted Slate",
+        "canonical": "#f8fafc",
+        "tonalRamp": [
+          "#1f2937",
+          "#374151",
+          "#4b5563",
+          "#6b7280",
+          "#9ca3af",
+          "#d1d5db",
+          "#e5e7eb",
+          "#f8fafc"
+        ]
+      },
+      "page-bg-dark": {
+        "role": "neutral",
+        "displayName": "Midnight Slate",
+        "canonical": "#111827",
+        "tonalRamp": [
+          "#0b1020",
+          "#111827",
+          "#1f2937",
+          "#374151",
+          "#4b5563",
+          "#6b7280",
+          "#9ca3af",
+          "#d1d5db"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero and major section headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Long-form technical reading."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation and compact UI text."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline code and technical snippets."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "theme-transition",
+        "value": "200ms ease",
+        "purpose": "Theme and hover color transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Theme Toggle Button",
+      "kind": "button",
+      "refersTo": "button-interactive",
+      "description": "Compact icon button used for theme switching in header contexts.",
+      "html": "<button class=\"ds-btn-icon\" aria-label=\"Toggle theme\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z\" fill=\"currentColor\"/></svg></button>",
+      "css": ".ds-btn-icon{display:inline-flex;align-items:center;justify-content:center;padding:.5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;border:0;cursor:pointer;transition:background-color .2s ease,color .2s ease}.ds-btn-icon:hover{background:#d1d5db}.ds-btn-icon:focus-visible{outline:2px solid #218676;outline-offset:2px}"
+    },
+    {
+      "name": "Menu Toggle Button",
+      "kind": "button",
+      "refersTo": "button-interactive-dark",
+      "description": "Mobile menu trigger with the same utility geometry as theme controls.",
+      "html": "<button class=\"ds-menu-btn\" aria-label=\"Toggle menu\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></button>",
+      "css": ".ds-menu-btn{display:inline-flex;align-items:center;justify-content:center;padding:.5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;border:0;cursor:pointer;transition:background-color .2s ease,color .2s ease}.ds-menu-btn:hover{background:#d1d5db}.ds-menu-btn:focus-visible{outline:2px solid #218676;outline-offset:2px}"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Primary navigation entry combining icon and bold label text.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\"><span class=\"ds-nav-icon\">●</span><span>Posts</span></a>",
+      "css": ".ds-nav-link{display:inline-flex;align-items:center;gap:.5rem;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.3;color:#4b5563;text-decoration:none;transition:color .2s ease}.ds-nav-link:hover{color:#218676}.ds-nav-link:focus-visible{outline:2px solid #218676;outline-offset:3px;border-radius:.25rem}.ds-nav-icon{font-size:1rem;line-height:1}"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "chip-tag",
+      "description": "Small metadata chip used for post tag links.",
+      "html": "<a class=\"ds-tag\" href=\"#\">distributed-systems</a>",
+      "css": ".ds-tag{display:inline-flex;align-items:center;padding:.25rem .5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;font-family:Cabin,sans-serif;font-size:.75rem;line-height:1.2;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-tag:hover{background:#d1d5db;color:#111827}.ds-tag:focus-visible{outline:2px solid #218676;outline-offset:2px}"
+    },
+    {
+      "name": "Pagination Pill",
+      "kind": "button",
+      "refersTo": "button-interactive",
+      "description": "Pagination control with bordered structure and active accent state.",
+      "html": "<a class=\"ds-page-btn\" href=\"#\">2</a><span class=\"ds-page-btn ds-page-active\">3</span>",
+      "css": ".ds-page-btn{display:inline-flex;align-items:center;justify-content:center;min-width:2.5rem;height:2.5rem;padding:0 .75rem;border:1px solid #d1d5db;background:#fff;color:#4b5563;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.2;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-page-btn:hover{background:#f3f4f6;color:#111827}.ds-page-btn:focus-visible{outline:2px solid #218676;outline-offset:2px}.ds-page-active{background:rgba(33,134,118,.1);color:#218676}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Neon Field Manual",
+    "overview": "This system pairs cyberpunk energy with engineering-grade readability. It is expressive where identity matters (accent moments, banner treatment, link interactions) and disciplined where comprehension matters (body copy contrast, predictable spacing, stable navigation patterns). The visual language should feel technically fluent, not performative: bold enough to be memorable, quiet enough to keep long-form reading frictionless.",
+    "keyCharacteristics": [
+      "High-contrast reading surfaces with dark/light parity.",
+      "Neon accent used as signal, not as paint.",
+      "Rounded interactive micro-surfaces for toggles, tags, and pagination controls.",
+      "Friendly geometric heading voice over pragmatic body typography.",
+      "Content-first rhythm optimized for technical scanning and depth reading."
+    ],
+    "rules": [
+      {
+        "name": "The Rare-Neon Rule",
+        "body": "Accent color appears only for intent-bearing elements (key links, emphasis gradients, active pagination), never as broad decorative fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Read-First Rule",
+        "body": "Body text always sits on high-contrast neutral fields; mood never outranks legibility.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dual-Voice Rule",
+        "body": "Headings carry identity; body copy carries trust. Do not swap these duties.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "Components stay visually flat at rest; interaction feedback comes from color and contrast transitions before any depth effect.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the existing cyberpunk identity and visual energy while keeping body copy contrast at readable levels.",
+      "Do use accent greens as signal moments, not full-surface decoration.",
+      "Do keep interaction geometry and spacing consistent across toggles, tags, and pagination controls.",
+      "Do maintain dark/light mode parity so hierarchy and clarity remain consistent in either theme."
+    ],
+    "donts": [
+      "Don't drift into generic SaaS dashboard aesthetics.",
+      "Don't adopt corporate consulting templates.",
+      "Don't replace the current visual language with a neutral redesign that erases the existing cyberpunk identity and visual energy.",
+      "Don't introduce side-stripe accent borders, gradient text-only gimmicks, or decorative glassmorphism patterns."
+    ]
+  }
+}
