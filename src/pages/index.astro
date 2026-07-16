@@ -1,7 +1,7 @@
 ---
 import { SITE } from "@/consts";
 import Layout from "../layouts/Layout.astro";
-import Wave from "@/components/Wave.astro";
+import TerminalPrompt from "@/components/TerminalPrompt.astro";
 import { getAllPosts } from "@/utils/data-utils";
 import PostList from "@/components/PostList.astro";
 import Gradient from "@/components/Gradient.astro";
@@ -10,24 +10,49 @@ const posts = (await getAllPosts()).slice(0, 3);
 ---
 
 <Layout description={SITE.description}>
-  <div class="py-6">
-    <h1 class="font-heading text-2xl font-bold text-gray-900 dark:text-white">
-      <Gradient>Hey there, I'm Alex</Gradient>
-      <Wave classes="text-3xl" />
-    </h1>
-    <p class="mt-4 text-gray-600 dark:text-gray-300">
-      I'm a VP and Software Architect based in Brisbane, Australia, with a focus
-      on AI, distributed systems, and cloud-native applications. Over the
-      years, I've worked across the medical, manufacturing, MMM, and AEC
-      industries. I'm passionate about technology, always learning, and enjoy
-      contributing to open source projects.
-    </p>
-    <section class="mt-10">
-      <h1
-        class="font-heading mb-4 text-2xl font-bold text-gray-900 dark:text-white"
-      >
-        <Gradient>Recent Posts</Gradient>
+  <div class="pt-8 pb-8 sm:pt-12 lg:pt-16">
+    <section class="surface-panel">
+      <h1 class="font-heading text-3xl font-extrabold tracking-wide text-[#123744] dark:text-[#dbf2ef] sm:text-4xl">
+        <TerminalPrompt />
+        <Gradient>Hey there, welcome!</Gradient>
       </h1>
+      <p class="mt-4 max-w-3xl text-base leading-relaxed text-[#35535f] dark:text-[#9cc2c9]">
+        I'm a VP and Software Architect based in Brisbane, Australia, with a focus
+        on AI, distributed systems, and cloud-native applications. Over the
+        years, I've worked across the medical, manufacturing, MMM, and AEC
+        industries. I'm passionate about technology, always learning, and enjoy
+        contributing to open source projects.
+      </p>
+
+      <ul
+        class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.72rem] tracking-[0.2em] text-[#537884] uppercase dark:text-[#7caab2]"
+      >
+        <li class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#de8b3a]" aria-hidden="true"
+          ></span>
+          Artificial Intelligence
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#3fd3c6]" aria-hidden="true"
+          ></span>
+          Distributed Systems
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#c08b3f]" aria-hidden="true"
+          ></span>
+          Cloud Native
+        </li>
+      </ul>
+
+      <div class="mt-6">
+        <a href="/posts" class="neon-outline-btn">View All Posts</a>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="font-heading mb-4 text-2xl font-bold text-[#163f4c] dark:text-[#cfecea]">
+        <Gradient>Recent Posts</Gradient>
+      </h2>
       <PostList posts={posts} />
     </section>
   </div>

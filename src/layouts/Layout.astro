@@ -1,10 +1,10 @@
----
+﻿---
 import "../styles/global.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { SITE } from "@/consts";
 import Seo from "@/components/Seo.astro";
-import Fonts from "@/components/Fonts.astro";
+import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -16,43 +16,162 @@ const { title = SITE.title, description = SITE.description, id } = Astro.props;
 const path = Astro.url.pathname;
 const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
 ---
-
 <!doctype html>
 <html lang="en" class="font-display-swap h-full">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{pageTitle}</title>
 
     <Seo {...{ title, description, id }} />
 
-    <Fonts />
+    <Font cssVariable="--font-cabin" preload />
+    <Font cssVariable="--font-nunito" preload />
+    <Font cssVariable="--font-inconsolata" preload />
 
     <!-- Prevent flash by applying theme immediately -->
     <script is:inline>
       // Apply theme as early as possible to prevent flash
-      const savedTheme = localStorage.getItem("theme");
-      if (
-        savedTheme === "dark" ||
-        (!savedTheme &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
+      let savedTheme = null;
+
+      try {
+        savedTheme = localStorage.getItem("theme");
+      } catch (error) {
+        console.warn("Theme preference could not be read from storage.", error);
       }
+
+      if (savedTheme !== "light" && savedTheme !== "dark" && savedTheme !== null) {
+        try {
+          localStorage.removeItem("theme");
+        } catch (error) {
+          console.warn(
+            "Invalid theme preference could not be removed from storage.",
+            error,
+          );
+        }
+        savedTheme = null;
+      }
+
+      const supportsMatchMedia = typeof window.matchMedia === "function";
+      const prefersDark = supportsMatchMedia
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : false;
+      const shouldUseDarkTheme =
+        savedTheme === "dark" || (savedTheme === null && prefersDark);
+
+      document.documentElement.classList.toggle("dark", shouldUseDarkTheme);
     </script>
+    <style is:inline>
+      .layout-frame {
+        min-width: 0;
+      }
+
+      .layout-frame :where(.prose) {
+        max-width: 75ch;
+        margin-inline: auto;
+      }
+
+      .layout-content {
+        padding-block: clamp(1.25rem, 0.95rem + 1.35vw, 2.5rem);
+      }
+
+      .skip-link {
+        inset-inline-start: max(1rem, env(safe-area-inset-left));
+        inset-inline-end: max(1rem, env(safe-area-inset-right));
+        inset-block-start: max(1rem, env(safe-area-inset-top));
+        max-inline-size: min(26rem, calc(100vw - 2rem));
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+      @media (max-width: 639px) {
+        .layout-atmosphere {
+          opacity: 0.74;
+        }
+
+        .layout-atmosphere-primary {
+          display: none;
+        }
+
+        .layout-grid {
+          opacity: 0.18 !important;
+          background-size: 64px 64px !important;
+        }
+      }
+
+      @media (pointer: coarse) {
+        .skip-link {
+          min-height: 44px;
+          padding-block: 0.7rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        body {
+          transition-duration: 0ms !important;
+        }
+
+        .layout-atmosphere {
+          opacity: 0.65 !important;
+        }
+
+        .layout-grid {
+          opacity: 0.08 !important;
+          background-size: 72px 72px !important;
+        }
+
+      }
+    </style>
   </head>
   <body
-    class="flex min-h-full flex-col bg-slate-50 transition-colors duration-200 dark:bg-gray-900"
+    class="flex min-h-dvh flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
   >
+    <a
+      href="#main-content"
+      class="skip-link sr-only focus:not-sr-only focus:fixed focus:z-50 focus:rounded focus:bg-[#071822] focus:px-4 focus:py-2 focus:text-[#3fd3c6] focus:ring-2 focus:ring-[#3fd3c6] focus:outline-none dark:focus:bg-[#071822]"
+      >Skip to main content</a
+    >
+    <div
+      aria-hidden="true"
+      class="layout-atmosphere pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-68 dark:opacity-60"
+    >
+      <div
+        class="layout-atmosphere-primary absolute top-30 right-[-66%] hidden h-52 w-132 bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.09)_0%,rgba(222,139,58,0.035)_34%,rgba(222,139,58,0)_74%)] sm:top-22 sm:right-[-54%] sm:h-64 sm:w-168 lg:top-16 lg:right-[-40%] lg:block lg:h-72 lg:w-200 xl:top-14 xl:right-[-30%] xl:h-84 xl:w-236 2xl:top-12 2xl:right-[-24%] 2xl:h-96 2xl:w-272 dark:bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.075)_0%,rgba(222,139,58,0.03)_32%,rgba(222,139,58,0)_72%)]"
+      ></div>
+      <div
+        class="absolute top-[20%] left-[-32%] h-116 w-88 -rotate-9 bg-[radial-gradient(ellipse_at_center,rgba(123,162,172,0.06)_0%,rgba(123,162,172,0.024)_36%,rgba(123,162,172,0)_76%)] sm:left-[-26%] sm:h-132 sm:w-96 lg:top-[22%] lg:left-[-20%] lg:h-148 lg:w-112 xl:left-[-16%] xl:h-168 xl:w-128 2xl:left-[-14%] 2xl:h-188 2xl:w-136 dark:bg-[radial-gradient(ellipse_at_center,rgba(63,211,198,0.08)_0%,rgba(63,211,198,0.03)_36%,rgba(63,211,198,0)_74%)]"
+      >
+        <div class="h-full w-full bg-[linear-gradient(to_bottom,rgba(243,248,249,0)_0%,rgba(243,248,249,0.04)_62%,rgba(243,248,249,0.09)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(7,24,34,0)_0%,rgba(7,24,34,0.04)_62%,rgba(7,24,34,0.11)_100%)]"></div>
+      </div>
+
+    </div>
+
     <Header />
 
-    <main class="flex-grow">
-      <div class="container-base">
+    <main id="main-content" class="relative grow isolate">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <div class="absolute inset-0 opacity-[0.14] dark:opacity-[0.06]">
+          <div
+            class="layout-grid h-full w-full bg-[linear-gradient(rgba(148,170,176,0.17)_1px,transparent_1px),linear-gradient(90deg,rgba(148,170,176,0.17)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(63,211,198,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.1)_1px,transparent_1px)] bg-size-[56px_56px]"
+          ></div>
+        </div>
+      </div>
+      <div class="layout-content container-base relative">
         <!-- Content goes here -->
-        <slot />
+        <div class="layout-frame">
+          <slot />
+        </div>
       </div>
     </main>
 

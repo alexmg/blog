@@ -2,24 +2,39 @@ document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggles();
 });
 
-// Setup all theme toggle buttons
-function setupThemeToggles() {
-  // Function to toggle the theme
-  function toggleTheme() {
-    // Disable Astro transitions during theme switch
-    document.documentElement.classList.add("disable-transitions");
+function updateThemeToggleLabels(isDark) {
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  ["theme-toggle", "theme-toggle-mobile"].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.setAttribute("aria-label", label);
+  });
+}
 
-    // Force reflow to ensure the class is applied before toggling theme
-    void document.documentElement.offsetWidth;
+function applyTheme(isDark) {
+  document.documentElement.classList.add("disable-transitions");
 
-    document.documentElement.classList.toggle("dark");
-    const isDark = document.documentElement.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+  // Force reflow so transition suppression is active before the theme class flips.
+  void document.documentElement.offsetWidth;
 
-    // Remove the class after the next frame
+  document.documentElement.classList.toggle("dark", isDark);
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  updateThemeToggleLabels(isDark);
+
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.documentElement.classList.remove("disable-transitions");
     });
+  });
+}
+
+// Setup all theme toggle buttons
+function setupThemeToggles() {
+  // Sync labels to current state on load
+  updateThemeToggleLabels(document.documentElement.classList.contains("dark"));
+
+  // Function to toggle the theme
+  function toggleTheme() {
+    applyTheme(!document.documentElement.classList.contains("dark"));
   }
 
   // Desktop toggle button
@@ -44,10 +59,6 @@ window
     const newColorScheme = e.matches ? "dark" : "light";
     if (!localStorage.getItem("theme")) {
       // Only change if user hasn't explicitly set a preference
-      if (newColorScheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      applyTheme(newColorScheme === "dark");
     }
   });

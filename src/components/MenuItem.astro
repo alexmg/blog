@@ -9,13 +9,31 @@ interface Props {
 }
 
 const { href, icon, text, target = "_self" } = Astro.props;
+const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+const currentPath = Astro.url.pathname;
+const isActive = href === "/" ? currentPath === "/" : currentPath.startsWith(href);
 ---
 
 <a
   href={href}
   target={target}
-  class="font-heading link-highlight flex items-center font-bold text-gray-700 dark:text-gray-300"
+  rel={rel}
+  aria-current={isActive ? "page" : undefined}
+  class:list={[
+    "font-heading cyber-link cyber-scanner group relative flex items-center rounded-md px-2 py-1 font-bold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-highlight-light/70 dark:focus-visible:ring-highlight-dark/70",
+    isActive
+      ? "bg-[#de8b3a]/10 text-[#7a4210] shadow-[0_0_0_1px_rgba(222,139,58,0.2)] dark:bg-[#3fd3c6]/12 dark:text-[#7ce9de] dark:shadow-[0_0_0_1px_rgba(63,211,198,0.24)]"
+      : "link-highlight text-[#274955] dark:text-[#aacfd6]",
+  ]}
 >
-  <Icon name={icon} class="mr-3 text-xl" />
+  <Icon
+    name={icon}
+    class={`mr-2 text-lg transition-colors duration-200 ${
+      isActive
+        ? "text-[#de8b3a] dark:text-[#3fd3c6]"
+        : "text-[#bf7226] group-hover:text-highlight-light dark:text-[#58cfc2] dark:group-hover:text-[#78eee0]"
+    }`}
+  />
   {text}
+  {target === "_blank" && <span class="sr-only">&nbsp;(opens in new tab)</span>}
 </a>
