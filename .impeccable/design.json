@@ -1,74 +1,74 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-16T00:04:20.146Z",
+  "generatedAt": "2026-07-16T02:58:26.924Z",
   "title": "Design System: Alex Meyer-Gleaves Blog",
   "extensions": {
     "colorMeta": {
-      "neon-accent-light": {
+      "signal-amber": {
         "role": "primary",
-        "displayName": "Signal Teal",
-        "canonical": "#218676",
+        "displayName": "Signal Amber",
+        "canonical": "#de8b3a",
         "tonalRamp": [
-          "#113c34",
-          "#145148",
-          "#18665b",
-          "#1b7a6f",
-          "#218676",
-          "#2aa08e",
-          "#41d1aa",
-          "#95f0d9"
+          "#3f240a",
+          "#643a11",
+          "#8d5317",
+          "#bf7226",
+          "#de8b3a",
+          "#f0ab57",
+          "#f4cb87",
+          "#f8e2bc"
         ]
       },
-      "neon-accent-dark": {
+      "signal-teal": {
         "role": "primary",
-        "displayName": "Night Neon",
-        "canonical": "#41d1aa",
+        "displayName": "Signal Teal",
+        "canonical": "#3fd3c6",
         "tonalRamp": [
-          "#113c34",
-          "#145148",
-          "#18665b",
-          "#1f7e71",
-          "#2aa08e",
-          "#41d1aa",
-          "#6fe0c2",
-          "#b7f3e5"
+          "#0d2f2c",
+          "#124744",
+          "#1a6a64",
+          "#279f96",
+          "#3fd3c6",
+          "#57e4d3",
+          "#8de2d9",
+          "#c5f2ec"
         ]
       },
       "page-bg-light": {
         "role": "neutral",
-        "displayName": "Frosted Slate",
-        "canonical": "#f8fafc",
+        "displayName": "Mist Field",
+        "canonical": "#f3f8f9",
         "tonalRamp": [
-          "#1f2937",
-          "#374151",
-          "#4b5563",
-          "#6b7280",
-          "#9ca3af",
-          "#d1d5db",
-          "#e5e7eb",
-          "#f8fafc"
+          "#163642",
+          "#2f4f5c",
+          "#456a76",
+          "#567b86",
+          "#7ba2ac",
+          "#b8d7dd",
+          "#dce7ea",
+          "#f3f8f9"
         ]
       },
       "page-bg-dark": {
         "role": "neutral",
-        "displayName": "Midnight Slate",
-        "canonical": "#111827",
+        "displayName": "Deep Bay",
+        "canonical": "#071822",
         "tonalRamp": [
-          "#0b1020",
-          "#111827",
-          "#1f2937",
-          "#374151",
-          "#4b5563",
-          "#6b7280",
-          "#9ca3af",
-          "#d1d5db"
+          "#071822",
+          "#0a1f25",
+          "#102833",
+          "#12313b",
+          "#1f4856",
+          "#547680",
+          "#7fa7b0",
+          "#c2dbe0"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero and major section headings."
+        "purpose": "Hero identity and major section headings."
       },
       "body": {
         "displayName": "Body",
@@ -76,19 +76,50 @@
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Navigation and compact UI text."
+        "purpose": "Navigation labels and compact controls."
       },
       "code": {
         "displayName": "Code",
-        "purpose": "Inline code and technical snippets."
+        "purpose": "Inline code and syntax-highlighted snippets."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "ambient-surface-light",
+        "value": "0 20px 45px rgba(6,24,37,0.08)",
+        "purpose": "Base depth for light-mode panel surfaces."
+      },
+      {
+        "name": "ambient-surface-dark",
+        "value": "0 26px 50px rgba(3,10,18,0.45)",
+        "purpose": "Base depth for dark-mode panel surfaces."
+      },
+      {
+        "name": "interaction-halo-amber",
+        "value": "0 0 12px rgba(222,139,58,0.22)",
+        "purpose": "Interactive glow response for light-mode scanner effects."
+      },
+      {
+        "name": "interaction-halo-teal",
+        "value": "0 0 14px rgba(63,211,198,0.24)",
+        "purpose": "Interactive glow response for dark-mode scanner effects."
+      }
+    ],
     "motion": [
       {
-        "name": "theme-transition",
-        "value": "200ms ease",
-        "purpose": "Theme and hover color transitions."
+        "name": "ease-standard",
+        "value": "200ms ease-out",
+        "purpose": "Default hover and color transitions."
+      },
+      {
+        "name": "scanner-sweep",
+        "value": "420ms cubic-bezier(0.19, 1, 0.22, 1)",
+        "purpose": "Scanner bar sweep across interactive surfaces."
+      },
+      {
+        "name": "pulse-loop",
+        "value": "1800ms ease-out infinite",
+        "purpose": "Optional hover pulse for cyber interaction motifs."
       }
     ],
     "breakpoints": [
@@ -99,70 +130,74 @@
       {
         "name": "lg",
         "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
       }
     ]
   },
   "components": [
     {
-      "name": "Theme Toggle Button",
+      "name": "Interactive Utility Button",
       "kind": "button",
-      "refersTo": "button-interactive",
-      "description": "Compact icon button used for theme switching in header contexts.",
-      "html": "<button class=\"ds-btn-icon\" aria-label=\"Toggle theme\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z\" fill=\"currentColor\"/></svg></button>",
-      "css": ".ds-btn-icon{display:inline-flex;align-items:center;justify-content:center;padding:.5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;border:0;cursor:pointer;transition:background-color .2s ease,color .2s ease}.ds-btn-icon:hover{background:#d1d5db}.ds-btn-icon:focus-visible{outline:2px solid #218676;outline-offset:2px}"
+      "refersTo": "control-base",
+      "description": "Base utility control used by theme and menu toggles, with scanner overlay and focus ring.",
+      "html": "<button class=\"ds-control\" aria-label=\"Toggle\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z\" fill=\"currentColor\"/></svg></button>",
+      "css": ".ds-control{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:.5rem;border-radius:.375rem;border:1px solid rgba(157,194,203,.4);background:#eff6f8;color:#9d5f1d;cursor:pointer;overflow:hidden;transition:all .2s ease}.ds-control::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,0) 18%,rgba(255,255,255,.34) 50%,rgba(255,255,255,0) 82%);transform:translateX(-145%);opacity:0;transition:transform .42s cubic-bezier(.19,1,.22,1),opacity .18s ease}.ds-control:hover{transform:translateY(-1px);border-color:rgba(222,139,58,.7);background:#e3eef2}.ds-control:hover::before{transform:translateX(145%);opacity:.9}.ds-control:focus-visible{outline:2px solid rgba(222,139,58,.7);outline-offset:2px}"
     },
     {
-      "name": "Menu Toggle Button",
-      "kind": "button",
-      "refersTo": "button-interactive-dark",
-      "description": "Mobile menu trigger with the same utility geometry as theme controls.",
-      "html": "<button class=\"ds-menu-btn\" aria-label=\"Toggle menu\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></button>",
-      "css": ".ds-menu-btn{display:inline-flex;align-items:center;justify-content:center;padding:.5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;border:0;cursor:pointer;transition:background-color .2s ease,color .2s ease}.ds-menu-btn:hover{background:#d1d5db}.ds-menu-btn:focus-visible{outline:2px solid #218676;outline-offset:2px}"
-    },
-    {
-      "name": "Navigation Link",
+      "name": "Navigation Signal Link",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Primary navigation entry combining icon and bold label text.",
+      "description": "Primary nav item with icon pairing and animated signal underline.",
       "html": "<a class=\"ds-nav-link\" href=\"#\"><span class=\"ds-nav-icon\">●</span><span>Posts</span></a>",
-      "css": ".ds-nav-link{display:inline-flex;align-items:center;gap:.5rem;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.3;color:#4b5563;text-decoration:none;transition:color .2s ease}.ds-nav-link:hover{color:#218676}.ds-nav-link:focus-visible{outline:2px solid #218676;outline-offset:3px;border-radius:.25rem}.ds-nav-icon{font-size:1rem;line-height:1}"
+      "css": ".ds-nav-link{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.25rem .5rem;border-radius:.375rem;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.3;letter-spacing:.02em;color:#123744;text-decoration:none;transition:color .2s ease}.ds-nav-link::after{content:'';position:absolute;left:.35rem;right:.35rem;bottom:.15rem;height:2px;border-radius:999px;background:linear-gradient(90deg,rgba(222,139,58,.96),rgba(63,211,198,.8));transform:scaleX(.2);transform-origin:left center;opacity:0;transition:transform .22s ease-out,opacity .18s ease-out}.ds-nav-link:hover{color:#bf7226}.ds-nav-link:hover::after{transform:scaleX(1);opacity:1}.ds-nav-link:focus-visible{outline:2px solid rgba(222,139,58,.7);outline-offset:2px}.ds-nav-icon{font-size:1rem;line-height:1;color:#bf7226}"
     },
     {
-      "name": "Tag Chip",
+      "name": "Signal Tag Chip",
       "kind": "chip",
-      "refersTo": "chip-tag",
-      "description": "Small metadata chip used for post tag links.",
-      "html": "<a class=\"ds-tag\" href=\"#\">distributed-systems</a>",
-      "css": ".ds-tag{display:inline-flex;align-items:center;padding:.25rem .5rem;border-radius:.375rem;background:#e5e7eb;color:#4b5563;font-family:Cabin,sans-serif;font-size:.75rem;line-height:1.2;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-tag:hover{background:#d1d5db;color:#111827}.ds-tag:focus-visible{outline:2px solid #218676;outline-offset:2px}"
+      "refersTo": "signal-chip",
+      "description": "Rounded metadata chip for tags with amber light-mode and teal dark-mode semantics.",
+      "html": "<a class=\"ds-chip\" href=\"#\">distributed-systems</a>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;padding:.25rem .625rem;border-radius:9999px;border:1px solid rgba(222,139,58,.45);background:rgba(247,236,223,.7);color:#975815;font-family:Cabin,sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.03em;text-decoration:none;transition:all .2s ease}.ds-chip:hover{transform:translateY(-.5px);background:#f6e3cb}.ds-chip:focus-visible{outline:2px solid rgba(222,139,58,.7);outline-offset:2px}"
     },
     {
-      "name": "Pagination Pill",
+      "name": "Pagination Button",
       "kind": "button",
-      "refersTo": "button-interactive",
-      "description": "Pagination control with bordered structure and active accent state.",
-      "html": "<a class=\"ds-page-btn\" href=\"#\">2</a><span class=\"ds-page-btn ds-page-active\">3</span>",
-      "css": ".ds-page-btn{display:inline-flex;align-items:center;justify-content:center;min-width:2.5rem;height:2.5rem;padding:0 .75rem;border:1px solid #d1d5db;background:#fff;color:#4b5563;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.2;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-page-btn:hover{background:#f3f4f6;color:#111827}.ds-page-btn:focus-visible{outline:2px solid #218676;outline-offset:2px}.ds-page-active{background:rgba(33,134,118,.1);color:#218676}"
+      "refersTo": "control-base",
+      "description": "Bordered pagination unit with scanner hover and accent-backed active state.",
+      "html": "<a class=\"ds-page\">2</a><span class=\"ds-page ds-page-active\">3</span>",
+      "css": ".ds-page{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:2.5rem;height:2.5rem;padding:0 .75rem;border:1px solid rgba(134,172,180,.45);background:rgba(255,255,255,.85);color:#173947;font-family:Nunito,sans-serif;font-size:.875rem;font-weight:700;line-height:1.2;text-decoration:none;transition:background-color .2s ease,color .2s ease}.ds-page:hover{background:#e8f1f4}.ds-page:focus-visible{outline:2px solid rgba(222,139,58,.7);outline-offset:2px}.ds-page-active{background:rgba(222,139,58,.15);color:#9b5917}"
+    },
+    {
+      "name": "Surface Panel",
+      "kind": "card",
+      "refersTo": "panel-light",
+      "description": "Signature translucent container with large radius, border rail, blur, and ambient shadow.",
+      "html": "<section class=\"ds-panel\"><h3>Panel Title</h3><p>Long-form supporting content.</p></section>",
+      "css": ".ds-panel{border-radius:1rem;border:1px solid rgba(136,172,180,.35);padding:1.5rem;background:rgba(255,255,255,.7);box-shadow:0 20px 45px rgba(6,24,37,.08);backdrop-filter:blur(8px);color:#163642}.ds-panel h3{margin:0 0 .5rem;font-family:Nunito,sans-serif;font-size:1.25rem;font-weight:700;line-height:1.35}.ds-panel p{margin:0;font-family:Cabin,sans-serif;font-size:1rem;line-height:1.6}"
     }
   ],
   "narrative": {
     "northStar": "The Neon Field Manual",
-    "overview": "This system pairs cyberpunk energy with engineering-grade readability. It is expressive where identity matters (accent moments, banner treatment, link interactions) and disciplined where comprehension matters (body copy contrast, predictable spacing, stable navigation patterns). The visual language should feel technically fluent, not performative: bold enough to be memorable, quiet enough to keep long-form reading frictionless.",
+    "overview": "This system now reads as neon-industrial rather than minimal cyber: dual accent signals (amber + teal), layered atmospheric backgrounds, and scanner-like interaction effects shape the visual voice. It preserves technical readability through strong contrast and stable typography while allowing controlled cinematic expression.",
     "keyCharacteristics": [
-      "High-contrast reading surfaces with dark/light parity.",
-      "Neon accent used as signal, not as paint.",
-      "Rounded interactive micro-surfaces for toggles, tags, and pagination controls.",
-      "Friendly geometric heading voice over pragmatic body typography.",
-      "Content-first rhythm optimized for technical scanning and depth reading."
+      "Dual-accent signal language (amber and teal) used as semantic emphasis rails.",
+      "Atmosphere layers framing content without reducing legibility.",
+      "Scanner and pulse interaction motifs on controls and navigation.",
+      "Rounded utility controls and stronger panel geometry for grouping.",
+      "Code and table theming integrated into the same cybernetic palette."
     ],
     "rules": [
       {
-        "name": "The Rare-Neon Rule",
-        "body": "Accent color appears only for intent-bearing elements (key links, emphasis gradients, active pagination), never as broad decorative fill.",
+        "name": "The Dual-Signal Rule",
+        "body": "Amber and teal must appear as paired signals, never as competing decorative floods.",
         "section": "colors"
       },
       {
         "name": "The Read-First Rule",
-        "body": "Body text always sits on high-contrast neutral fields; mood never outranks legibility.",
+        "body": "Body text remains high-contrast against neutral fields; atmosphere layers never degrade readability.",
         "section": "colors"
       },
       {
@@ -171,22 +206,22 @@
         "section": "typography"
       },
       {
-        "name": "The Flat-by-Default Rule",
-        "body": "Components stay visually flat at rest; interaction feedback comes from color and contrast transitions before any depth effect.",
+        "name": "The Controlled-Glow Rule",
+        "body": "Glow is reserved for interaction and framing moments; persistent ambient haze must stay subtle.",
         "section": "elevation"
       }
     ],
     "dos": [
       "Do preserve the existing cyberpunk identity and visual energy while keeping body copy contrast at readable levels.",
-      "Do use accent greens as signal moments, not full-surface decoration.",
-      "Do keep interaction geometry and spacing consistent across toggles, tags, and pagination controls.",
+      "Do use amber and teal as a coordinated dual-signal pair.",
+      "Do keep scanner/pulse motion tied to interaction states, with reduced-motion parity.",
       "Do maintain dark/light mode parity so hierarchy and clarity remain consistent in either theme."
     ],
     "donts": [
       "Don't drift into generic SaaS dashboard aesthetics.",
       "Don't adopt corporate consulting templates.",
       "Don't replace the current visual language with a neutral redesign that erases the existing cyberpunk identity and visual energy.",
-      "Don't introduce side-stripe accent borders, gradient text-only gimmicks, or decorative glassmorphism patterns."
+      "Don't introduce side-stripe accent borders or hero-metric template scaffolding."
     ]
   }
 }

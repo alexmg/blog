@@ -1,26 +1,26 @@
 ---
 name: Alex Meyer-Gleaves Blog
-description: A bold cyberpunk-leaning technical blog designed for trust, clarity, and high-signal reading.
+description: A neon-industrial technical blog balancing expressive cyberpunk styling with disciplined long-form readability.
 colors:
-  neon-accent-light: "#218676"
-  neon-accent-dark: "#41d1aa"
-  page-bg-light: "#f8fafc"
-  page-bg-dark: "#111827"
-  surface-light: "#f9fafb"
-  surface-dark: "#1f2937"
-  border-light: "#e5e7eb"
-  border-dark: "#374151"
-  text-primary-light: "#111827"
-  text-primary-dark: "#ffffff"
-  text-secondary-light: "#4b5563"
-  text-secondary-dark: "#d1d5db"
-  text-muted-light: "#6b7280"
-  text-muted-dark: "#9ca3af"
+  signal-amber: "#de8b3a"
+  signal-teal: "#3fd3c6"
+  page-bg-light: "#f3f8f9"
+  page-bg-dark: "#071822"
+  panel-light: "#f6fafb"
+  panel-dark: "#081b24"
+  border-light: "#7ba2ac"
+  border-dark: "#1f4856"
+  text-primary-light: "#163642"
+  text-primary-dark: "#c2dbe0"
+  text-secondary-light: "#456a76"
+  text-secondary-dark: "#7fa7b0"
+  code-bg-light: "#dce7ea"
+  code-bg-dark: "#102833"
 typography:
   display:
     fontFamily: "Nunito, sans-serif"
-    fontSize: "2.25rem"
-    fontWeight: 700
+    fontSize: "2.5rem"
+    fontWeight: 800
     lineHeight: 1.2
   body:
     fontFamily: "Cabin, sans-serif"
@@ -40,39 +40,42 @@ typography:
 rounded:
   sm: "0.375rem"
   md: "0.5rem"
-  lg: "9999px"
+  lg: "0.75rem"
+  xl: "1rem"
+  pill: "9999px"
 spacing:
   xs: "0.25rem"
   sm: "0.5rem"
   md: "0.75rem"
   lg: "1rem"
   xl: "1.5rem"
+  xxl: "2rem"
 components:
-  button-interactive:
-    backgroundColor: "{colors.border-light}"
-    textColor: "{colors.text-secondary-light}"
+  control-base:
+    backgroundColor: "#eff6f8"
+    textColor: "#10303b"
     rounded: "{rounded.sm}"
     padding: "0.5rem"
-  button-interactive-hover:
-    backgroundColor: "#d1d5db"
-    textColor: "{colors.text-secondary-light}"
+  control-base-dark:
+    backgroundColor: "#0d2530"
+    textColor: "#b6d7dc"
     rounded: "{rounded.sm}"
     padding: "0.5rem"
-  button-interactive-dark:
-    backgroundColor: "{colors.border-dark}"
-    textColor: "{colors.text-secondary-dark}"
-    rounded: "{rounded.sm}"
-    padding: "0.5rem"
-  chip-tag:
-    backgroundColor: "{colors.border-light}"
-    textColor: "{colors.text-secondary-light}"
-    rounded: "{rounded.sm}"
-    padding: "0.25rem 0.5rem"
+  signal-chip:
+    backgroundColor: "#f6ecdf"
+    textColor: "#975815"
+    rounded: "{rounded.pill}"
+    padding: "0.25rem 0.75rem"
+  signal-chip-dark:
+    backgroundColor: "#12333d"
+    textColor: "#8ce0d8"
+    rounded: "{rounded.pill}"
+    padding: "0.25rem 0.75rem"
   nav-link:
-    textColor: "{colors.text-secondary-light}"
+    textColor: "#123744"
     typography: "{typography.label}"
-  nav-link-accent:
-    textColor: "{colors.neon-accent-light}"
+  nav-link-dark:
+    textColor: "#b8d9de"
     typography: "{typography.label}"
 ---
 
@@ -82,42 +85,40 @@ components:
 
 **Creative North Star: "The Neon Field Manual"**
 
-This system pairs cyberpunk energy with engineering-grade readability. It is expressive where identity matters (accent moments, banner treatment, link interactions) and disciplined where comprehension matters (body copy contrast, predictable spacing, stable navigation patterns).
+This system now reads as neon-industrial rather than minimal cyber: dual accent signals (amber + teal), layered atmospheric backgrounds, and scanner-like interaction effects shape the visual voice. The site keeps its editorial utility, but the styling has become more cinematic and tactile.
 
-The visual language should feel technically fluent, not performative: bold enough to be memorable, quiet enough to keep long-form reading frictionless. Motion remains lightweight and functional (theme transitions, hover feedback), and the interface prioritizes legibility and information hierarchy over decorative noise.
+The interface still prioritizes technical readability through strong foreground/background contrast, stable type scale, and restrained body copy rhythm. Motion is intentional and state-driven (scanner sweeps, pulse halos, hover lifts), with a reduced-motion fallback that collapses animation to near-instant transitions.
 
 This system explicitly rejects generic SaaS dashboard aesthetics, corporate consulting templates, and any redesign direction that erases the existing cyberpunk identity and visual energy.
 
 **Key Characteristics:**
-- High-contrast reading surfaces with dark/light parity.
-- Neon accent used as signal, not as paint.
-- Rounded interactive micro-surfaces for toggles, tags, and pagination controls.
-- Friendly geometric heading voice over pragmatic body typography.
-- Content-first rhythm optimized for technical scanning and depth reading.
+- Dual-accent signal language (amber and teal) used as semantic emphasis rails.
+- Atmosphere layers (radial glows + subtle grid field) framing content without reducing legibility.
+- Scanner and pulse interaction motifs on controls and navigation.
+- Rounded utility controls with stronger panel geometry (`rounded-2xl`) for cards/surfaces.
+- Code and table theming integrated into the same cybernetic palette.
 
 ## 2. Colors
 
-The palette is a restrained cyberpunk system: slate/gray structural neutrals with a green-cyan neon accent reserved for moments of emphasis.
+The palette is now a committed cyberpunk duo: amber warmth and teal coolness balanced over deep blue-slate neutrals.
 
 ### Primary
-- **Signal Teal** (#218676): Primary accent in light mode for links and gradient text emphasis.
-- **Night Neon** (#41d1aa): Primary accent in dark mode for hover and highlighted interactive moments.
-
-### Secondary (optional; omit if the project has only one accent)
-- **No secondary accent by design**: The system intentionally preserves a single accent family to keep emphasis sharp.
+- **Signal Amber** (#de8b3a): Warm emphasis for active highlights, icon accents, and interaction glow.
+- **Signal Teal** (#3fd3c6): Cool emphasis for dark-mode focus, hover treatments, and motion glints.
 
 ### Neutral
-- **Frosted Slate** (#f8fafc): Main light-mode page canvas.
-- **Midnight Slate** (#111827): Main dark-mode page canvas.
-- **Panel Mist** (#f9fafb) and **Panel Charcoal** (#1f2937): Elevated surfaces and overlays.
-- **Structural Line** (#e5e7eb / #374151): Borders, dividers, and control boundaries in light/dark.
-- **Ink Core** (#111827 / #ffffff): Primary text for long-form readability.
-- **Ink Support** (#4b5563 / #d1d5db): Secondary text, metadata, and helper copy.
+- **Mist Field** (#f3f8f9): Light-mode base canvas.
+- **Deep Bay** (#071822): Dark-mode base canvas.
+- **Panel Glass** (#f6fafb / #081b24): Surface containers, nav bars, and footer blocks.
+- **Structural Rail** (#7ba2ac / #1f4856): Border and edge framing in light/dark.
+- **Ink Main** (#163642 / #c2dbe0): Primary reading text.
+- **Ink Support** (#456a76 / #7fa7b0): Secondary metadata and support text.
+- **Code Surfaces** (#dce7ea / #102833): Inline code chip backgrounds.
 
 ### Named Rules (optional, powerful)
-**The Rare-Neon Rule.** Accent color appears only for intent-bearing elements (key links, emphasis gradients, active pagination), never as broad decorative fill.
+**The Dual-Signal Rule.** Amber and teal must appear as paired signals, never as competing decorative floods.
 
-**The Read-First Rule.** Body text always sits on high-contrast neutral fields; mood never outranks legibility.
+**The Read-First Rule.** Body text remains high-contrast against neutral fields; atmosphere layers never degrade readability.
 
 ## 3. Typography
 
@@ -125,10 +126,10 @@ The palette is a restrained cyberpunk system: slate/gray structural neutrals wit
 **Body Font:** Cabin (with sans-serif fallback)  
 **Label/Mono Font:** Inconsolata (with monospace fallback for code)
 
-**Character:** Approachable technical voice: rounded heading forms deliver personality, while body and code stacks keep documentation-style clarity and scan speed.
+**Character:** Technical but expressive: strong, friendly heading weight with practical body/coding typography for deep reading.
 
 ### Hierarchy
-- **Display** (700, 2.25rem, 1.2): Hero and key section headings.
+- **Display** (800, 2.5rem, 1.2): Hero identity and major section headings.
 - **Headline** (700, 1.5rem, 1.3): Post list titles and high-priority sectional headings.
 - **Title** (600, 1.25rem, 1.35): Subsection titles and medium-prominence callouts.
 - **Body** (400, 1rem, 1.6): Paragraph content and primary reading text (target line length: 65-75ch where possible).
@@ -139,51 +140,55 @@ The palette is a restrained cyberpunk system: slate/gray structural neutrals wit
 
 ## 4. Elevation
 
-Depth is primarily tonal, not shadow-driven. The system communicates layer changes through background shifts, borders, and contrast transitions, with minimal visual effects. This keeps the interface crisp and avoids faux-3D noise while still signaling interactivity.
+Depth is hybrid: tonal layering plus controlled glow/shadow stacks. Surfaces use translucent backgrounds and soft blur, while controls gain depth only during interaction through micro-lift and pulse effects.
 
 ### Shadow Vocabulary (if applicable)
-- **No persistent shadow scale**: Shadows are intentionally absent from base components.
+- **Ambient Surface** (`0 20px 45px rgba(6,24,37,0.08)`): Light-mode panel depth for cards and container surfaces.
+- **Night Surface** (`0 26px 50px rgba(3,10,18,0.45)`): Dark-mode panel depth to separate content layers.
+- **Interaction Halo** (`0 0 12px rgba(222,139,58,0.22)` / `0 0 14px rgba(63,211,198,0.24)`): Scanner/pulse feedback for interactive controls.
 
 ### Named Rules (optional)
-**The Flat-by-Default Rule.** Components stay visually flat at rest; interaction feedback comes from color/contrast transitions before any depth effect.
+**The Controlled-Glow Rule.** Glow is reserved for interaction and framing moments; persistent ambient haze must stay subtle.
 
 ## 5. Components
 
 ### Buttons
-- **Shape:** Soft utility corners (6px / 0.375rem) for icon controls and action chips.
-- **Primary:** Interactive controls use neutral backgrounds with clear icon/text contrast.
-- **Hover / Focus:** Hover shifts to a stronger neutral tone; focus should maintain equivalent prominence to hover with visible keyboard affordance.
-- **Secondary / Ghost / Tertiary (if applicable):** Navigation links behave like ghost buttons, inheriting body tone and activating through accent color.
+- **Shape:** Utility controls use compact rounded corners (6px / 0.375rem); signature CTA outlines use larger radii.
+- **Primary:** `bg-interactive` buttons use layered neutral fills with high-contrast text and border rails.
+- **Hover / Focus:** `cyber-scanner` sweep + micro-lift + ring focus treatment in accent color.
+- **Secondary / Ghost / Tertiary (if applicable):** `neon-outline-btn` and nav links operate as ghost/signal controls with accent border or underline feedback.
 
 ### Chips (if used)
-- **Style:** Tag chips use muted neutral surfaces with compact text sizing.
-- **State:** Hover preserves readability while raising contrast; selected/filter semantics should align with accent usage.
+- **Style:** Tag and signal chips are rounded-full with amber/teal semantic tinting and high local contrast.
+- **State:** Hover introduces subtle lift and background intensification; keyboard focus uses accent-colored rings.
 
 ### Cards / Containers
-- **Corner Style:** Containers are mostly square or lightly rounded, depending on context.
-- **Background:** Light/dark neutral panels anchor content without competing with text.
-- **Shadow Strategy:** Tonal separation only; no decorative glass or heavy shadow.
-- **Border:** Subtle 1px neutral borders define list and footer structure.
-- **Internal Padding:** Uses an 8px/12px/16px scale (0.5rem / 0.75rem / 1rem) with larger section spacing at 24px (1.5rem).
+- **Corner Style:** Panels and cards use generous geometry (`rounded-2xl`) for container-level grouping.
+- **Background:** Translucent light/dark panels (`surface-panel`, `cyber-card`) preserve context behind content.
+- **Shadow Strategy:** Soft ambient shadows at rest with stronger hover shadows for card affordance.
+- **Border:** Color-tinted neutral rails reinforce structure without hard edges.
+- **Internal Padding:** Core panel spacing follows 20px-24px (`p-5`, `p-6`) with compact controls on 8px-12px.
 
 ### Inputs / Fields
-- **Style:** Interactive controls use neutral backgrounds and rounded utility geometry.
-- **Focus:** Focus treatment should be explicit and high-contrast in both themes.
-- **Error / Disabled:** Disabled states reduce contrast while preserving readability; error states should remain consistent with the single-accent discipline plus semantic color overlays when introduced.
+- **Style:** Field-like controls inherit `bg-interactive` surface language.
+- **Focus:** Always visible focus rings in amber/teal variants by theme.
+- **Error / Disabled:** Disabled controls maintain legibility with lowered opacity; semantic states should layer over, not replace, the core interaction vocabulary.
 
 ### Navigation
-- **Style, typography, default/hover/active states, mobile treatment.** Bold label-weight links with icon pairing, accent hover transitions, and a mobile menu panel that preserves the same visual vocabulary as desktop.
+- **Style, typography, default/hover/active states, mobile treatment.** Navigation combines icon-led labels, scanner underlines, and a translucent/glow nav rail; mobile menu retains the same visual language with bordered panel treatment.
 
 ## 6. Do's and Don'ts
 
 ### Do:
 - **Do** preserve the existing cyberpunk identity and visual energy while keeping body copy contrast at readable levels.
-- **Do** use accent greens as signal moments, not full-surface decoration.
-- **Do** keep interaction geometry and spacing consistent across toggles, tags, and pagination controls.
+- **Do** use amber and teal as a coordinated dual-signal pair.
+- **Do** keep scanner/pulse motion tied to interaction states, with reduced-motion parity.
+- **Do** keep interaction geometry and spacing consistent across toggles, tags, pagination, and nav controls.
 - **Do** maintain dark/light mode parity so hierarchy and clarity remain consistent in either theme.
 
 ### Don't:
 - **Don't** drift into generic SaaS dashboard aesthetics.
 - **Don't** adopt corporate consulting templates.
 - **Don't** replace the current visual language with a neutral redesign that erases the existing cyberpunk identity and visual energy.
-- **Don't** introduce side-stripe accent borders, gradient text-only gimmicks, or decorative glassmorphism patterns.
+- **Don't** introduce side-stripe accent borders or hero-metric template scaffolding.
+- **Don't** use decorative glow everywhere; concentrated signal moments are the point.
