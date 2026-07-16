@@ -37,7 +37,7 @@ import MenuToggle from "./MenuToggle.astro";
       <a href="/" class="cursor-pointer">
         <img
           src="/logo.webp"
-          alt="Logo"
+          alt={SITE.title}
           class="h-32 w-32 rounded-full border-4 border-[#f4cb87] object-cover shadow-[0_0_0_4px_rgba(13,38,48,0.3),0_20px_35px_rgba(7,24,34,0.35)] dark:border-highlight-dark"
         />
       </a>
@@ -61,7 +61,7 @@ import MenuToggle from "./MenuToggle.astro";
 
       <!-- Desktop navigation -->
       <div class="hidden items-center space-x-6 sm:flex">
-        <nav class="flex space-x-6">
+        <nav aria-label="Main navigation" class="flex space-x-6">
           <MenuItem href="/posts" icon="post" text="Posts" />
           <MenuItem href="/tags" icon="tag" text="Tags" />
           <MenuItem href="/rss.xml" icon="rss" text="RSS" target="_blank" />
@@ -75,7 +75,7 @@ import MenuToggle from "./MenuToggle.astro";
       id="mobile-menu"
       class="hidden border-t border-[#7ba2ac]/25 bg-[#f7fbfc]/95 px-4 py-4 sm:hidden dark:border-[#1f4856] dark:bg-[#0a1e27]/95"
     >
-      <nav class="flex flex-col space-y-6">
+      <nav aria-label="Main navigation" class="flex flex-col space-y-6">
         <MenuItem href="/posts" icon="post" text="Posts" />
         <MenuItem href="/tags" icon="tag" text="Tags" />
         <MenuItem href="/rss.xml" icon="rss" text="RSS" target="_blank" />
@@ -93,6 +93,10 @@ import MenuToggle from "./MenuToggle.astro";
         mobileMenu.classList.toggle("hidden");
         const isExpanded = !mobileMenu.classList.contains("hidden");
         menuToggle.setAttribute("aria-expanded", String(isExpanded));
+        menuToggle.setAttribute(
+          "aria-label",
+          isExpanded ? "Close navigation" : "Open navigation",
+        );
       });
     }
   </script>
