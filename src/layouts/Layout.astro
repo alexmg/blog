@@ -33,19 +33,55 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
     <!-- Prevent flash by applying theme immediately -->
     <script is:inline>
       // Apply theme as early as possible to prevent flash
+      let savedTheme = null;
+
       try {
-        const savedTheme = localStorage.getItem("theme");
-        if (
-          savedTheme === "dark" ||
-          (!savedTheme &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
+        savedTheme = localStorage.getItem("theme");
+      } catch (error) {
+        console.warn("Theme preference could not be read from storage.", error);
+      }
+
+      if (savedTheme !== "light" && savedTheme !== "dark" && savedTheme !== null) {
+        try {
+          localStorage.removeItem("theme");
+        } catch (error) {
+          console.warn(
+            "Invalid theme preference could not be removed from storage.",
+            error,
+          );
         }
-      } catch (e) {}
+        savedTheme = null;
+      }
+
+      const supportsMatchMedia = typeof window.matchMedia === "function";
+      const prefersDark = supportsMatchMedia
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : false;
+      const shouldUseDarkTheme =
+        savedTheme === "dark" || (savedTheme === null && prefersDark);
+
+      document.documentElement.classList.toggle("dark", shouldUseDarkTheme);
     </script>
+    <style is:inline>
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        body {
+          transition-duration: 0ms !important;
+        }
+
+        .layout-atmosphere {
+          opacity: 0.65 !important;
+        }
+
+        .layout-grid {
+          opacity: 0.08 !important;
+          background-size: 72px 72px !important;
+        }
+      }
+    </style>
   </head>
   <body
     class="flex min-h-full flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
@@ -53,7 +89,7 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-[#071822] focus:px-4 focus:py-2 focus:text-[#3fd3c6] focus:ring-2 focus:ring-[#3fd3c6] focus:outline-none dark:focus:bg-[#071822]">Skip to main content</a>
     <div
       aria-hidden="true"
-      class="pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-85 dark:opacity-80"
+      class="layout-atmosphere pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-85 dark:opacity-80"
     >
       <div
         class="absolute top-30 right-[-66%] h-52 w-132 bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.11)_0%,rgba(222,139,58,0.05)_34%,rgba(222,139,58,0)_74%)] sm:top-22 sm:right-[-54%] sm:h-64 sm:w-168 lg:top-16 lg:right-[-40%] lg:h-72 lg:w-200 xl:top-14 xl:right-[-30%] xl:h-84 xl:w-236 2xl:top-12 2xl:right-[-24%] 2xl:h-96 2xl:w-272 dark:bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.1)_0%,rgba(222,139,58,0.04)_32%,rgba(222,139,58,0)_72%)]"
@@ -75,7 +111,7 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
       >
         <div class="absolute inset-0 opacity-[0.26] dark:opacity-[0.1]">
           <div
-            class="h-full w-full bg-[linear-gradient(rgba(148,170,176,0.17)_1px,transparent_1px),linear-gradient(90deg,rgba(148,170,176,0.17)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(63,211,198,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.1)_1px,transparent_1px)] bg-size-[56px_56px]"
+            class="layout-grid h-full w-full bg-[linear-gradient(rgba(148,170,176,0.17)_1px,transparent_1px),linear-gradient(90deg,rgba(148,170,176,0.17)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(63,211,198,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(63,211,198,0.1)_1px,transparent_1px)] bg-size-[56px_56px]"
           ></div>
         </div>
       </div>
