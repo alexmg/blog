@@ -20,7 +20,10 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
 <html lang="en" class="font-display-swap h-full">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{pageTitle}</title>
 
@@ -72,6 +75,41 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
         margin-inline: auto;
       }
 
+      .layout-content {
+        padding-block: clamp(1.25rem, 0.95rem + 1.35vw, 2.5rem);
+      }
+
+      .skip-link {
+        inset-inline-start: max(1rem, env(safe-area-inset-left));
+        inset-inline-end: max(1rem, env(safe-area-inset-right));
+        inset-block-start: max(1rem, env(safe-area-inset-top));
+        max-inline-size: min(26rem, calc(100vw - 2rem));
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+      @media (max-width: 639px) {
+        .layout-atmosphere {
+          opacity: 0.74;
+        }
+
+        .layout-atmosphere-primary {
+          display: none;
+        }
+
+        .layout-grid {
+          opacity: 0.18 !important;
+          background-size: 64px 64px !important;
+        }
+      }
+
+      @media (pointer: coarse) {
+        .skip-link {
+          min-height: 44px;
+          padding-block: 0.7rem;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -93,15 +131,19 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
     </style>
   </head>
   <body
-    class="flex min-h-full flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
+    class="flex min-h-dvh flex-col bg-[#f3f8f9] text-[#163642] transition-colors duration-200 dark:bg-[#071822] dark:text-[#c2dbe0]"
   >
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-[#071822] focus:px-4 focus:py-2 focus:text-[#3fd3c6] focus:ring-2 focus:ring-[#3fd3c6] focus:outline-none dark:focus:bg-[#071822]">Skip to main content</a>
+    <a
+      href="#main-content"
+      class="skip-link sr-only focus:not-sr-only focus:fixed focus:z-50 focus:rounded focus:bg-[#071822] focus:px-4 focus:py-2 focus:text-[#3fd3c6] focus:ring-2 focus:ring-[#3fd3c6] focus:outline-none dark:focus:bg-[#071822]"
+      >Skip to main content</a
+    >
     <div
       aria-hidden="true"
       class="layout-atmosphere pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-85 dark:opacity-80"
     >
       <div
-        class="absolute top-30 right-[-66%] h-52 w-132 bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.11)_0%,rgba(222,139,58,0.05)_34%,rgba(222,139,58,0)_74%)] sm:top-22 sm:right-[-54%] sm:h-64 sm:w-168 lg:top-16 lg:right-[-40%] lg:h-72 lg:w-200 xl:top-14 xl:right-[-30%] xl:h-84 xl:w-236 2xl:top-12 2xl:right-[-24%] 2xl:h-96 2xl:w-272 dark:bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.1)_0%,rgba(222,139,58,0.04)_32%,rgba(222,139,58,0)_72%)]"
+        class="layout-atmosphere-primary absolute top-30 right-[-66%] h-52 w-132 bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.11)_0%,rgba(222,139,58,0.05)_34%,rgba(222,139,58,0)_74%)] sm:top-22 sm:right-[-54%] sm:h-64 sm:w-168 lg:top-16 lg:right-[-40%] lg:h-72 lg:w-200 xl:top-14 xl:right-[-30%] xl:h-84 xl:w-236 2xl:top-12 2xl:right-[-24%] 2xl:h-96 2xl:w-272 dark:bg-[radial-gradient(ellipse_at_center,rgba(222,139,58,0.1)_0%,rgba(222,139,58,0.04)_32%,rgba(222,139,58,0)_72%)]"
       ></div>
       <div
         class="absolute top-[20%] left-[-32%] h-116 w-88 -rotate-9 bg-[radial-gradient(ellipse_at_center,rgba(123,162,172,0.08)_0%,rgba(123,162,172,0.03)_36%,rgba(123,162,172,0)_76%)] sm:left-[-26%] sm:h-132 sm:w-96 lg:top-[22%] lg:left-[-20%] lg:h-148 lg:w-112 xl:left-[-16%] xl:h-168 xl:w-128 2xl:left-[-14%] 2xl:h-188 2xl:w-136 dark:bg-[radial-gradient(ellipse_at_center,rgba(63,211,198,0.11)_0%,rgba(63,211,198,0.05)_36%,rgba(63,211,198,0)_74%)]"
@@ -124,7 +166,7 @@ const pageTitle = path === "/" ? title : `${title} | ${SITE.title}`;
           ></div>
         </div>
       </div>
-      <div class="container-base relative py-6 sm:py-8 lg:py-10">
+      <div class="layout-content container-base relative">
         <!-- Content goes here -->
         <div class="layout-frame">
           <slot />
