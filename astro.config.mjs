@@ -6,8 +6,8 @@ import {
 } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import icon from "astro-icon";
 import expressiveCode from "astro-expressive-code";
+import Icons from "unplugin-icons/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -40,7 +40,6 @@ export default defineConfig({
   ],
   integrations: [
     sitemap(),
-    icon(),
     expressiveCode({
       themes: ["night-owl", "catppuccin-latte"],
       useDarkModeMediaQuery: false,
@@ -59,7 +58,13 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      Icons({
+        compiler: "astro",
+        scale: 1,
+      }),
+    ],
   },
   image: {
     service: passthroughImageService(),

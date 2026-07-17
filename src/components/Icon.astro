@@ -1,0 +1,41 @@
+---
+import LucideFileText from "~icons/lucide/file-text";
+import LucideRss from "~icons/lucide/rss";
+import LucideTag from "~icons/lucide/tag";
+import SiBluesky from "~icons/simple-icons/bluesky";
+import SiGithub from "~icons/simple-icons/github";
+import SiLinkedin from "~icons/simple-icons/linkedin";
+import SiMastodon from "~icons/simple-icons/mastodon";
+import SiX from "~icons/simple-icons/x";
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+const icons = {
+  github: SiGithub,
+  bluesky: SiBluesky,
+  mastodon: SiMastodon,
+  "x-twitter": SiX,
+  linkedin: SiLinkedin,
+  post: LucideFileText,
+  tag: LucideTag,
+  rss: LucideRss,
+} as const;
+
+const IconComponent = icons[name as keyof typeof icons];
+---
+
+{
+  IconComponent && (
+    <IconComponent
+      class={className}
+      width="0.85em"
+      height="0.85em"
+      aria-hidden="true"
+    />
+  )
+}
