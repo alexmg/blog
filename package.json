@@ -20,7 +20,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.117",
+    "@iconify-json/lucide": "^1.2.118",
     "@iconify-json/simple-icons": "^1.2.90",
     "@tailwindcss/typography": "^0.5.20",
     "html-entities": "^2.6.0",
