@@ -16,11 +16,11 @@
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "7.1.6",
-    "astro-expressive-code": "^0.44.0",
+    "astro-expressive-code": "^0.44.1",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.120",
+    "@iconify-json/lucide": "^1.2.121",
     "@iconify-json/simple-icons": "^1.2.93",
     "@tailwindcss/typography": "^0.5.20",
     "html-entities": "^2.6.0",
