@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.121",
-    "@iconify-json/simple-icons": "^1.2.93",
+    "@iconify-json/simple-icons": "^1.2.94",
     "@tailwindcss/typography": "^0.5.20",
     "html-entities": "^2.6.0",
     "prettier": "3.9.6",
